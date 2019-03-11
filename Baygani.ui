@@ -41,7 +41,7 @@ border-bottom-width: 2px;
           <property name="title">
            <string>فرم ثبت خروج پرونده از بایگانی</string>
           </property>
-          <widget class="QWidget" name="">
+          <widget class="QWidget" name="layoutWidget">
            <property name="geometry">
             <rect>
              <x>40</x>
