@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>556</width>
-    <height>524</height>
+    <height>541</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,30 @@
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{
+background-color: #5D5136;
+}
+QStatusBar{
+background-color:#5D5136;
+color: rgb(0, 255, 59);
+border:1px solid rgbrgb(0, 148, 0);
+border-radius:2px;
+	font: 12pt &quot;Dast Nevis&quot;;
+}
+
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="statusTip">
+       <string>  ثبت پرونده خارج شده از بایگانی</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -64,7 +84,13 @@ border-radius: 10px;
 QCheckBox{
 font: 75 10pt &quot;A Arsoo&quot;;
 }
-
+QStatusBar{
+background-color:rgb(33, 33, 33);
+color: rgb(0, 255, 59);
+border:1px solid rgbrgb(0, 148, 0);
+border-radius:2px;
+	font: 8pt &quot;Dast Nevis&quot;;
+}
 </string>
        </property>
        <attribute name="title">
@@ -74,7 +100,7 @@ font: 75 10pt &quot;A Arsoo&quot;;
         <item row="0" column="1">
          <widget class="QGroupBox" name="groupBox_inputData">
           <property name="title">
-           <string>فرم ثبت پرونده خارح شده از بایگانی</string>
+           <string>فرم ثبت خروج پرونده از بایگانی</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="0" column="0">
@@ -102,6 +128,9 @@ font: 75 10pt &quot;A Arsoo&quot;;
                  <italic>false</italic>
                  <bold>false</bold>
                 </font>
+               </property>
+               <property name="statusTip">
+                <string>سنگ فرعی را وارد کنید</string>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -152,6 +181,9 @@ font: 75 10pt &quot;A Arsoo&quot;;
                  <italic>false</italic>
                  <bold>false</bold>
                 </font>
+               </property>
+               <property name="statusTip">
+                <string>سنگ اصلی را وارد کنید</string>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -225,6 +257,9 @@ font: 75 10pt &quot;A Arsoo&quot;;
                  <italic>false</italic>
                  <bold>false</bold>
                 </font>
+               </property>
+               <property name="statusTip">
+                <string>بخش را انتخاب کنید</string>
                </property>
                <property name="text">
                 <string>بخش:</string>
@@ -307,6 +342,9 @@ font: 75 10pt &quot;A Arsoo&quot;;
              </item>
              <item>
               <widget class="QLabel" name="label_3">
+               <property name="statusTip">
+                <string>همکار تقاضا کننده پرونده را مشخص کنید</string>
+               </property>
                <property name="text">
                 <string>همکار تقاضا کننده:</string>
                </property>
@@ -319,6 +357,9 @@ font: 75 10pt &quot;A Arsoo&quot;;
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="statusTip">
+                <string>همکار تقاضا کننده پرونده را مشخص کنید</string>
                </property>
                <property name="editable">
                 <bool>true</bool>
@@ -436,8 +477,11 @@ font: 75 10pt &quot;A Arsoo&quot;;
              </item>
              <item>
               <widget class="QLabel" name="label_4">
+               <property name="statusTip">
+                <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
+               </property>
                <property name="text">
-                <string>تحویل گیرنده پرونده:</string>
+                <string>تحویل گیرنده:</string>
                </property>
               </widget>
              </item>
@@ -514,6 +558,9 @@ font: 75 10pt &quot;A Arsoo&quot;;
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_sabt">
+               <property name="statusTip">
+                <string>برای ثبت کلیک کنید</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
 {
@@ -593,6 +640,9 @@ border-radius: 10px;
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="statusTip">
+                <string>ریست کردن فرم</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
 {
@@ -635,7 +685,10 @@ border-radius: 10px;
             </layout>
            </item>
            <item row="4" column="0">
-            <widget class="QGroupBox" name="groupBox_2">
+            <widget class="QGroupBox" name="groupBox_Tozihat">
+             <property name="statusTip">
+              <string>  علت درخواست پرونده از بایگانی  </string>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::RightToLeft</enum>
              </property>
@@ -654,6 +707,9 @@ border-radius: 10px;
                <widget class="QTextEdit" name="textEdit_Tozihat">
                 <property name="enabled">
                  <bool>false</bool>
+                </property>
+                <property name="statusTip">
+                 <string>توضیحات </string>
                 </property>
                 <property name="placeholderText">
                  <string>                                                                                                                                                                                                                                  توضیحات</string>
@@ -757,6 +813,9 @@ background-color: #eee1c5   ;
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBox">
+          <property name="statusTip">
+           <string>   جستجوی سوابق پرونده خارج شده از بایگانی</string>
+          </property>
           <property name="title">
            <string>فرم بازیابی اطلاعات ثبت شده</string>
           </property>
@@ -793,6 +852,9 @@ background-color: #eee1c5   ;
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_search">
+               <property name="statusTip">
+                <string> جستجو اطلاعات ذخیره شده کلیک کنید</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
 {
@@ -860,6 +922,9 @@ border-radius: 10px;
                  <bold>false</bold>
                 </font>
                </property>
+               <property name="statusTip">
+                <string>سنگ فرعی را وارد کنید</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true"/>
                </property>
@@ -909,6 +974,9 @@ border-radius: 10px;
                  <italic>false</italic>
                  <bold>false</bold>
                 </font>
+               </property>
+               <property name="statusTip">
+                <string>سنگ اصلی را وارد کنید</string>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -983,6 +1051,9 @@ border-radius: 10px;
                  <bold>false</bold>
                 </font>
                </property>
+               <property name="statusTip">
+                <string>بخش را انتخاب کنید</string>
+               </property>
                <property name="text">
                 <string>بخش:</string>
                </property>
@@ -1047,7 +1118,7 @@ border-radius: 10px;
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>40</width>
+                 <width>90</width>
                  <height>20</height>
                 </size>
                </property>
@@ -1064,6 +1135,9 @@ border-radius: 10px;
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="statusTip">
+                <string>  ثبت پرونده بازگشت داده شده به بایگانی</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
 {
@@ -1072,15 +1146,65 @@ border-radius: 10px;
 	color:   #d101ff  ;
 }
 QPushButton{
-background-color:   #0087f1    ;
+background-color:#64A3F8;
 font: 14pt &quot;A Arsoo&quot;;
-color: rgb(255, 255, 127);
+color: #EE2121;
 border: 1px solid   #2bff01 ;;
 border-radius: 10px;
 }</string>
                </property>
                <property name="text">
-                <string>   برگشت به بایگانی   </string>
+                <string>                بازگشت به بایگانی                </string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_21">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_print">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="statusTip">
+                <string>پرینت اطلاعات بازیابی شده</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton:hover:!pressed
+{
+  border: 2px dashed  #FF87A6  ;
+	background-color:  #5F8375  ;
+	color:  #E0F354  ;
+}
+QPushButton{
+background-color:  #96B9B9    ;
+font: 14pt &quot;A Arsoo&quot;;
+color: #00FF13;
+border: 1px solid   #FE760C ;;
+border-radius: 10px;
+}</string>
+               </property>
+               <property name="text">
+                <string>  پرینت   </string>
                </property>
               </widget>
              </item>
@@ -1094,7 +1218,7 @@ border-radius: 10px;
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>40</width>
+                 <width>90</width>
                  <height>20</height>
                 </size>
                </property>
@@ -1137,19 +1261,19 @@ border-radius: 10px;
     <property name="title">
      <string>فابل</string>
     </property>
-    <addaction name="action"/>
-    <addaction name="action_2"/>
+    <addaction name="action_help"/>
+    <addaction name="action_about"/>
     <addaction name="action_close"/>
    </widget>
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action">
+  <action name="action_help">
    <property name="text">
     <string>راهنما</string>
    </property>
   </action>
-  <action name="action_2">
+  <action name="action_about">
    <property name="text">
     <string>درباره</string>
    </property>
@@ -1214,6 +1338,86 @@ border-radius: 10px;
     <hint type="destinationlabel">
      <x>276</x>
      <y>365</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_search</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>278</x>
+     <y>206</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_bazgashBygani</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>279</x>
+     <y>478</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_sabt</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>278</x>
+     <y>436</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_new</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>279</x>
+     <y>478</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_print</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>478</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>269</y>
     </hint>
    </hints>
   </connection>
