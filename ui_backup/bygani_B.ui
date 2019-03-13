@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>561</height>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>سامانه بایگانی ثبت ماسال</string>
+   <string>MainWindow</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>
@@ -31,7 +31,7 @@ border-radius:2px;
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="enabled">
        <bool>true</bool>
@@ -397,9 +397,6 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="checked">
                 <bool>true</bool>
                </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_2</string>
-               </attribute>
               </widget>
              </item>
              <item>
@@ -416,9 +413,6 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="checked">
                 <bool>false</bool>
                </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_2</string>
-               </attribute>
               </widget>
              </item>
              <item>
@@ -636,9 +630,6 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="checked">
                 <bool>true</bool>
                </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_3</string>
-               </attribute>
               </widget>
              </item>
              <item>
@@ -652,9 +643,6 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="text">
                 <string>همکار</string>
                </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_3</string>
-               </attribute>
               </widget>
              </item>
              <item>
@@ -1419,41 +1407,41 @@ border-radius: 10px;
     <property name="title">
      <string>فایل</string>
     </property>
-    <addaction name="action_help"/>
     <addaction name="action"/>
+    <addaction name="action_2"/>
     <addaction name="separator"/>
-    <addaction name="action_about"/>
+    <addaction name="action_4"/>
     <addaction name="separator"/>
-    <addaction name="action_close"/>
+    <addaction name="action_6"/>
    </widget>
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action_help">
+  <action name="action">
    <property name="text">
     <string>راهنما</string>
    </property>
   </action>
-  <action name="action_about">
-   <property name="text">
-    <string>درباره</string>
-   </property>
-  </action>
-  <action name="action_close">
-   <property name="text">
-    <string>بستن</string>
-   </property>
-  </action>
-  <action name="action">
+  <action name="action_2">
    <property name="text">
     <string>تغییر رمز ورود</string>
    </property>
   </action>
+  <action name="action_4">
+   <property name="text">
+    <string>درباره</string>
+   </property>
+  </action>
+  <action name="action_6">
+   <property name="text">
+    <string>بستن</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
-  <tabstop>tabWidget</tabstop>
   <tabstop>lineEdit_sangAsli</tabstop>
   <tabstop>lineEdit_sangFari</tabstop>
+  <tabstop>checkBox_daftar</tabstop>
   <tabstop>radioButton_bakhsh26</tabstop>
   <tabstop>radioButton_bakhsh25</tabstop>
   <tabstop>comboBox_Hamkaran</tabstop>
@@ -1471,21 +1459,17 @@ border-radius: 10px;
   <tabstop>textEdit_Tozihat</tabstop>
   <tabstop>pushButton_sabt</tabstop>
   <tabstop>pushButton_new</tabstop>
-  <tabstop>checkBox_daftar</tabstop>
   <tabstop>lineEdit_sangAsli_2</tabstop>
   <tabstop>lineEdit_sangFari_2</tabstop>
+  <tabstop>checkBox_daftar_2</tabstop>
   <tabstop>radioButton_bakhsh26_2</tabstop>
   <tabstop>radioButton_bakhsh25_2</tabstop>
   <tabstop>pushButton_search</tabstop>
-  <tabstop>checkBox_daftar_2</tabstop>
   <tabstop>pushButton_bazgashBygani</tabstop>
   <tabstop>pushButton_print</tabstop>
   <tabstop>tableView_result</tabstop>
+  <tabstop>tabWidget</tabstop>
  </tabstops>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup_2"/>
- </buttongroups>
 </ui>

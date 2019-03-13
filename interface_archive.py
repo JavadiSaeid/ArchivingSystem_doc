@@ -2,12 +2,11 @@
 
 # Form implementation generated from reading ui file 'Baygani.ui'
 #
-# Created by: PyQt5 UI code generator 5.12
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -293,6 +292,8 @@ class Ui_MainWindow(object):
 "border: 1px solid   #b2ff00  ;\n"
 "border-radius: 10px;\n"
 "}")
+        self.pushButton_sabt.setAutoDefault(False)
+        self.pushButton_sabt.setDefault(False)
         self.pushButton_sabt.setObjectName("pushButton_sabt")
         self.horizontalLayout_sabtBtn.addWidget(self.pushButton_sabt)
         spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
@@ -478,6 +479,8 @@ class Ui_MainWindow(object):
 "border: 1px solid   #003efe   ;\n"
 "border-radius: 10px;\n"
 "}")
+        self.pushButton_search.setAutoDefault(False)
+        self.pushButton_search.setDefault(False)
         self.pushButton_search.setObjectName("pushButton_search")
         self.horizontalLayout_2.addWidget(self.pushButton_search)
         spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
@@ -575,6 +578,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setTabOrder(self.tabWidget, self.lineEdit_sangAsli)
         MainWindow.setTabOrder(self.lineEdit_sangAsli, self.lineEdit_sangFari)
         MainWindow.setTabOrder(self.lineEdit_sangFari, self.radioButton_bakhsh26)
         MainWindow.setTabOrder(self.radioButton_bakhsh26, self.radioButton_bakhsh25)
@@ -603,7 +607,6 @@ class Ui_MainWindow(object):
         MainWindow.setTabOrder(self.checkBox_daftar_2, self.pushButton_bazgashBygani)
         MainWindow.setTabOrder(self.pushButton_bazgashBygani, self.pushButton_print)
         MainWindow.setTabOrder(self.pushButton_print, self.tableView_result)
-        MainWindow.setTabOrder(self.tableView_result, self.tabWidget)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -660,7 +663,6 @@ class Ui_MainWindow(object):
         self.radioButton_hamkar.setText(_translate("MainWindow", "همکار"))
         self.pushButton_sabt.setStatusTip(_translate("MainWindow", "برای ثبت کلیک کنید"))
         self.pushButton_sabt.setText(_translate("MainWindow", "ثبت"))
-        self.pushButton_sabt.setShortcut(_translate("MainWindow", "Ctrl+S, Return"))
         self.pushButton_new.setStatusTip(_translate("MainWindow", "پاکسازی فرم برای ثبت اطلاعات جدید"))
         self.pushButton_new.setText(_translate("MainWindow", "   جدید   "))
         self.pushButton_new.setShortcut(_translate("MainWindow", "Ctrl+N"))
@@ -691,5 +693,4 @@ class Ui_MainWindow(object):
         self.action_about.setText(_translate("MainWindow", "درباره"))
         self.action_close.setText(_translate("MainWindow", "بستن"))
         self.action.setText(_translate("MainWindow", "تغییر رمز ورود"))
-
 
