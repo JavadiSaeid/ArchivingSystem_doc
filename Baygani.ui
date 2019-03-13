@@ -227,6 +227,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
              </item>
              <item>
               <widget class="QLineEdit" name="lineEdit_sangFari">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="font">
                 <font>
                  <family>A Arghavan</family>
@@ -1295,7 +1298,7 @@ border-radius: 10px;
              <item>
               <widget class="QPushButton" name="pushButton_bazgashBygani">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -1351,7 +1354,7 @@ border-radius: 10px;
              <item>
               <widget class="QPushButton" name="pushButton_print">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
