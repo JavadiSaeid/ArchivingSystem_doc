@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>631</width>
-    <height>633</height>
+    <width>600</width>
+    <height>561</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,15 +25,17 @@ background-color:#5D5136;
 color: rgb(0, 255, 59);
 border:1px solid rgbrgb(0, 148, 0);
 border-radius:2px;
-	font: 12pt &quot;Dast Nevis&quot;;
+	font: 10pt &quot;A Arsoo&quot;;
 }
-
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="statusTip">
        <string>  ثبت پرونده خارج شده از بایگانی</string>
       </property>
@@ -129,10 +131,10 @@ font: 75 11pt &quot;A Arsoo&quot;;
                  <cursorShape>IBeamCursor</cursorShape>
                 </property>
                 <property name="statusTip">
-                 <string>توضیحات</string>
+                 <string>توضیحات خود را در این بخش بنویسید</string>
                 </property>
                 <property name="placeholderText">
-                 <string>                                                                                                                                                                                                                                                   توضیحات</string>
+                 <string>توضیحات</string>
                 </property>
                </widget>
               </item>
@@ -305,12 +307,12 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="checkBox">
+              <widget class="QCheckBox" name="checkBox_daftar">
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="statusTip">
-                <string>   دفتر خواسته شده از بایگانی   </string>
+                <string>   درخواست دریافت دفتر از بایگانی  </string>
                </property>
                <property name="text">
                 <string>دفتر</string>
@@ -386,6 +388,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
+               <property name="statusTip">
+                <string>بخش 26 گیلان</string>
+               </property>
                <property name="text">
                 <string>26</string>
                </property>
@@ -401,6 +406,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               <widget class="QRadioButton" name="radioButton_bakhsh25">
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="statusTip">
+                <string>بخش 25 گیلان</string>
                </property>
                <property name="text">
                 <string>25</string>
@@ -619,6 +627,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
+               <property name="statusTip">
+                <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
+               </property>
                <property name="text">
                 <string>ارباب رجوع</string>
                </property>
@@ -634,6 +645,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               <widget class="QRadioButton" name="radioButton_hamkar">
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="statusTip">
+                <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
                </property>
                <property name="text">
                 <string>همکار</string>
@@ -782,7 +796,7 @@ border-radius: 10px;
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="statusTip">
-                <string>ریست کردن فرم</string>
+                <string>پاکسازی فرم برای ثبت اطلاعات جدید</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
@@ -872,6 +886,9 @@ font: 75 12pt &quot;A Arsoo&quot;;
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBox">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="statusTip">
            <string>   جستجوی سوابق پرونده خارج شده از بایگانی</string>
           </property>
@@ -879,27 +896,30 @@ font: 75 12pt &quot;A Arsoo&quot;;
            <string>فرم بازیابی اطلاعات ثبت شده</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
-           <item row="2" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_QRadio_2">
+             <property name="spacing">
+              <number>30</number>
+             </property>
              <property name="leftMargin">
-              <number>20</number>
+              <number>10</number>
              </property>
              <property name="topMargin">
-              <number>10</number>
+              <number>7</number>
              </property>
              <property name="rightMargin">
-              <number>20</number>
-             </property>
-             <property name="bottomMargin">
               <number>10</number>
              </property>
+             <property name="bottomMargin">
+              <number>7</number>
+             </property>
              <item>
-              <spacer name="horizontalSpacer_15">
+              <spacer name="horizontalSpacer_13">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -910,43 +930,66 @@ font: 75 12pt &quot;A Arsoo&quot;;
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_search">
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
+              <widget class="QLabel" name="label_5">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="font">
+                <font>
+                 <family>A Arsoo</family>
+                 <pointsize>18</pointsize>
+                 <weight>9</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
                </property>
                <property name="statusTip">
-                <string> جستجو اطلاعات ذخیره شده کلیک کنید</string>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton:hover:!pressed
-{
-  border: 2px dashed rgb(255, 85, 0);
-	background-color: rgb(129, 125, 255);
-	color: rgb(85, 255, 255);
-}
-QPushButton{
-background-color: #d3f97a   ;
-font: 14pt &quot;A Arsoo&quot;;
-color:    #056608   ;
-border: 1px solid   #003efe   ;
-border-radius: 10px;
-}</string>
+                <string>بخش را انتخاب کنید</string>
                </property>
                <property name="text">
-                <string>جستجو</string>
-               </property>
-               <property name="shortcut">
-                <string>Ctrl+S</string>
+                <string>بخش:</string>
                </property>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_16">
+              <widget class="QRadioButton" name="radioButton_bakhsh26_2">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string>26</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButton_bakhsh25_2">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string>25</string>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_14">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -962,6 +1005,9 @@ border-radius: 10px;
             <layout class="QHBoxLayout" name="horizontalLayout_Sang_2">
              <item>
               <spacer name="horizontalSpacer_17">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -975,6 +1021,9 @@ border-radius: 10px;
              </item>
              <item>
               <widget class="QLineEdit" name="lineEdit_sangFari_2">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="font">
                 <font>
                  <family>A Arghavan</family>
@@ -1000,6 +1049,9 @@ border-radius: 10px;
              </item>
              <item>
               <widget class="QLabel" name="label_6">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -1028,6 +1080,9 @@ border-radius: 10px;
              </item>
              <item>
               <widget class="QLineEdit" name="lineEdit_sangAsli_2">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="font">
                 <font>
                  <family>A Arghavan</family>
@@ -1058,7 +1113,10 @@ border-radius: 10px;
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="checkBox_2">
+              <widget class="QCheckBox" name="checkBox_daftar_2">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
@@ -1072,6 +1130,9 @@ border-radius: 10px;
              </item>
              <item>
               <spacer name="horizontalSpacer_18">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -1085,27 +1146,30 @@ border-radius: 10px;
              </item>
             </layout>
            </item>
-           <item row="1" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_QRadio_2">
-             <property name="spacing">
-              <number>30</number>
-             </property>
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
              <property name="leftMargin">
-              <number>10</number>
+              <number>20</number>
              </property>
              <property name="topMargin">
-              <number>7</number>
-             </property>
-             <property name="rightMargin">
               <number>10</number>
              </property>
+             <property name="rightMargin">
+              <number>20</number>
+             </property>
              <property name="bottomMargin">
-              <number>7</number>
+              <number>10</number>
              </property>
              <item>
-              <spacer name="horizontalSpacer_13">
+              <spacer name="horizontalSpacer_15">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1116,54 +1180,49 @@ border-radius: 10px;
               </spacer>
              </item>
              <item>
-              <widget class="QLabel" name="label_5">
-               <property name="font">
-                <font>
-                 <family>A Arsoo</family>
-                 <pointsize>18</pointsize>
-                 <weight>9</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="statusTip">
-                <string>بخش را انتخاب کنید</string>
-               </property>
-               <property name="text">
-                <string>بخش:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="radioButton_26">
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string>26</string>
-               </property>
-               <property name="checked">
+              <widget class="QPushButton" name="pushButton_search">
+               <property name="enabled">
                 <bool>true</bool>
                </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="radioButton_25">
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
-               <property name="text">
-                <string>25</string>
+               <property name="statusTip">
+                <string>برای جستجو اطلاعات ذخیره شده کلیک کنید</string>
                </property>
-               <property name="checked">
-                <bool>false</bool>
+               <property name="styleSheet">
+                <string notr="true">QPushButton:hover:!pressed
+{
+  border: 2px dashed rgb(255, 85, 0);
+	background-color: rgb(129, 125, 255);
+	color: rgb(85, 255, 255);
+}
+QPushButton{
+background-color: #d3f97a   ;
+font: 14pt &quot;A Arsoo&quot;;
+color:    #056608   ;
+border: 1px solid   #003efe   ;
+border-radius: 10px;
+}</string>
+               </property>
+               <property name="text">
+                <string>جستجو</string>
+               </property>
+               <property name="shortcut">
+                <string>Ctrl+S</string>
                </property>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_14">
+              <spacer name="horizontalSpacer_16">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1175,7 +1234,14 @@ border-radius: 10px;
              </item>
             </layout>
            </item>
-           <item row="5" column="0">
+           <item row="3" column="0">
+            <widget class="QTableView" name="tableView_result">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_btnNew_2">
              <property name="leftMargin">
               <number>10</number>
@@ -1191,6 +1257,9 @@ border-radius: 10px;
              </property>
              <item>
               <spacer name="horizontalSpacer_19">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -1208,10 +1277,10 @@ border-radius: 10px;
              <item>
               <widget class="QPushButton" name="pushButton_bazgashBygani">
                <property name="enabled">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
@@ -1238,12 +1307,15 @@ border-radius: 10px;
 }</string>
                </property>
                <property name="text">
-                <string>                بازگشت به بایگانی                </string>
+                <string>بازگشت پرونده به بایگانی</string>
                </property>
               </widget>
              </item>
              <item>
               <spacer name="horizontalSpacer_21">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -1261,10 +1333,10 @@ border-radius: 10px;
              <item>
               <widget class="QPushButton" name="pushButton_print">
                <property name="enabled">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
@@ -1285,18 +1357,21 @@ border-radius: 10px;
 QPushButton{
 background-color:  #96B9B9    ;
 font: 14pt &quot;A Arsoo&quot;;
-color: #00FF13;
+color: #533F11;
 border: 1px solid   #FE760C ;;
 border-radius: 10px;
 }</string>
                </property>
                <property name="text">
-                <string>  پرینت   </string>
+                <string>     پرینت     </string>
                </property>
               </widget>
              </item>
              <item>
               <spacer name="horizontalSpacer_20">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -1305,26 +1380,13 @@ border-radius: 10px;
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>90</width>
-                 <height>20</height>
+                 <width>100</width>
+                 <height>30</height>
                 </size>
                </property>
               </spacer>
              </item>
             </layout>
-           </item>
-           <item row="4" column="0">
-            <widget class="QTableView" name="tableView_result"/>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_showSearchResult">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
            </item>
           </layout>
          </widget>
@@ -1340,8 +1402,8 @@ border-radius: 10px;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>631</width>
-     <height>21</height>
+     <width>600</width>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -1349,7 +1411,10 @@ border-radius: 10px;
      <string>فایل</string>
     </property>
     <addaction name="action_help"/>
+    <addaction name="action"/>
+    <addaction name="separator"/>
     <addaction name="action_about"/>
+    <addaction name="separator"/>
     <addaction name="action_close"/>
    </widget>
    <addaction name="menu"/>
@@ -1370,6 +1435,11 @@ border-radius: 10px;
     <string>بستن</string>
    </property>
   </action>
+  <action name="action">
+   <property name="text">
+    <string>تغییر رمز ورود</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>lineEdit_sangAsli</tabstop>
@@ -1382,16 +1452,25 @@ border-radius: 10px;
   <tabstop>radioButton_estelam</tabstop>
   <tabstop>radioButton_tafkik</tabstop>
   <tabstop>radioButton_tajmii</tabstop>
+  <tabstop>radioButton_nameEdarat</tabstop>
+  <tabstop>radioButton_Baresi</tabstop>
+  <tabstop>radioButton_darKhastSanad</tabstop>
+  <tabstop>radioButton_edary</tabstop>
+  <tabstop>radioButton_Jari</tabstop>
+  <tabstop>radioButton_sayer</tabstop>
   <tabstop>textEdit_Tozihat</tabstop>
   <tabstop>pushButton_sabt</tabstop>
   <tabstop>pushButton_new</tabstop>
+  <tabstop>checkBox_daftar</tabstop>
   <tabstop>lineEdit_sangAsli_2</tabstop>
   <tabstop>lineEdit_sangFari_2</tabstop>
-  <tabstop>radioButton_26</tabstop>
-  <tabstop>radioButton_25</tabstop>
+  <tabstop>radioButton_bakhsh26_2</tabstop>
+  <tabstop>radioButton_bakhsh25_2</tabstop>
   <tabstop>pushButton_search</tabstop>
-  <tabstop>tableView_result</tabstop>
+  <tabstop>checkBox_daftar_2</tabstop>
   <tabstop>pushButton_bazgashBygani</tabstop>
+  <tabstop>pushButton_print</tabstop>
+  <tabstop>tableView_result</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>
  <resources/>
@@ -1429,7 +1508,7 @@ border-radius: 10px;
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_bazgashBygani</sender>
+   <sender>pushButton_print</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
@@ -1477,7 +1556,7 @@ border-radius: 10px;
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_print</sender>
+   <sender>pushButton_bazgashBygani</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
@@ -1492,9 +1571,41 @@ border-radius: 10px;
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>checkBox_daftar</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>142</x>
+     <y>95</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_daftar_2</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>142</x>
+     <y>96</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

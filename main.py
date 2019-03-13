@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QMe
 
 from loginpage import Ui_Form
 from dialogF import Ui_Dialog
-from interface_ui import Ui_MainWindow
 
 class NoteP():
     def __init__(self):
@@ -27,11 +26,8 @@ class NoteP():
         pass_ = self.ui.passline.text()
         if (user_ != "") & (pass_ != ""):
             if (user_ =='admin') & (pass_=='admin'):
-                print("Login")
-                print(user_+'\n'+pass_)
                 self.PageNotePad()
             else:
-                print('Error login')
                 # self.ui.userline.setText('')
                 self.ui.passline.setText('')
                 Dialog_Error()
