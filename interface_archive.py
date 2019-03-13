@@ -574,14 +574,6 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
-        self.action_close.triggered['bool'].connect(MainWindow.close)
-        self.pushButton_search.clicked.connect(MainWindow.close)
-        self.pushButton_print.clicked.connect(MainWindow.close)
-        self.pushButton_sabt.clicked.connect(MainWindow.close)
-        self.pushButton_new.clicked.connect(MainWindow.close)
-        self.pushButton_bazgashBygani.clicked.connect(MainWindow.close)
-        self.checkBox_daftar.stateChanged['int'].connect(MainWindow.close)
-        self.checkBox_daftar_2.stateChanged['int'].connect(MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.lineEdit_sangAsli, self.lineEdit_sangFari)
         MainWindow.setTabOrder(self.lineEdit_sangFari, self.radioButton_bakhsh26)
@@ -699,4 +691,5 @@ class Ui_MainWindow(object):
         self.action_about.setText(_translate("MainWindow", "درباره"))
         self.action_close.setText(_translate("MainWindow", "بستن"))
         self.action.setText(_translate("MainWindow", "تغییر رمز ورود"))
+
 
