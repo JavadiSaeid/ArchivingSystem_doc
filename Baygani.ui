@@ -396,7 +396,7 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_bakhsh26">
+              <widget class="QRadioButton" name="radioButton_bakhsh26_1">
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
@@ -415,7 +415,7 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_bakhsh25">
+              <widget class="QRadioButton" name="radioButton_bakhsh25_1">
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
@@ -1467,8 +1467,8 @@ border-radius: 10px;
   <tabstop>lineEdit_sangAsli</tabstop>
   <tabstop>lineEdit_sangFari</tabstop>
   <tabstop>checkBox_daftar</tabstop>
-  <tabstop>radioButton_bakhsh26</tabstop>
-  <tabstop>radioButton_bakhsh25</tabstop>
+  <tabstop>radioButton_bakhsh26_1</tabstop>
+  <tabstop>radioButton_bakhsh25_1</tabstop>
   <tabstop>comboBox_Hamkaran</tabstop>
   <tabstop>radioButton_arbabRojo</tabstop>
   <tabstop>radioButton_hamkar</tabstop>

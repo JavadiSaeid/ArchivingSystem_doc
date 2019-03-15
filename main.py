@@ -1,11 +1,13 @@
 import sys,dpi
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QMessageBox, QDialog
-
 from loginpage import Ui_Form
 from dialogF import Ui_Dialog
+from BayganiMain import Baygan
 
-class NoteP():
+
+
+class Baygans():
     def __init__(self):
         self.app = QApplication(sys.argv)
         self.login = QWidget()
@@ -26,7 +28,7 @@ class NoteP():
         pass_ = self.ui.passline.text()
         if (user_ != "") & (pass_ != ""):
             if (user_ =='admin') & (pass_=='admin'):
-                self.PageNotePad()
+                self.RunBaygan()
             else:
                 # self.ui.userline.setText('')
                 self.ui.passline.setText('')
@@ -35,11 +37,12 @@ class NoteP():
             print('Not Empty Field')
             Dialog_Error()
 
-    def PageNotePad(self):
-        self.window = QMainWindow()
-        self.ui = Ui_MainWindow()
-        self.ui.setupU(self.window)
-        self.window.show()
+    def RunBaygan(self):
+        # self.window = QMainWindow()
+        # self.ui = Ui_MainWindow()
+        # self.ui.setupU(self.window)
+        # self.window.show()
+        Run = Baygan()
         self.login.hide()
 
 class Dialog_Error():
@@ -51,11 +54,11 @@ class Dialog_Error():
         res = dialog.exec_()
         if res == QDialog.Accepted:
             print('Ok')
-            NoteP.loginp
+            Baygan.loginp
         else:
             print('cancel')
             sys.exit()
 
 
 if __name__ =='__main__':
-    ex = NoteP()
+    ex = Baygans()
