@@ -59,7 +59,7 @@ class Baygan():
 
     def getUpdateVriable(self):
         self.sangAsli_1 = self.ui.lineEdit_sangAsli.text()
-        self.sangFari_2 = self.ui.lineEdit_sangFari.text()
+        self.sangFari_1 = self.ui.lineEdit_sangFari.text()
         if self.ui.checkBox_daftar.isChecked():
             self.daftarState_1 = True
         else:
@@ -97,7 +97,7 @@ class Baygan():
     def btn_sabt(self):
         self.getUpdateVriable()
 
-        print(self.sangAsli_1+"/"+self.sangFari_2)
+        print(self.sangAsli_1+"/"+self.sangFari_1)
         print ("Daftar=",self.daftarState_1)
         print(self.bakhsh)
         print(self.hamkarCB)
@@ -108,15 +108,24 @@ class Baygan():
         self.btn_New()
 
     def btn_search(self):
+        self.sangAsli_2 = self.ui.lineEdit_sangAsli_2.text()
+        self.sangFari_2 = self.ui.lineEdit_sangFari_2.text()
+        if self.ui.radioButton_bakhsh26_2.isChecked():
+            self.bakhsh_2 = 26
+        else:
+            self.bakhsh_2 = 25
         self.ui.pushButton_bazgashBygani.setEnabled(True)
         self.ui.pushButton_print.setEnabled(True)
         if self.ui.checkBox_daftar.isChecked():
             self.daftarState_2 = True
         else:
             self.daftarState_2 = False
-        print(self.daftarState_2)
         self.ui.lineEdit_sangAsli_2.setText('')
         self.ui.lineEdit_sangFari_2.setText('')
+
+        print(self.sangAsli_2+"/"+self.sangFari_2)
+        print(self.bakhsh_2)
+        print(self.daftarState_2)
 
     def btn_New(self):
         self.ui.lineEdit_sangFari.setText('')
