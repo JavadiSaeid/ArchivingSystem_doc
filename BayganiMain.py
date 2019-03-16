@@ -1,4 +1,4 @@
-import sys ,dpi ,os
+import sys ,dpi ,os,sqlite3
 from pytz import timezone
 from jdatetime import datetime as dt
 from PyQt5.QtCore import Qt, pyqtSlot
@@ -12,8 +12,8 @@ class Baygan():
         MainWindow = QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(MainWindow)
-        self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.dateTime()
+        self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
         self.ui.lineEdit_dateYear.setValidator((QIntValidator(1,9999)))
         self.ui.lineEdit_dateMonth.setText(self.nowMonth)
@@ -39,12 +39,12 @@ class Baygan():
 
     def dateTime(self):
         self.tz = timezone('Asia/Tehran')
-        self.timDel = dt.now(self.tz)
-        self.nowYear = self.timDel.strftime("%Y")
-        self.nowMonth = self.timDel.strftime("%m")
-        self.nowDay = self.timDel.strftime("%d")
-        self.nowHour = self.timDel.strftime("%H")
-        self.nowMinute = self.timDel.strftime("%S")
+        self.TimeSabt = dt.now(self.tz)
+        self.nowYear = self.TimeSabt.strftime("%Y")
+        self.nowMonth = self.TimeSabt.strftime("%m")
+        self.nowDay = self.TimeSabt.strftime("%d")
+        self.nowHour = self.TimeSabt.strftime("%H")
+        self.nowMinute = self.TimeSabt.strftime("%S")
     def EnterToTab_1(self, e):
         if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter :
             self.btn_sabt()
@@ -89,10 +89,14 @@ class Baygan():
             self.daftarState_1 = True
         else:
             self.daftarState_1 = False
-        if self.ui.radioButton_bakhsh26_1.isChecked():
-            self.bakhsh = 26
+        if self.daftarState_1:
+            self.TypeReq = "دفتر"
         else:
-            self.bakhsh = 25
+            self.TypeReq = "پرونده"
+        if self.ui.radioButton_bakhsh26_1.isChecked():
+            self.bakhsh = '26'
+        else:
+            self.bakhsh = '25'
         self.hamkarCB = self.ui.comboBox_Hamkaran.currentText()
         if self.ui.radioButton_arbabRojo.isChecked():
             self.dariaftKonande = 'ارباب رجوع'
@@ -118,19 +122,28 @@ class Baygan():
             self.elatDarkhast = 'سایر'
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()
 
+    def insertdb(self,TH,ST,TR,SA,HR,TG,ER,SF='',BH='',TT='',BB='',BT=''):
+        with sqlite3.connect(r'Backup\ArchivesData.db') as database:
+            table = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
+                    "sa VARCHAR(50) ,sf VARCHAR (50),bh VARCHAR (30),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bb varchar(30),bt varchar (50))"
+            database.execute(table)
+            insert = "INSERT INTO IT_BAYGAN(th,st,tr,sa,sf,bh,hr,tg,er,tt,bb,bt) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
+                .format(TH,ST,TR,SA,SF,BH,HR,TG,ER,TT,BB,BT)
+            database.execute(insert)
+            database.commit()
+            print("OK Database")
 
     def btn_sabt(self):
         self.getUpdateVriable()
-
-        print(self.sangAsli_1+"/"+self.sangFari_1)
-        print ("Daftar=",self.daftarState_1)
-        print(self.bakhsh)
-        print(self.hamkarCB)
-        print(self.dariaftKonande)
-        print(self.elatDarkhast)
-        print(self.tozihat)
-        self.ui.statusbar.showMessage('با موفقیت ثبت شد')
-        self.btn_New()
+        self.dateTime()
+        try:
+            self.insertdb(TH=self.TimeSabt.strftime("%Y/%m/%d"),ST=self.TimeSabt.strftime("%H:%S"),TR=self.TypeReq,SA=self.sangAsli_1,SF=self.sangFari_1,
+                          BH=self.bakhsh,HR=self.hamkarCB ,TG=self.dariaftKonande,ER=self.elatDarkhast ,TT=self.tozihat)
+            self.ui.statusbar.showMessage('با موفقیت ثبت شد')
+            self.btn_New()
+        except:
+            print("Error")
+            pass
 
     def btn_search(self):
         self.sangAsli_2 = self.ui.lineEdit_sangAsli_2.text()
