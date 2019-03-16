@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>580</height>
+    <height>629</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1441,7 +1441,7 @@ border-radius: 3px;
              </property>
              <layout class="QGridLayout" name="gridLayout_7">
               <item row="1" column="1">
-               <widget class="QCheckBox" name="checkBox">
+               <widget class="QCheckBox" name="checkBox_advanceSearch">
                 <property name="text">
                  <string>بازیابی پیشرفته</string>
                 </property>
@@ -1463,14 +1463,17 @@ border-radius: 3px;
               <item row="1" column="4">
                <layout class="QHBoxLayout" name="horizontalLayout">
                 <property name="spacing">
-                 <number>0</number>
+                 <number>1</number>
                 </property>
                 <item>
-                 <widget class="QLineEdit" name="lineEdit_3">
+                 <widget class="QLineEdit" name="lineEdit_dateDay">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>1</horstretch>
+                    <verstretch>1</verstretch>
                    </sizepolicy>
                   </property>
                   <property name="minimumSize">
@@ -1543,11 +1546,14 @@ border-radius: 3px;
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="lineEdit_2">
+                 <widget class="QLineEdit" name="lineEdit_dateMonth">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>1</horstretch>
+                    <verstretch>1</verstretch>
                    </sizepolicy>
                   </property>
                   <property name="minimumSize">
@@ -1599,6 +1605,18 @@ border-radius: 3px;
                     <height>46</height>
                    </size>
                   </property>
+                  <property name="sizeIncrement">
+                   <size>
+                    <width>15</width>
+                    <height>46</height>
+                   </size>
+                  </property>
+                  <property name="baseSize">
+                   <size>
+                    <width>15</width>
+                    <height>46</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <family>A Arsoo</family>
@@ -1620,34 +1638,37 @@ border-radius: 3px;
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="lineEdit">
+                 <widget class="QLineEdit" name="lineEdit_dateYear">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>1</horstretch>
+                    <verstretch>1</verstretch>
                    </sizepolicy>
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>35</width>
                     <height>20</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>35</width>
                     <height>20</height>
                    </size>
                   </property>
                   <property name="sizeIncrement">
                    <size>
-                    <width>40</width>
+                    <width>35</width>
                     <height>20</height>
                    </size>
                   </property>
                   <property name="baseSize">
                    <size>
-                    <width>40</width>
+                    <width>35</width>
                     <height>20</height>
                    </size>
                   </property>
@@ -1691,7 +1712,10 @@ border-radius: 3px;
                </spacer>
               </item>
               <item row="1" column="6">
-               <widget class="QComboBox" name="comboBox">
+               <widget class="QComboBox" name="comboBox_searchType">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -1721,12 +1745,12 @@ border-radius: 3px;
                 </item>
                 <item>
                  <property name="text">
-                  <string>کلیه بازگشت داده نشده</string>
+                  <string>کلیه پرونده های بازگشت داده نشده</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>کلیه بازگشت داده شده</string>
+                  <string>کلیه پرونده های بازگشت داده شده</string>
                  </property>
                 </item>
                </widget>
@@ -1762,7 +1786,7 @@ border-radius: 3px;
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -1827,13 +1851,34 @@ border-radius: 3px;
   <tabstop>checkBox_daftar_2</tabstop>
   <tabstop>radioButton_bakhsh26_2</tabstop>
   <tabstop>radioButton_bakhsh25_2</tabstop>
+  <tabstop>checkBox_advanceSearch</tabstop>
+  <tabstop>lineEdit_dateDay</tabstop>
+  <tabstop>lineEdit_dateMonth</tabstop>
+  <tabstop>comboBox_searchType</tabstop>
   <tabstop>pushButton_search</tabstop>
   <tabstop>pushButton_bazgashBygani</tabstop>
   <tabstop>pushButton_print</tabstop>
   <tabstop>tableView_result</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>action_close</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <buttongroups>
   <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>

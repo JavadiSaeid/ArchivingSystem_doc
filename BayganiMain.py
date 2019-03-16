@@ -1,4 +1,6 @@
 import sys ,dpi ,os
+from pytz import timezone
+from jdatetime import datetime as dt
 from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtGui import QIntValidator
 from PyQt5.QtWidgets import QApplication, QMainWindow
@@ -11,9 +13,15 @@ class Baygan():
         self.ui = Ui_MainWindow()
         self.ui.setupUi(MainWindow)
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
-        self.onlyIntAsli = QIntValidator(1,999)
-        self.ui.lineEdit_sangAsli.setValidator(self.onlyIntAsli)
-        self.ui.lineEdit_sangAsli_2.setValidator(self.onlyIntAsli)
+        self.dateTime()
+        self.ui.lineEdit_dateYear.setText(self.nowYear)
+        self.ui.lineEdit_dateYear.setValidator((QIntValidator(1,9999)))
+        self.ui.lineEdit_dateMonth.setText(self.nowMonth)
+        self.ui.lineEdit_dateMonth.setValidator((QIntValidator(1,12)))
+        self.ui.lineEdit_dateDay.setText(self.nowDay)
+        self.ui.lineEdit_dateDay.setValidator((QIntValidator(1,31)))
+        self.ui.lineEdit_sangAsli.setValidator(QIntValidator(1,999))
+        self.ui.lineEdit_sangAsli_2.setValidator(QIntValidator(1,999))
         self.ui.lineEdit_sangFari.setValidator(self.onlyInt)
         self.ui.lineEdit_sangFari_2.setValidator(self.onlyInt)
         self.ui.tab1_inputData.keyPressEvent = self.EnterToTab_1
@@ -22,13 +30,22 @@ class Baygan():
         self.ui.pushButton_search.clicked.connect(self.btn_search)
         self.ui.pushButton_new.clicked.connect(self.btn_New)
         self.ui.checkBox_daftar.stateChanged.connect(self.Daftar)
+        self.ui.checkBox_advanceSearch.stateChanged.connect(self.advance)
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
 
 
         MainWindow.show()
         sys.exit(app.exec_())
 
-
+    def dateTime(self):
+        self.tz = timezone('Asia/Tehran')
+        self.timDel = dt.now(self.tz)
+        self.nowYear = self.timDel.strftime("%Y")
+        self.nowMonth = self.timDel.strftime("%m")
+        self.nowDay = self.timDel.strftime("%d")
+        self.nowHour = self.timDel.strftime("%H")
+        self.nowMinute = self.timDel.strftime("%S")
+        print(self.nowYear)
     def EnterToTab_1(self, e):
         if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter :
             self.btn_sabt()
@@ -42,7 +59,6 @@ class Baygan():
             self.ui.lineEdit_sangFari.setEnabled(False)
             self.ui.radioButton_bakhsh25_1.setEnabled(False)
             self.ui.radioButton_bakhsh26_1.setEnabled(False)
-
         if state == Qt.Unchecked:
             self.ui.lineEdit_sangFari.setEnabled(True)
             self.ui.radioButton_bakhsh25_1.setEnabled(True)
@@ -56,7 +72,17 @@ class Baygan():
             self.ui.lineEdit_sangFari_2.setEnabled(True)
             self.ui.radioButton_bakhsh25_2.setEnabled(True)
             self.ui.radioButton_bakhsh26_2.setEnabled(True)
-
+    def advance(self):
+        if self.ui.checkBox_advanceSearch.isChecked():
+            self.ui.lineEdit_dateDay.setEnabled(True)
+            self.ui.lineEdit_dateMonth.setEnabled(True)
+            self.ui.lineEdit_dateYear.setEnabled(True)
+            self.ui.comboBox_searchType.setEnabled(True)
+        else:
+            self.ui.lineEdit_dateDay.setEnabled(False)
+            self.ui.lineEdit_dateMonth.setEnabled(False)
+            self.ui.lineEdit_dateYear.setEnabled(False)
+            self.ui.comboBox_searchType.setEnabled(False)
     def getUpdateVriable(self):
         self.sangAsli_1 = self.ui.lineEdit_sangAsli.text()
         self.sangFari_1 = self.ui.lineEdit_sangFari.text()
