@@ -45,7 +45,6 @@ class Baygan():
         self.nowDay = self.timDel.strftime("%d")
         self.nowHour = self.timDel.strftime("%H")
         self.nowMinute = self.timDel.strftime("%S")
-        print(self.nowYear)
     def EnterToTab_1(self, e):
         if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter :
             self.btn_sabt()
@@ -130,7 +129,7 @@ class Baygan():
         print(self.dariaftKonande)
         print(self.elatDarkhast)
         print(self.tozihat)
-
+        self.ui.statusbar.showMessage('با موفقیت ثبت شد')
         self.btn_New()
 
     def btn_search(self):
