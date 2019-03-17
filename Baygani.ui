@@ -148,34 +148,6 @@ font: 75 11pt &quot;A Arsoo&quot;;
                 </property>
                </widget>
               </item>
-              <item row="0" column="5">
-               <widget class="QRadioButton" name="radioButton_darKhastSanad">
-                <property name="text">
-                 <string>درخواست سند</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4">
-               <widget class="QRadioButton" name="radioButton_nameEdarat">
-                <property name="text">
-                 <string>نامه ادارات</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="QRadioButton" name="radioButton_tajmii">
-                <property name="text">
-                 <string>تجمیع</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QRadioButton" name="radioButton_tafkik">
-                <property name="text">
-                 <string>تفکیک</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="1">
                <widget class="QRadioButton" name="radioButton_estelam">
                 <property name="text">
@@ -193,17 +165,45 @@ font: 75 11pt &quot;A Arsoo&quot;;
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
-               <widget class="QRadioButton" name="radioButton_Jari">
+              <item row="0" column="3">
+               <widget class="QRadioButton" name="radioButton_tafkik">
                 <property name="text">
-                 <string>جاری</string>
+                 <string>تفکیک</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QRadioButton" name="radioButton_darKhastSanad">
+                <property name="text">
+                 <string>درخواست سند</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="QRadioButton" name="radioButton_nameEdarat">
+                <property name="text">
+                 <string>نامه ادارات</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QRadioButton" name="radioButton_tajmii">
+                <property name="text">
+                 <string>تجمیع</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QRadioButton" name="radioButton_Baresi">
+                <property name="text">
+                 <string>بررسی</string>
                 </property>
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QRadioButton" name="radioButton_Baresi">
+               <widget class="QRadioButton" name="radioButton_Jari">
                 <property name="text">
-                 <string>بررسی</string>
+                 <string>جاری</string>
                 </property>
                </widget>
               </item>
@@ -1836,12 +1836,12 @@ border-radius: 3px;
   <tabstop>radioButton_hamkar</tabstop>
   <tabstop>radioButton_edary</tabstop>
   <tabstop>radioButton_estelam</tabstop>
-  <tabstop>radioButton_tafkik</tabstop>
   <tabstop>radioButton_tajmii</tabstop>
+  <tabstop>radioButton_tafkik</tabstop>
   <tabstop>radioButton_nameEdarat</tabstop>
   <tabstop>radioButton_darKhastSanad</tabstop>
-  <tabstop>radioButton_Jari</tabstop>
   <tabstop>radioButton_Baresi</tabstop>
+  <tabstop>radioButton_Jari</tabstop>
   <tabstop>radioButton_sayer</tabstop>
   <tabstop>textEdit_Tozihat</tabstop>
   <tabstop>pushButton_sabt</tabstop>
@@ -1854,6 +1854,7 @@ border-radius: 3px;
   <tabstop>checkBox_advanceSearch</tabstop>
   <tabstop>lineEdit_dateDay</tabstop>
   <tabstop>lineEdit_dateMonth</tabstop>
+  <tabstop>lineEdit_dateYear</tabstop>
   <tabstop>comboBox_searchType</tabstop>
   <tabstop>pushButton_search</tabstop>
   <tabstop>pushButton_bazgashBygani</tabstop>

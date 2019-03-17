@@ -1,4 +1,4 @@
-import sys ,dpi ,os,sqlite3
+import sys ,dpi ,sqlite3
 from pytz import timezone
 from jdatetime import datetime as dt
 from PyQt5.QtCore import Qt, pyqtSlot
@@ -26,7 +26,7 @@ class Baygan():
         self.ui.lineEdit_sangFari_2.setValidator(self.onlyInt)
         self.ui.tab1_inputData.keyPressEvent = self.EnterToTab_1
         self.ui.tab2_SearchData.keyPressEvent = self.EnterToTab_2
-        self.ui.pushButton_sabt.clicked.connect(self.btn_sabt)
+        self.ui.pushButton_sabt.clicked.connect(self.btn_sbt)
         self.ui.pushButton_search.clicked.connect(self.btn_search)
         self.ui.pushButton_new.clicked.connect(self.btn_New)
         self.ui.checkBox_daftar.stateChanged.connect(self.Daftar)
@@ -44,10 +44,10 @@ class Baygan():
         self.nowMonth = self.TimeSabt.strftime("%m")
         self.nowDay = self.TimeSabt.strftime("%d")
         self.nowHour = self.TimeSabt.strftime("%H")
-        self.nowMinute = self.TimeSabt.strftime("%S")
+        self.nowMinute = self.TimeSabt.strftime("%M")
     def EnterToTab_1(self, e):
         if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter :
-            self.btn_sabt()
+            self.btn_sbt()
     def EnterToTab_2(self,e):
         if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter:
             print("tab Dovom enter shod")
@@ -122,27 +122,34 @@ class Baygan():
             self.elatDarkhast = 'سایر'
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()
 
-    def insertdb(self,TH,ST,TR,SA,HR,TG,ER,SF='',BH='',TT='',BB='',BT=''):
+    def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT=''):
         with sqlite3.connect(r'Backup\ArchivesData.db') as database:
-            table = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
-                    "sa VARCHAR(50) ,sf VARCHAR (50),bh VARCHAR (30),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bb varchar(30),bt varchar (50))"
-            database.execute(table)
-            insert = "INSERT INTO IT_BAYGAN(th,st,tr,sa,sf,bh,hr,tg,er,tt,bb,bt) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
-                .format(TH,ST,TR,SA,SF,BH,HR,TG,ER,TT,BB,BT)
+            IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
+                    "sn VARCHAR(60) ,bh VARCHAR (50),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (50))"
+            database.execute(IT_BAYGAN)
+            TH = self.TimeSabt.strftime("%Y/%m/%d")
+            ST = self.TimeSabt.strftime("%H:%M")
+            if TR == 'پرونده':
+                SN = SA+"/"+SF
+            else:
+                BH = ''
+                SN = SA
+            insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
+                .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT)
             database.execute(insert)
             database.commit()
             print("OK Database")
 
-    def btn_sabt(self):
+    def btn_sbt(self):
         self.getUpdateVriable()
         self.dateTime()
         try:
-            self.insertdb(TH=self.TimeSabt.strftime("%Y/%m/%d"),ST=self.TimeSabt.strftime("%H:%S"),TR=self.TypeReq,SA=self.sangAsli_1,SF=self.sangFari_1,
-                          BH=self.bakhsh,HR=self.hamkarCB ,TG=self.dariaftKonande,ER=self.elatDarkhast ,TT=self.tozihat)
+            self.insertdb(TR=self.TypeReq, SA=self.sangAsli_1, SF=self.sangFari_1, BH=self.bakhsh,
+                          HR=self.hamkarCB, TG=self.dariaftKonande, ER=self.elatDarkhast, TT=self.tozihat)
             self.ui.statusbar.showMessage('با موفقیت ثبت شد')
             self.btn_New()
         except:
-            print("Error")
+            self.ui.statusbar.showMessage('مشکل در ثبت اطلاعات!')
             pass
 
     def btn_search(self):
