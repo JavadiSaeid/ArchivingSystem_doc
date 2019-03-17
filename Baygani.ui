@@ -108,7 +108,7 @@ border-radius:2px;
            <item row="6" column="0">
             <widget class="QGroupBox" name="groupBox_Tozihat">
              <property name="statusTip">
-              <string>  علت درخواست پرونده از بایگانی  </string>
+              <string>  علت درخواست</string>
              </property>
              <property name="layoutDirection">
               <enum>Qt::RightToLeft</enum>
@@ -140,6 +140,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="1" column="2">
                <widget class="QRadioButton" name="radioButton_sayer">
+                <property name="statusTip">
+                 <string>  علت درخواست</string>
+                </property>
                 <property name="text">
                  <string>سایر</string>
                 </property>
@@ -150,6 +153,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="1">
                <widget class="QRadioButton" name="radioButton_estelam">
+                <property name="statusTip">
+                 <string>  علت درخواست</string>
+                </property>
                 <property name="text">
                  <string>استعلام</string>
                 </property>
@@ -157,6 +163,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="0">
                <widget class="QRadioButton" name="radioButton_edary">
+                <property name="statusTip">
+                 <string>  علت درخواست</string>
+                </property>
                 <property name="text">
                  <string>اداری</string>
                 </property>
@@ -167,6 +176,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="3">
                <widget class="QRadioButton" name="radioButton_tafkik">
+                <property name="statusTip">
+                 <string>  علت درخواست</string>
+                </property>
                 <property name="text">
                  <string>تفکیک</string>
                 </property>
@@ -174,6 +186,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="5">
                <widget class="QRadioButton" name="radioButton_darKhastSanad">
+                <property name="statusTip">
+                 <string>  علت درخواست</string>
+                </property>
                 <property name="text">
                  <string>درخواست سند</string>
                 </property>
@@ -181,6 +196,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="4">
                <widget class="QRadioButton" name="radioButton_nameEdarat">
+                <property name="statusTip">
+                 <string>  علت درخواست</string>
+                </property>
                 <property name="text">
                  <string>نامه ادارات</string>
                 </property>
@@ -188,6 +206,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="2">
                <widget class="QRadioButton" name="radioButton_tajmii">
+                <property name="statusTip">
+                 <string>  علت درخواست</string>
+                </property>
                 <property name="text">
                  <string>تجمیع</string>
                 </property>
@@ -195,6 +216,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="1" column="0">
                <widget class="QRadioButton" name="radioButton_Baresi">
+                <property name="statusTip">
+                 <string>  علت درخواست</string>
+                </property>
                 <property name="text">
                  <string>بررسی</string>
                 </property>
@@ -202,6 +226,9 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="1" column="1">
                <widget class="QRadioButton" name="radioButton_Jari">
+                <property name="statusTip">
+                 <string>  علت درخواست</string>
+                </property>
                 <property name="text">
                  <string>جاری</string>
                 </property>
@@ -953,7 +980,7 @@ font: 75 12pt &quot;A Arsoo&quot;;
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="statusTip">
-                <string>برای جستجو اطلاعات ذخیره شده کلیک کنید</string>
+                <string>برای بازیابی اطلاعات ذخیره شده کلیک کنید</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
@@ -1417,6 +1444,9 @@ border-radius: 10px;
            </item>
            <item row="3" column="0">
             <widget class="QGroupBox" name="groupBox_2">
+             <property name="statusTip">
+              <string>بازیابی پیشرفته به تاریخ</string>
+             </property>
              <property name="styleSheet">
               <string notr="true">QLineEdit{
 background-color: rgba(0, 0, 0, 0);
@@ -1442,8 +1472,11 @@ border-radius: 3px;
              <layout class="QGridLayout" name="gridLayout_7">
               <item row="1" column="1">
                <widget class="QCheckBox" name="checkBox_advanceSearch">
+                <property name="statusTip">
+                 <string>بازیابی سوابق پرونده به تاریخ</string>
+                </property>
                 <property name="text">
-                 <string>بازیابی پیشرفته</string>
+                 <string>بازیابی به تاریخ</string>
                 </property>
                </widget>
               </item>
@@ -1499,6 +1532,9 @@ border-radius: 3px;
                     <width>20</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="statusTip">
+                   <string>روز</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -1579,6 +1615,9 @@ border-radius: 3px;
                     <width>20</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="statusTip">
+                   <string>ماه</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -1672,6 +1711,9 @@ border-radius: 3px;
                     <height>20</height>
                    </size>
                   </property>
+                  <property name="statusTip">
+                   <string>سال</string>
+                  </property>
                   <property name="maxLength">
                    <number>32765</number>
                   </property>
@@ -1727,6 +1769,9 @@ border-radius: 3px;
                   <width>220</width>
                   <height>0</height>
                  </size>
+                </property>
+                <property name="statusTip">
+                 <string>بازیابی برا اساس گزینه های موجود</string>
                 </property>
                 <item>
                  <property name="text">
@@ -1786,7 +1831,7 @@ border-radius: 3px;
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -1881,7 +1926,7 @@ border-radius: 3px;
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

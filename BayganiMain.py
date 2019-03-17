@@ -1,9 +1,11 @@
 import sys ,dpi ,sqlite3
+
+from PyQt5 import QtCore
 from pytz import timezone
 from jdatetime import datetime as dt
 from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtGui import QIntValidator
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox, QFrame, QGridLayout, QVBoxLayout
 from interface_archive import Ui_MainWindow
 
 class Baygan():
@@ -55,6 +57,7 @@ class Baygan():
 
     def Daftar(self,state):
         if state == Qt.Checked:
+            self.ui.lineEdit_sangFari.setText('')
             self.ui.lineEdit_sangFari.setEnabled(False)
             self.ui.radioButton_bakhsh25_1.setEnabled(False)
             self.ui.radioButton_bakhsh26_1.setEnabled(False)
@@ -64,6 +67,7 @@ class Baygan():
             self.ui.radioButton_bakhsh26_1.setEnabled(True)
     def Daftar_2(self,state):
         if state == Qt.Checked:
+            self.ui.lineEdit_sangFari_2.setText('')
             self.ui.lineEdit_sangFari_2.setEnabled(False)
             self.ui.radioButton_bakhsh25_2.setEnabled(False)
             self.ui.radioButton_bakhsh26_2.setEnabled(False)
@@ -144,12 +148,17 @@ class Baygan():
         self.getUpdateVriable()
         self.dateTime()
         try:
-            self.insertdb(TR=self.TypeReq, SA=self.sangAsli_1, SF=self.sangFari_1, BH=self.bakhsh,
-                          HR=self.hamkarCB, TG=self.dariaftKonande, ER=self.elatDarkhast, TT=self.tozihat)
-            self.ui.statusbar.showMessage('با موفقیت ثبت شد')
-            self.btn_New()
+            if self.ui.checkBox_daftar.isChecked():
+                if self.sangAsli_1 != '':
+                    self.insertdb(TR=self.TypeReq, SA=self.sangAsli_1, SF=self.sangFari_1, BH=self.bakhsh,
+                                  HR=self.hamkarCB, TG=self.dariaftKonande, ER=self.elatDarkhast, TT=self.tozihat)
+                    self.ui.statusbar.showMessage('با موفقیت ثبت شد')
+                    self.btn_New()
+                else:
+                    self.ui.statusbar.showMessage('باید شماره سنگ اصلی دفتر وارد شود')
+                    self.errorM()
         except:
-            self.ui.statusbar.showMessage('مشکل در ثبت اطلاعات!')
+            self.ui.statusbar.showMessage('مشکل در ثبت اطلاعات')
             pass
 
     def btn_search(self):
@@ -178,7 +187,43 @@ class Baygan():
         self.ui.textEdit_Tozihat.setText('')
 
 
+    def errorM(self,errorText='مشکلی پیش آمده است !!!'):
+        box = QMessageBox()
+        box.setIcon(QMessageBox.Warning)
+        box.setWindowTitle('ارور')
+        box.setText(errorText)
+        box.setStandardButtons(QMessageBox.Yes)
+        buttonY = box.button(QMessageBox.Yes)
 
+        buttonY.setText('       تایید       ')
+        box.setStyleSheet("QMessageBox{\n"
+                          "background-color:    #d9c9a3    ;\n"
+                          "border: 3px solid   #ff0000  ;\n"
+                          "border-radius:5px;\n"
+                          "}\n"
+                          "QLabel{\n"
+                          "color:   #ff0000  ;\n"
+                          "font-weight: bold;\n"
+                          "border:no;\n"
+                          "}\n"
+                          "\n"
+                          "QPushButton:hover:!pressed\n"
+                          "{\n"
+                          "  border: 2px dashed rgb(255, 85, 255);\n"
+                          "    background-color:  #e4e7bb ;\n"
+                          "    color:  #9804ff ;\n"
+                          "}\n"
+                          "QPushButton{\n"
+                          "background-color:  #a2fdc1 ;\n"
+                          "font: 10pt \"B Zar\";\n"
+                          "font-weight: bold;\n"
+                          "    color:  #ff0000 ;\n"
+                          "border: 2px solid  #8b00ff ;\n"
+                          "border-radius: 8px;\n"
+                          "}")
+        box.setWindowFlags(box.windowFlags() | QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
+        # box.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        box.exec_()
 
 
 

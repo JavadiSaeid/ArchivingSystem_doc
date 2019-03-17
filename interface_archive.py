@@ -2,12 +2,11 @@
 
 # Form implementation generated from reading ui file 'Baygani.ui'
 #
-# Created by: PyQt5 UI code generator 5.12
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -694,7 +693,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.tabWidget, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 600, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 600, 20))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
@@ -762,18 +761,27 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "سامانه بایگانی ثبت ماسال"))
         self.tabWidget.setStatusTip(_translate("MainWindow", "  ثبت پرونده خارج شده از بایگانی"))
         self.groupBox_inputData.setTitle(_translate("MainWindow", "فرم ثبت خروج پرونده از بایگانی"))
-        self.groupBox_Tozihat.setStatusTip(_translate("MainWindow", "  علت درخواست پرونده از بایگانی  "))
+        self.groupBox_Tozihat.setStatusTip(_translate("MainWindow", "  علت درخواست"))
         self.groupBox_Tozihat.setTitle(_translate("MainWindow", "توضیحات"))
         self.textEdit_Tozihat.setStatusTip(_translate("MainWindow", "توضیحات خود را در این بخش بنویسید"))
         self.textEdit_Tozihat.setPlaceholderText(_translate("MainWindow", "توضیحات"))
+        self.radioButton_sayer.setStatusTip(_translate("MainWindow", "  علت درخواست"))
         self.radioButton_sayer.setText(_translate("MainWindow", "سایر"))
+        self.radioButton_estelam.setStatusTip(_translate("MainWindow", "  علت درخواست"))
         self.radioButton_estelam.setText(_translate("MainWindow", "استعلام"))
+        self.radioButton_edary.setStatusTip(_translate("MainWindow", "  علت درخواست"))
         self.radioButton_edary.setText(_translate("MainWindow", "اداری"))
+        self.radioButton_tafkik.setStatusTip(_translate("MainWindow", "  علت درخواست"))
         self.radioButton_tafkik.setText(_translate("MainWindow", "تفکیک"))
+        self.radioButton_darKhastSanad.setStatusTip(_translate("MainWindow", "  علت درخواست"))
         self.radioButton_darKhastSanad.setText(_translate("MainWindow", "درخواست سند"))
+        self.radioButton_nameEdarat.setStatusTip(_translate("MainWindow", "  علت درخواست"))
         self.radioButton_nameEdarat.setText(_translate("MainWindow", "نامه ادارات"))
+        self.radioButton_tajmii.setStatusTip(_translate("MainWindow", "  علت درخواست"))
         self.radioButton_tajmii.setText(_translate("MainWindow", "تجمیع"))
+        self.radioButton_Baresi.setStatusTip(_translate("MainWindow", "  علت درخواست"))
         self.radioButton_Baresi.setText(_translate("MainWindow", "بررسی"))
+        self.radioButton_Jari.setStatusTip(_translate("MainWindow", "  علت درخواست"))
         self.radioButton_Jari.setText(_translate("MainWindow", "جاری"))
         self.lineEdit_sangFari.setStatusTip(_translate("MainWindow", "سنگ فرعی را وارد کنید"))
         self.lineEdit_sangFari.setPlaceholderText(_translate("MainWindow", "سنگ فرعی"))
@@ -818,7 +826,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1_inputData), _translate("MainWindow", "ورود اطلاعات"))
         self.groupBox.setStatusTip(_translate("MainWindow", "   جستجوی سوابق پرونده خارج شده از بایگانی"))
         self.groupBox.setTitle(_translate("MainWindow", "فرم بازیابی اطلاعات ثبت شده"))
-        self.pushButton_search.setStatusTip(_translate("MainWindow", "برای جستجو اطلاعات ذخیره شده کلیک کنید"))
+        self.pushButton_search.setStatusTip(_translate("MainWindow", "برای بازیابی اطلاعات ذخیره شده کلیک کنید"))
         self.pushButton_search.setText(_translate("MainWindow", "جستجو"))
         self.pushButton_search.setShortcut(_translate("MainWindow", "Ctrl+S"))
         self.label_5.setStatusTip(_translate("MainWindow", "بخش را انتخاب کنید"))
@@ -836,13 +844,19 @@ class Ui_MainWindow(object):
         self.pushButton_bazgashBygani.setText(_translate("MainWindow", "بازگشت پرونده به بایگانی"))
         self.pushButton_print.setStatusTip(_translate("MainWindow", "پرینت اطلاعات بازیابی شده"))
         self.pushButton_print.setText(_translate("MainWindow", "     پرینت     "))
+        self.groupBox_2.setStatusTip(_translate("MainWindow", "بازیابی پیشرفته به تاریخ"))
         self.groupBox_2.setTitle(_translate("MainWindow", "بازیابی پیشرفته"))
-        self.checkBox_advanceSearch.setText(_translate("MainWindow", "بازیابی پیشرفته"))
+        self.checkBox_advanceSearch.setStatusTip(_translate("MainWindow", "بازیابی سوابق پرونده به تاریخ"))
+        self.checkBox_advanceSearch.setText(_translate("MainWindow", "بازیابی به تاریخ"))
+        self.lineEdit_dateDay.setStatusTip(_translate("MainWindow", "روز"))
         self.lineEdit_dateDay.setPlaceholderText(_translate("MainWindow", "روز"))
         self.label_7.setText(_translate("MainWindow", "/"))
+        self.lineEdit_dateMonth.setStatusTip(_translate("MainWindow", "ماه"))
         self.lineEdit_dateMonth.setPlaceholderText(_translate("MainWindow", "ماه"))
         self.label_8.setText(_translate("MainWindow", "/"))
+        self.lineEdit_dateYear.setStatusTip(_translate("MainWindow", "سال"))
         self.lineEdit_dateYear.setPlaceholderText(_translate("MainWindow", "سال"))
+        self.comboBox_searchType.setStatusTip(_translate("MainWindow", "بازیابی برا اساس گزینه های موجود"))
         self.comboBox_searchType.setItemText(0, _translate("MainWindow", "کلیه سوابق موجود"))
         self.comboBox_searchType.setItemText(1, _translate("MainWindow", "بازگشت داده نشده"))
         self.comboBox_searchType.setItemText(2, _translate("MainWindow", "بازگشت داده شده"))
@@ -854,5 +868,4 @@ class Ui_MainWindow(object):
         self.action_about.setText(_translate("MainWindow", "درباره"))
         self.action_close.setText(_translate("MainWindow", "بستن"))
         self.action.setText(_translate("MainWindow", "تغییر رمز ورود"))
-
 
