@@ -3,9 +3,9 @@ import sys ,dpi ,sqlite3
 from PyQt5 import QtCore
 from pytz import timezone
 from jdatetime import datetime as dt
-from PyQt5.QtCore import Qt, pyqtSlot
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIntValidator
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox, QFrame, QGridLayout, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from interface_archive import Ui_MainWindow
 
 class Baygan():
@@ -127,10 +127,12 @@ class Baygan():
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()
 
     def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT=''):
-        with sqlite3.connect(r'Backup\ArchivesData.db') as database:
-            IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
-                    "sn VARCHAR(60) ,bh VARCHAR (50),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (50))"
+        with sqlite3.connect(r'\\10.120.112.70\baygan-data\ArchivesData.db') as database:
+            IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
+                    "sn VARCHAR(60),bh VARCHAR (50),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (50))"
+            STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn INTEGER NOT NULL UNIQUE, ss VARCHAR(60))"
             database.execute(IT_BAYGAN)
+            database.execute(STATUS_BAYGAN)
             TH = self.TimeSabt.strftime("%Y/%m/%d")
             ST = self.TimeSabt.strftime("%H:%M")
             if TR == 'پرونده':
@@ -140,9 +142,10 @@ class Baygan():
                 SN = SA
             insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
                 .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT)
+            instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn, ss) VALUES ('{}', 'خارج شده')".format(SN)
             database.execute(insert)
+            database.execute(instatus)
             database.commit()
-            print("OK Database")
 
     def btn_sbt(self):
         self.getUpdateVriable()
@@ -155,10 +158,22 @@ class Baygan():
                     self.ui.statusbar.showMessage('با موفقیت ثبت شد')
                     self.btn_New()
                 else:
-                    self.ui.statusbar.showMessage('باید شماره سنگ اصلی دفتر وارد شود')
-                    self.errorM()
+                    self.ui.statusbar.showMessage('خطا')
+                    self.errorM(errorText='شماره سنگ اصلی دفتر باید وارد شود')
+            else:
+                if self.sangAsli_1 != '':
+                    if self.sangFari_1 != '':
+                        self.insertdb(TR=self.TypeReq, SA=self.sangAsli_1, SF=self.sangFari_1, BH=self.bakhsh,
+                                      HR=self.hamkarCB, TG=self.dariaftKonande, ER=self.elatDarkhast, TT=self.tozihat)
+                        self.ui.statusbar.showMessage('با موفقیت ثبت شد')
+                        self.btn_New()
+                    else:
+                        self.errorM('شماره سنگ فرعی باید وارد شود')
+                else:
+                    self.errorM('شماره سنگ اصلی باید وارد شود')
         except:
-            self.ui.statusbar.showMessage('مشکل در ثبت اطلاعات')
+            self.ui.statusbar.showMessage('خطا در ثبت اطلاعات')
+            self.errorM(' خطایی در ثبت اطلاعات بوجود امده است \n این خطا را به مدیر سیستم اطلاع دهید')
             pass
 
     def btn_search(self):
@@ -203,6 +218,7 @@ class Baygan():
                           "}\n"
                           "QLabel{\n"
                           "color:   #ff0000  ;\n"
+                          "font: 13pt \"A Arsoo\";\n"
                           "font-weight: bold;\n"
                           "border:no;\n"
                           "}\n"
@@ -215,7 +231,7 @@ class Baygan():
                           "}\n"
                           "QPushButton{\n"
                           "background-color:  #a2fdc1 ;\n"
-                          "font: 10pt \"B Zar\";\n"
+                          "font: 12pt \"A Arsoo\";\n"
                           "font-weight: bold;\n"
                           "    color:  #ff0000 ;\n"
                           "border: 2px solid  #8b00ff ;\n"
