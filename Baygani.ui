@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>629</height>
+    <width>581</width>
+    <height>592</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,6 +27,13 @@ border:1px solid rgbrgb(0, 148, 0);
 border-radius:2px;
 	font: 10pt &quot;A Arsoo&quot;;
 }
+QToolTip {
+background-color: #b8d5dd;
+    border: 2px solid  #1bff00 ;
+    border-radius: 5px;
+	color:  #e300a5 ;
+	font-weight: bold;
+}
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -37,7 +44,7 @@ border-radius:2px;
        <bool>true</bool>
       </property>
       <property name="statusTip">
-       <string>  ثبت پرونده خارج شده از بایگانی</string>
+       <string/>
       </property>
       <property name="styleSheet">
        <string notr="true"/>
@@ -46,6 +53,12 @@ border-radius:2px;
        <number>0</number>
       </property>
       <widget class="QWidget" name="tab1_inputData">
+       <property name="statusTip">
+        <string>  ثبت پرونده خارج شده از بایگانی</string>
+       </property>
+       <property name="whatsThis">
+        <string/>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::RightToLeft</enum>
        </property>
@@ -107,8 +120,11 @@ border-radius:2px;
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="6" column="0">
             <widget class="QGroupBox" name="groupBox_Tozihat">
-             <property name="statusTip">
+             <property name="toolTip">
               <string>  علت درخواست</string>
+             </property>
+             <property name="statusTip">
+              <string/>
              </property>
              <property name="layoutDirection">
               <enum>Qt::RightToLeft</enum>
@@ -130,8 +146,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                 <property name="cursor" stdset="0">
                  <cursorShape>IBeamCursor</cursorShape>
                 </property>
-                <property name="statusTip">
+                <property name="toolTip">
                  <string>توضیحات خود را در این بخش بنویسید</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
                 </property>
                 <property name="placeholderText">
                  <string>توضیحات</string>
@@ -140,8 +159,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="1" column="2">
                <widget class="QRadioButton" name="radioButton_sayer">
+                <property name="toolTip">
+                 <string>  علت درخواست سایر</string>
+                </property>
                 <property name="statusTip">
-                 <string>  علت درخواست</string>
+                 <string/>
                 </property>
                 <property name="text">
                  <string>سایر</string>
@@ -153,8 +175,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="1">
                <widget class="QRadioButton" name="radioButton_estelam">
+                <property name="toolTip">
+                 <string>  علت درخواست استعلام</string>
+                </property>
                 <property name="statusTip">
-                 <string>  علت درخواست</string>
+                 <string/>
                 </property>
                 <property name="text">
                  <string>استعلام</string>
@@ -163,8 +188,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="0">
                <widget class="QRadioButton" name="radioButton_edary">
+                <property name="toolTip">
+                 <string>  علت درخواست اداری</string>
+                </property>
                 <property name="statusTip">
-                 <string>  علت درخواست</string>
+                 <string/>
                 </property>
                 <property name="text">
                  <string>اداری</string>
@@ -176,8 +204,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="3">
                <widget class="QRadioButton" name="radioButton_tafkik">
+                <property name="toolTip">
+                 <string>  علت درخواست تفکیک</string>
+                </property>
                 <property name="statusTip">
-                 <string>  علت درخواست</string>
+                 <string/>
                 </property>
                 <property name="text">
                  <string>تفکیک</string>
@@ -186,8 +217,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="5">
                <widget class="QRadioButton" name="radioButton_darKhastSanad">
+                <property name="toolTip">
+                 <string>  علت درخواست درخواست سند</string>
+                </property>
                 <property name="statusTip">
-                 <string>  علت درخواست</string>
+                 <string/>
                 </property>
                 <property name="text">
                  <string>درخواست سند</string>
@@ -196,8 +230,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="4">
                <widget class="QRadioButton" name="radioButton_nameEdarat">
+                <property name="toolTip">
+                 <string>  علت درخواست نامه ادارات</string>
+                </property>
                 <property name="statusTip">
-                 <string>  علت درخواست</string>
+                 <string/>
                 </property>
                 <property name="text">
                  <string>نامه ادارات</string>
@@ -206,8 +243,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="0" column="2">
                <widget class="QRadioButton" name="radioButton_tajmii">
+                <property name="toolTip">
+                 <string>  علت درخواست تجمیع</string>
+                </property>
                 <property name="statusTip">
-                 <string>  علت درخواست</string>
+                 <string/>
                 </property>
                 <property name="text">
                  <string>تجمیع</string>
@@ -216,8 +256,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="1" column="0">
                <widget class="QRadioButton" name="radioButton_Baresi">
+                <property name="toolTip">
+                 <string>  علت درخواست بررسی</string>
+                </property>
                 <property name="statusTip">
-                 <string>  علت درخواست</string>
+                 <string/>
                 </property>
                 <property name="text">
                  <string>بررسی</string>
@@ -226,8 +269,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
               </item>
               <item row="1" column="1">
                <widget class="QRadioButton" name="radioButton_Jari">
+                <property name="toolTip">
+                 <string>  علت درخواست جاری</string>
+                </property>
                 <property name="statusTip">
-                 <string>  علت درخواست</string>
+                 <string/>
                 </property>
                 <property name="text">
                  <string>جاری</string>
@@ -266,8 +312,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                  <bold>false</bold>
                 </font>
                </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;سنگ &lt;span style=&quot; font-weight:600; color:#724c00;&quot;&gt;فرعی&lt;/span&gt; را وارد کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
                <property name="statusTip">
-                <string>سنگ فرعی را وارد کنید</string>
+                <string/>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -319,8 +368,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                  <bold>false</bold>
                 </font>
                </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;سنگ &lt;span style=&quot; font-weight:600; color:#875a00;&quot;&gt;اصلی&lt;/span&gt; را وارد کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
                <property name="statusTip">
-                <string>سنگ اصلی را وارد کنید</string>
+                <string/>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -347,8 +399,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="tabletTracking">
                 <bool>true</bool>
                </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir=&quot;rtl&quot;&gt;   درخواست دریافت &lt;span style=&quot; font-weight:600; color:#644200;&quot;&gt;دفتر&lt;/span&gt; از بایگانی  &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
                <property name="statusTip">
-                <string>   درخواست دریافت دفتر از بایگانی  </string>
+                <string/>
                </property>
                <property name="autoFillBackground">
                 <bool>false</bool>
@@ -414,8 +469,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                  <bold>false</bold>
                 </font>
                </property>
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>بخش را انتخاب کنید</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="text">
                 <string>بخش:</string>
@@ -427,8 +485,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>بخش 26 گیلان</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="text">
                 <string>26</string>
@@ -446,8 +507,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>بخش 25 گیلان</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="text">
                 <string>25</string>
@@ -510,8 +574,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
              </item>
              <item>
               <widget class="QLabel" name="label_3">
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>همکار تقاضا کننده پرونده را مشخص کنید</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="text">
                 <string>همکار تقاضا کننده:</string>
@@ -529,8 +596,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>همکار تقاضا کننده پرونده را مشخص کنید</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="editable">
                 <bool>false</bool>
@@ -653,8 +723,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
              </item>
              <item>
               <widget class="QLabel" name="label_4">
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="text">
                 <string>تحویل گیرنده:</string>
@@ -666,8 +739,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="text">
                 <string>ارباب رجوع</string>
@@ -685,8 +761,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="text">
                 <string>همکار</string>
@@ -749,8 +828,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir=&quot;rtl&quot;&gt;برای ثبت کلیک کنید&lt;/p&gt;&lt;p dir=&quot;rtl&quot;&gt;یا دکمه Enter را از کیبورد انتخاب کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
                <property name="statusTip">
-                <string>برای ثبت کلیک کنید</string>
+                <string/>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
@@ -837,8 +919,11 @@ border-radius: 10px;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir=&quot;rtl&quot;&gt;پاکسازی فرم برای ثبت اطلاعات جدید&lt;/p&gt;&lt;p dir=&quot;rtl&quot;&gt;کلید میانبر CTRL+N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
                <property name="statusTip">
-                <string>پاکسازی فرم برای ثبت اطلاعات جدید</string>
+                <string/>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
@@ -891,7 +976,7 @@ border-radius: 10px;
         <cursorShape>ArrowCursor</cursorShape>
        </property>
        <property name="statusTip">
-        <string/>
+        <string> بازیابی پرونده خارج شده از بایگانی</string>
        </property>
        <property name="styleSheet">
         <string notr="true">QWidget{
@@ -920,7 +1005,18 @@ background-color: #eee1c5   ;
 QCheckBox{
 font: 75 12pt &quot;A Arsoo&quot;;
 }
-</string>
+
+QTableView {
+
+                background-color: #646464;
+                padding: 4px;
+                font-size: 8pt;
+                border-style: none;
+                border-bottom: 1px solid #fffff8;
+                border-right: 1px solid #fffff8;
+                selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5,
+                                stop: 0 #FF92BB, stop: 1 white);
+            }</string>
        </property>
        <attribute name="title">
         <string>بازیابی اطلاعات</string>
@@ -931,8 +1027,11 @@ font: 75 12pt &quot;A Arsoo&quot;;
           <property name="enabled">
            <bool>true</bool>
           </property>
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="statusTip">
-           <string>   جستجوی سوابق پرونده خارج شده از بایگانی</string>
+           <string/>
           </property>
           <property name="title">
            <string>فرم بازیابی اطلاعات ثبت شده</string>
@@ -979,8 +1078,11 @@ font: 75 12pt &quot;A Arsoo&quot;;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>برای بازیابی اطلاعات ذخیره شده کلیک کنید</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
@@ -1079,8 +1181,11 @@ border-radius: 10px;
                  <bold>false</bold>
                 </font>
                </property>
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>بخش را انتخاب کنید</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="text">
                 <string>بخش:</string>
@@ -1094,6 +1199,9 @@ border-radius: 10px;
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="toolTip">
+                <string>بخش 26 گیلان</string>
                </property>
                <property name="text">
                 <string>26</string>
@@ -1110,6 +1218,9 @@ border-radius: 10px;
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="toolTip">
+                <string>بخش 25 گیلان</string>
                </property>
                <property name="text">
                 <string>25</string>
@@ -1169,8 +1280,11 @@ border-radius: 10px;
                  <bold>false</bold>
                 </font>
                </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;سنگ &lt;span style=&quot; font-weight:600; color:#724c00;&quot;&gt;فرعی&lt;/span&gt; را وارد کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
                <property name="statusTip">
-                <string>سنگ فرعی را وارد کنید</string>
+                <string/>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -1228,8 +1342,11 @@ border-radius: 10px;
                  <bold>false</bold>
                 </font>
                </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;سنگ &lt;span style=&quot; font-weight:600; color:#875a00;&quot;&gt;اصلی&lt;/span&gt; را وارد کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
                <property name="statusTip">
-                <string>سنگ اصلی را وارد کنید</string>
+                <string/>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -1256,8 +1373,11 @@ border-radius: 10px;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;   درخواست دریافت &lt;span style=&quot; font-weight:600; color:#644200;&quot;&gt;دفتر&lt;/span&gt; از بایگانی  &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
                <property name="statusTip">
-                <string>   بازیابی دفتر خارج شده از بایگانی   </string>
+                <string/>
                </property>
                <property name="text">
                 <string>دفتر</string>
@@ -1292,6 +1412,9 @@ border-radius: 10px;
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>نمایش نتیجه جستجو</string>
              </property>
             </widget>
            </item>
@@ -1342,8 +1465,11 @@ border-radius: 10px;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>  ثبت پرونده بازگشت داده شده به بایگانی</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
@@ -1398,8 +1524,11 @@ border-radius: 10px;
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
-               <property name="statusTip">
+               <property name="toolTip">
                 <string>پرینت اطلاعات بازیابی شده</string>
+               </property>
+               <property name="statusTip">
+                <string/>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton:hover:!pressed
@@ -1444,8 +1573,11 @@ border-radius: 10px;
            </item>
            <item row="3" column="0">
             <widget class="QGroupBox" name="groupBox_2">
+             <property name="toolTip">
+              <string>بازیابی پیشرفته </string>
+             </property>
              <property name="statusTip">
-              <string>بازیابی پیشرفته به تاریخ</string>
+              <string/>
              </property>
              <property name="styleSheet">
               <string notr="true">QLineEdit{
@@ -1470,18 +1602,74 @@ border-radius: 3px;
               <string>بازیابی پیشرفته</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_7">
+              <item row="1" column="5">
+               <spacer name="horizontalSpacer_22">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
               <item row="1" column="1">
                <widget class="QCheckBox" name="checkBox_advanceSearch">
-                <property name="statusTip">
+                <property name="toolTip">
                  <string>بازیابی سوابق پرونده به تاریخ</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
                 </property>
                 <property name="text">
                  <string>بازیابی به تاریخ</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="5">
-               <spacer name="horizontalSpacer_22">
+              <item row="1" column="6">
+               <widget class="QComboBox" name="comboBox_searchType">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>180</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string>بازیابی برا اساس گزینه های موجود</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>کلیه سوابق موجود</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>بازگشت داده نشده</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>بازگشت داده شده</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="8">
+               <spacer name="horizontalSpacer_24">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -1533,8 +1721,11 @@ border-radius: 3px;
                     <height>20</height>
                    </size>
                   </property>
-                  <property name="statusTip">
+                  <property name="toolTip">
                    <string>روز</string>
+                  </property>
+                  <property name="statusTip">
+                   <string/>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -1616,8 +1807,11 @@ border-radius: 3px;
                     <height>20</height>
                    </size>
                   </property>
-                  <property name="statusTip">
+                  <property name="toolTip">
                    <string>ماه</string>
+                  </property>
+                  <property name="statusTip">
+                   <string/>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -1711,8 +1905,11 @@ border-radius: 3px;
                     <height>20</height>
                    </size>
                   </property>
-                  <property name="statusTip">
+                  <property name="toolTip">
                    <string>سال</string>
+                  </property>
+                  <property name="statusTip">
+                   <string/>
                   </property>
                   <property name="maxLength">
                    <number>32765</number>
@@ -1727,19 +1924,6 @@ border-radius: 3px;
                 </item>
                </layout>
               </item>
-              <item row="1" column="7">
-               <spacer name="horizontalSpacer_24">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item row="1" column="3">
                <spacer name="horizontalSpacer_23">
                 <property name="orientation">
@@ -1747,71 +1931,24 @@ border-radius: 3px;
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>30</width>
+                  <width>20</width>
                   <height>20</height>
                  </size>
                 </property>
                </spacer>
-              </item>
-              <item row="1" column="6">
-               <widget class="QComboBox" name="comboBox_searchType">
-                <property name="enabled">
-                 <bool>false</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>220</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="statusTip">
-                 <string>بازیابی برا اساس گزینه های موجود</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>کلیه سوابق موجود</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>بازگشت داده نشده</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>بازگشت داده شده</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>کلیه پرونده های بازگشت داده نشده</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>کلیه پرونده های بازگشت داده شده</string>
-                 </property>
-                </item>
-               </widget>
               </item>
               <item row="1" column="0">
-               <spacer name="horizontalSpacer_25">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+               <widget class="QCheckBox" name="checkBox_allDontReturn">
+                <property name="enabled">
+                 <bool>true</bool>
                 </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir=&quot;rtl&quot;&gt;کلیه پرونده های که تاکنون به بایگانی بازگشت داده نشده اند را مورد بازیابی قرار می دهد&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
-               </spacer>
+                <property name="text">
+                 <string>تمام پرونده های خارج شده</string>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -1830,7 +1967,7 @@ border-radius: 3px;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>581</width>
      <height>20</height>
     </rect>
    </property>
@@ -1926,7 +2063,7 @@ border-radius: 3px;
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>

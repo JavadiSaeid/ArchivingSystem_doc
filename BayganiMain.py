@@ -33,6 +33,7 @@ class Baygan():
         self.ui.pushButton_new.clicked.connect(self.btn_New)
         self.ui.checkBox_daftar.stateChanged.connect(self.Daftar)
         self.ui.checkBox_advanceSearch.stateChanged.connect(self.advance)
+        self.ui.checkBox_allDontReturn.stateChanged.connect(self.allDontReturn)
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
 
 
@@ -67,25 +68,45 @@ class Baygan():
             self.ui.radioButton_bakhsh26_1.setEnabled(True)
     def Daftar_2(self,state):
         if state == Qt.Checked:
-            self.ui.lineEdit_sangFari_2.setText('')
-            self.ui.lineEdit_sangFari_2.setEnabled(False)
-            self.ui.radioButton_bakhsh25_2.setEnabled(False)
-            self.ui.radioButton_bakhsh26_2.setEnabled(False)
+            if not self.ui.checkBox_allDontReturn.isChecked():
+                self.ui.lineEdit_sangFari_2.setText('')
+                self.ui.lineEdit_sangFari_2.setEnabled(False)
+                self.ui.radioButton_bakhsh25_2.setEnabled(False)
+                self.ui.radioButton_bakhsh26_2.setEnabled(False)
         if state == Qt.Unchecked:
-            self.ui.lineEdit_sangFari_2.setEnabled(True)
-            self.ui.radioButton_bakhsh25_2.setEnabled(True)
-            self.ui.radioButton_bakhsh26_2.setEnabled(True)
+            if not self.ui.checkBox_allDontReturn.isChecked():
+                self.ui.lineEdit_sangFari_2.setEnabled(True)
+                self.ui.radioButton_bakhsh25_2.setEnabled(True)
+                self.ui.radioButton_bakhsh26_2.setEnabled(True)
     def advance(self):
         if self.ui.checkBox_advanceSearch.isChecked():
             self.ui.lineEdit_dateDay.setEnabled(True)
             self.ui.lineEdit_dateMonth.setEnabled(True)
             self.ui.lineEdit_dateYear.setEnabled(True)
             self.ui.comboBox_searchType.setEnabled(True)
+            self.ui.checkBox_allDontReturn.setEnabled(False)
         else:
+            self.ui.checkBox_allDontReturn.setEnabled(True)
             self.ui.lineEdit_dateDay.setEnabled(False)
             self.ui.lineEdit_dateMonth.setEnabled(False)
             self.ui.lineEdit_dateYear.setEnabled(False)
             self.ui.comboBox_searchType.setEnabled(False)
+    def allDontReturn(self):
+        if self.ui.checkBox_allDontReturn.isChecked():
+            self.ui.checkBox_advanceSearch.setEnabled(False)
+            self.ui.lineEdit_sangAsli_2.setEnabled(False)
+            self.ui.lineEdit_sangAsli_2.setText('')
+            self.ui.lineEdit_sangFari_2.setEnabled(False)
+            self.ui.lineEdit_sangFari_2.setText('')
+            self.ui.radioButton_bakhsh25_2.setEnabled(False)
+            self.ui.radioButton_bakhsh26_2.setEnabled(False)
+        else:
+            self.ui.checkBox_advanceSearch.setEnabled(True)
+            self.ui.lineEdit_sangAsli_2.setEnabled(True)
+            if not self.ui.checkBox_daftar_2.isChecked():
+                self.ui.lineEdit_sangFari_2.setEnabled(True)
+                self.ui.radioButton_bakhsh25_2.setEnabled(True)
+                self.ui.radioButton_bakhsh26_2.setEnabled(True)
     def getUpdateVriable(self):
         self.sangAsli_1 = self.ui.lineEdit_sangAsli.text()
         self.sangFari_1 = self.ui.lineEdit_sangFari.text()
@@ -127,22 +148,27 @@ class Baygan():
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()
 
     def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT=''):
-        with sqlite3.connect(r'\\10.120.112.70\baygan-data\ArchivesData.db') as database:
+        with sqlite3.connect(r'Backup\ArchivesData.db') as database:
+        # with sqlite3.connect(r'\\10.120.112.70\baygan-data\ArchivesData.db') as database:
             IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
-                    "sn VARCHAR(60),bh VARCHAR (50),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (50))"
-            STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn INTEGER NOT NULL UNIQUE, ss VARCHAR(60))"
+                    "sn VARCHAR(60),bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (50))"
+            STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn_bh VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY, ss VARCHAR(60))"
+            USERS_BAYGAN = "CREATE TABLE IF NOT EXISTS USERS_BAYGAN(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,us varchar (60) NOT NULL UNIQUE, pw VARCHAR(60) NOT NULL)"
             database.execute(IT_BAYGAN)
             database.execute(STATUS_BAYGAN)
+            database.execute(USERS_BAYGAN)
             TH = self.TimeSabt.strftime("%Y/%m/%d")
             ST = self.TimeSabt.strftime("%H:%M")
             if TR == 'پرونده':
                 SN = SA+"/"+SF
+                SNBH = SA+"/"+SF+"-"+BH
             else:
                 BH = ''
                 SN = SA
+                SNBH = SN
             insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
                 .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT)
-            instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn, ss) VALUES ('{}', 'خارج شده')".format(SN)
+            instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn_bh, ss) VALUES ('{}', 'Exit')".format(SNBH)
             database.execute(insert)
             database.execute(instatus)
             database.commit()
@@ -176,25 +202,38 @@ class Baygan():
             self.errorM(' خطایی در ثبت اطلاعات بوجود امده است \n این خطا را به مدیر سیستم اطلاع دهید')
             pass
 
-    def btn_search(self):
+
+    def searcherVariable(self):
         self.sangAsli_2 = self.ui.lineEdit_sangAsli_2.text()
         self.sangFari_2 = self.ui.lineEdit_sangFari_2.text()
         if self.ui.radioButton_bakhsh26_2.isChecked():
-            self.bakhsh_2 = 26
+            self.bakhsh_2 = '26'
         else:
-            self.bakhsh_2 = 25
-        self.ui.pushButton_bazgashBygani.setEnabled(True)
-        self.ui.pushButton_print.setEnabled(True)
-        if self.ui.checkBox_daftar.isChecked():
+            self.bakhsh_2 = '25'
+        if self.ui.checkBox_daftar_2.isChecked():
             self.daftarState_2 = True
         else:
             self.daftarState_2 = False
-        self.ui.lineEdit_sangAsli_2.setText('')
-        self.ui.lineEdit_sangFari_2.setText('')
+    def btn_search(self):
+        self.searcherVariable()
+        if self.ui.checkBox_allDontReturn.isChecked():
+            with sqlite3.connect(r'Backup\ArchivesData.db') as database:
+            # with sqlite3.connect(r'\\10.120.112.70\baygan-data\ArchivesData.db') as database:
+                selectALL = "SELECT * FROM IT_BAYGAN"
+                curser = database.execute(selectALL)
+                for row in curser:
+                    print (row)
+                    print("ID =", row[0])
+        else:
+            pass
+        self.ui.pushButton_bazgashBygani.setEnabled(True)
+        self.ui.pushButton_print.setEnabled(True)
+        # self.ui.lineEdit_sangAsli_2.setText('')
+        # self.ui.lineEdit_sangFari_2.setText('')
 
-        print(self.sangAsli_2+"/"+self.sangFari_2)
-        print(self.bakhsh_2)
-        print(self.daftarState_2)
+        # print(self.sangAsli_2+"/"+self.sangFari_2)
+        # print(self.bakhsh_2)
+        # print(self.daftarState_2)
 
     def btn_New(self):
         self.ui.lineEdit_sangFari.setText('')
