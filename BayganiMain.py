@@ -1,6 +1,7 @@
 import sys ,dpi ,sqlite3
 
 from PyQt5 import QtCore
+from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
 from pytz import timezone
 from jdatetime import datetime as dt
 from PyQt5.QtCore import Qt
@@ -11,9 +12,9 @@ from interface_archive import Ui_MainWindow
 class Baygan():
     def __init__(self):
         app = QApplication(sys.argv)
-        MainWindow = QMainWindow()
+        self.MainWindow = QMainWindow()
         self.ui = Ui_MainWindow()
-        self.ui.setupUi(MainWindow)
+        self.ui.setupUi(self.MainWindow)
         self.dateTime()
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
@@ -35,9 +36,9 @@ class Baygan():
         self.ui.checkBox_advanceSearch.stateChanged.connect(self.advance)
         self.ui.checkBox_allDontReturn.stateChanged.connect(self.allDontReturn)
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
+        self.MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
 
-
-        MainWindow.show()
+        self.MainWindow.show()
         sys.exit(app.exec_())
 
     def dateTime(self):
@@ -148,8 +149,8 @@ class Baygan():
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()
 
     def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT=''):
-        with sqlite3.connect(r'Backup\ArchivesData.db') as database:
-        # with sqlite3.connect(r'\\10.120.112.70\baygan-data\ArchivesData.db') as database:
+        # with sqlite3.connect(r'Backup\ArchivesData.db') as database:
+        with sqlite3.connect(r'\\10.120.112.70\baygan-data\ArchivesData.db') as database:
             IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
                     "sn VARCHAR(60),bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (50))"
             STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn_bh VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY, ss VARCHAR(60))"
@@ -217,13 +218,33 @@ class Baygan():
     def btn_search(self):
         self.searcherVariable()
         if self.ui.checkBox_allDontReturn.isChecked():
-            with sqlite3.connect(r'Backup\ArchivesData.db') as database:
+            # with sqlite3.connect(r'Backup\ArchivesData.db') as database:
             # with sqlite3.connect(r'\\10.120.112.70\baygan-data\ArchivesData.db') as database:
-                selectALL = "SELECT * FROM IT_BAYGAN"
-                curser = database.execute(selectALL)
-                for row in curser:
-                    print (row)
-                    print("ID =", row[0])
+                # selectALL = "SELECT * FROM IT_BAYGAN"
+                # curser = database.execute(selectALL)
+                # self.ui.tableView_result.setItem
+                # for row in curser:
+                #     print (row)
+                #     print("ID =", row[0])
+            db = QSqlDatabase.addDatabase("QSQLITE")
+            db.setDatabaseName(r'\\10.120.112.70\baygan-data\ArchivesData.db')
+            db.open()
+            projectModel = QSqlQueryModel()
+            projectModel.setQuery("SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN", db)
+            projectModel.setHeaderData(0, Qt.Horizontal, 'پلاک')
+            projectModel.setHeaderData(1, Qt.Horizontal, 'بخش')
+            projectModel.setHeaderData(2, Qt.Horizontal, 'نوع')
+            projectModel.setHeaderData(3, Qt.Horizontal, 'همکار تقاضا کننده')
+            projectModel.setHeaderData(4, Qt.Horizontal, 'تحویل گیرنده')
+            projectModel.setHeaderData(5, Qt.Horizontal, 'علت درخواست')
+            projectModel.setHeaderData(6, Qt.Horizontal, 'توضیحات')
+            projectModel.setHeaderData(7, Qt.Horizontal, 'تاریخ تحویل')
+            projectModel.setHeaderData(8, Qt.Horizontal, 'ساعت تحویل')
+            projectModel.setHeaderData(9, Qt.Horizontal, 'تاریخ بازگشت')
+            self.ui.tableView_result.setModel(projectModel)
+            self.ui.tableView_result.show()
+            db.close()
+
         else:
             pass
         self.ui.pushButton_bazgashBygani.setEnabled(True)
