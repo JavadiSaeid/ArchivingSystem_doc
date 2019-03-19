@@ -2,16 +2,17 @@
 
 # Form implementation generated from reading ui file 'Baygani.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.12
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(581, 592)
+        MainWindow.resize(630, 640)
         MainWindow.setLayoutDirection(QtCore.Qt.RightToLeft)
         MainWindow.setStyleSheet("QMainWindow{\n"
 "background-color: #5D5136;\n"
@@ -396,6 +397,13 @@ class Ui_MainWindow(object):
 "QCheckBox{\n"
 "font: 75 12pt \"A Arsoo\";\n"
 "}\n"
+"\n"
+"QTableView {\n"
+"padding: 4px;\n"
+"border-style: none;\n"
+"border-bottom: 1px solid #fffff8;\n"
+"border-right: 1px solid #fffff8;\n"
+"}\n"
 "")
         self.tab2_SearchData.setObjectName("tab2_SearchData")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.tab2_SearchData)
@@ -408,12 +416,14 @@ class Ui_MainWindow(object):
         self.gridLayout_5 = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout_5.setObjectName("gridLayout_5")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setContentsMargins(20, 10, 20, 10)
+        self.horizontalLayout_2.setContentsMargins(20, 1, 20, 1)
+        self.horizontalLayout_2.setSpacing(1)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem12)
         self.pushButton_search = QtWidgets.QPushButton(self.groupBox)
         self.pushButton_search.setEnabled(True)
+        self.pushButton_search.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.pushButton_search.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_search.setStatusTip("")
         self.pushButton_search.setStyleSheet("QPushButton:hover:!pressed\n"
@@ -437,13 +447,14 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addItem(spacerItem13)
         self.gridLayout_5.addLayout(self.horizontalLayout_2, 4, 0, 1, 1)
         self.horizontalLayout_QRadio_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_QRadio_2.setContentsMargins(10, 7, 10, 7)
+        self.horizontalLayout_QRadio_2.setContentsMargins(10, 2, 10, 2)
         self.horizontalLayout_QRadio_2.setSpacing(30)
         self.horizontalLayout_QRadio_2.setObjectName("horizontalLayout_QRadio_2")
         spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_QRadio_2.addItem(spacerItem14)
         self.label_5 = QtWidgets.QLabel(self.groupBox)
         self.label_5.setEnabled(True)
+        self.label_5.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setFamily("A Arsoo")
         font.setPointSize(18)
@@ -597,6 +608,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_btnNew_2.addItem(spacerItem20)
         self.gridLayout_5.addLayout(self.horizontalLayout_btnNew_2, 6, 0, 1, 1)
         self.groupBox_2 = QtWidgets.QGroupBox(self.groupBox)
+        self.groupBox_2.setMaximumSize(QtCore.QSize(16777215, 60))
         self.groupBox_2.setStatusTip("")
         self.groupBox_2.setStyleSheet("QLineEdit{\n"
 "background-color: rgba(0, 0, 0, 0);\n"
@@ -740,7 +752,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.tabWidget, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 581, 20))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 630, 21))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
@@ -918,4 +930,5 @@ class Ui_MainWindow(object):
         self.action_about.setText(_translate("MainWindow", "درباره"))
         self.action_close.setText(_translate("MainWindow", "بستن"))
         self.action.setText(_translate("MainWindow", "تغییر رمز ورود"))
+
 

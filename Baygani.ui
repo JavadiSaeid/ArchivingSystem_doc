@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>581</width>
-    <height>592</height>
+    <width>630</width>
+    <height>640</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1007,16 +1007,12 @@ font: 75 12pt &quot;A Arsoo&quot;;
 }
 
 QTableView {
-
-                background-color: #646464;
-                padding: 4px;
-                font-size: 8pt;
-                border-style: none;
-                border-bottom: 1px solid #fffff8;
-                border-right: 1px solid #fffff8;
-                selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5,
-                                stop: 0 #FF92BB, stop: 1 white);
-            }</string>
+padding: 4px;
+border-style: none;
+border-bottom: 1px solid #fffff8;
+border-right: 1px solid #fffff8;
+}
+</string>
        </property>
        <attribute name="title">
         <string>بازیابی اطلاعات</string>
@@ -1039,17 +1035,20 @@ QTableView {
           <layout class="QGridLayout" name="gridLayout_5">
            <item row="4" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <property name="spacing">
+              <number>1</number>
+             </property>
              <property name="leftMargin">
               <number>20</number>
              </property>
              <property name="topMargin">
-              <number>10</number>
+              <number>1</number>
              </property>
              <property name="rightMargin">
               <number>20</number>
              </property>
              <property name="bottomMargin">
-              <number>10</number>
+              <number>1</number>
              </property>
              <item>
               <spacer name="horizontalSpacer_15">
@@ -1074,6 +1073,12 @@ QTableView {
               <widget class="QPushButton" name="pushButton_search">
                <property name="enabled">
                 <bool>true</bool>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
@@ -1143,13 +1148,13 @@ border-radius: 10px;
               <number>10</number>
              </property>
              <property name="topMargin">
-              <number>7</number>
+              <number>2</number>
              </property>
              <property name="rightMargin">
               <number>10</number>
              </property>
              <property name="bottomMargin">
-              <number>7</number>
+              <number>2</number>
              </property>
              <item>
               <spacer name="horizontalSpacer_13">
@@ -1171,6 +1176,12 @@ border-radius: 10px;
               <widget class="QLabel" name="label_5">
                <property name="enabled">
                 <bool>true</bool>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
                </property>
                <property name="font">
                 <font>
@@ -1573,6 +1584,12 @@ border-radius: 10px;
            </item>
            <item row="3" column="0">
             <widget class="QGroupBox" name="groupBox_2">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>60</height>
+              </size>
+             </property>
              <property name="toolTip">
               <string>بازیابی پیشرفته </string>
              </property>
@@ -1967,8 +1984,8 @@ border-radius: 3px;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>581</width>
-     <height>20</height>
+     <width>630</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
