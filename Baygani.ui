@@ -1633,7 +1633,7 @@ border-radius: 3px;
                </spacer>
               </item>
               <item row="1" column="1">
-               <widget class="QCheckBox" name="checkBox_advanceSearch">
+               <widget class="QCheckBox" name="checkBox_viaDate">
                 <property name="toolTip">
                  <string>بازیابی سوابق پرونده به تاریخ</string>
                 </property>
@@ -2050,7 +2050,7 @@ border-radius: 3px;
   <tabstop>checkBox_daftar_2</tabstop>
   <tabstop>radioButton_bakhsh26_2</tabstop>
   <tabstop>radioButton_bakhsh25_2</tabstop>
-  <tabstop>checkBox_advanceSearch</tabstop>
+  <tabstop>checkBox_viaDate</tabstop>
   <tabstop>lineEdit_dateDay</tabstop>
   <tabstop>lineEdit_dateMonth</tabstop>
   <tabstop>lineEdit_dateYear</tabstop>
@@ -2080,7 +2080,7 @@ border-radius: 3px;
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>

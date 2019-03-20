@@ -40,7 +40,7 @@ class Baygan():
         self.ui.pushButton_search.clicked.connect(self.btn_search)
         self.ui.pushButton_new.clicked.connect(self.btn_New)
         self.ui.checkBox_daftar.stateChanged.connect(self.Daftar)
-        self.ui.checkBox_advanceSearch.stateChanged.connect(self.advance)
+        self.ui.checkBox_viaDate.stateChanged.connect(self.advance)
         self.ui.checkBox_allDontReturn.stateChanged.connect(self.allDontReturn)
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
         self.ui.pushButton_bazgashBygani.clicked.connect(self.btn_return)
@@ -91,7 +91,7 @@ class Baygan():
                 self.ui.radioButton_bakhsh25_2.setEnabled(True)
                 self.ui.radioButton_bakhsh26_2.setEnabled(True)
     def advance(self):
-        if self.ui.checkBox_advanceSearch.isChecked():
+        if self.ui.checkBox_viaDate.isChecked():
             self.ui.lineEdit_dateDay.setEnabled(True)
             self.ui.lineEdit_dateMonth.setEnabled(True)
             self.ui.lineEdit_dateYear.setEnabled(True)
@@ -105,7 +105,7 @@ class Baygan():
             self.ui.comboBox_searchType.setEnabled(False)
     def allDontReturn(self):
         if self.ui.checkBox_allDontReturn.isChecked():
-            self.ui.checkBox_advanceSearch.setEnabled(False)
+            self.ui.checkBox_viaDate.setEnabled(False)
             self.ui.lineEdit_sangAsli_2.setEnabled(False)
             self.ui.lineEdit_sangAsli_2.setText('')
             self.ui.lineEdit_sangFari_2.setEnabled(False)
@@ -115,7 +115,7 @@ class Baygan():
             self.ui.checkBox_daftar_2.setEnabled(False)
         else:
             self.ui.checkBox_daftar_2.setEnabled(True)
-            self.ui.checkBox_advanceSearch.setEnabled(True)
+            self.ui.checkBox_viaDate.setEnabled(True)
             self.ui.lineEdit_sangAsli_2.setEnabled(True)
             if not self.ui.checkBox_daftar_2.isChecked():
                 self.ui.lineEdit_sangFari_2.setEnabled(True)
@@ -271,13 +271,46 @@ class Baygan():
             SNBH = self.sangAsli_2 + "/" + self.sangFari_2+ "-" + self.bakhsh_2
         if self.ui.checkBox_allDontReturn.isChecked():
             self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit'")
+        elif self.ui.checkBox_viaDate.isChecked():
+            day = self.ui.lineEdit_dateDay.text()
+            month = self.ui.lineEdit_dateMonth.text()
+            year = self.ui.lineEdit_dateYear.text()
+            searchDate = year+"/"+month+"/"+day
+            searchType = self.ui.comboBox_searchType.currentText()
+            if self.ui.checkBox_daftar_2.isChecked():
+                if self.sangAsli_2 != '':
+                    if self.sangAsli_2 == '*':
+                        if searchType == 'تمام سوابق موجود':
+                            self.dbToTableView(
+                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE tr = 'دفتر' AND th='{}'".format(searchDate))
+                        elif searchType == 'بازگشت داده نشده':
+                            self.dbToTableView(
+                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE tr = 'دفتر' AND th='{}' AND bt = ''".format(searchDate))
+                        elif searchType == 'بازگشت داده شده':
+                            self.dbToTableView(
+                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE tr = 'دفتر' AND th='{}' AND bt != ''".format(searchDate))
+                        else:
+                            self.ui.statusbar.showMessage("برای دفتر {} سابقه ای موجود نیست".format(self.sangAsli_2))
+                else:
+                    self.errorM('شماره سنگ اصلی باید وارد شود')
+
+
+            # if searchType =='تمام سوابق موجود':
+            #     print("تمام سوابق موجود")
+            #     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE th='{}'".format(searchDate))
+            # elif searchType == 'بازگشت داده نشده':
+            #     print("بازگشت داده نشده")
+            #     pass
+            # elif searchType == 'بازگشت داده شده':
+            #     print("بازگشت داده شده")
+            #     pass
         else:
             if self.ui.checkBox_daftar_2.isChecked():
                 if self.sangAsli_2 != '':
                     if self.sangAsli_2 == '*':
-                        self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where tr='دفتر' ")
+                        self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE tr='دفتر' ")
                     else:
-                        self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where sn='{}' ".format(self.sangAsli_2))
+                        self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE sn='{}' ".format(self.sangAsli_2))
                         if self.rowCount > 0:
                             if self.getStatus(SNBH) == 'Exit':
                                 self.ARBTN()
