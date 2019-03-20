@@ -2,12 +2,11 @@
 
 # Form implementation generated from reading ui file 'Baygani.ui'
 #
-# Created by: PyQt5 UI code generator 5.12
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -752,7 +751,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.tabWidget, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 630, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 630, 20))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
@@ -911,7 +910,7 @@ class Ui_MainWindow(object):
         self.checkBox_advanceSearch.setToolTip(_translate("MainWindow", "بازیابی سوابق پرونده به تاریخ"))
         self.checkBox_advanceSearch.setText(_translate("MainWindow", "بازیابی به تاریخ"))
         self.comboBox_searchType.setToolTip(_translate("MainWindow", "بازیابی برا اساس گزینه های موجود"))
-        self.comboBox_searchType.setItemText(0, _translate("MainWindow", "کلیه سوابق موجود"))
+        self.comboBox_searchType.setItemText(0, _translate("MainWindow", "تمام سوابق موجود"))
         self.comboBox_searchType.setItemText(1, _translate("MainWindow", "بازگشت داده نشده"))
         self.comboBox_searchType.setItemText(2, _translate("MainWindow", "بازگشت داده شده"))
         self.lineEdit_dateDay.setToolTip(_translate("MainWindow", "روز"))
@@ -930,5 +929,4 @@ class Ui_MainWindow(object):
         self.action_about.setText(_translate("MainWindow", "درباره"))
         self.action_close.setText(_translate("MainWindow", "بستن"))
         self.action.setText(_translate("MainWindow", "تغییر رمز ورود"))
-
 

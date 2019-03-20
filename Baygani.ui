@@ -1670,7 +1670,7 @@ border-radius: 3px;
                 </property>
                 <item>
                  <property name="text">
-                  <string>کلیه سوابق موجود</string>
+                  <string>تمام سوابق موجود</string>
                  </property>
                 </item>
                 <item>
@@ -1985,7 +1985,7 @@ border-radius: 3px;
      <x>0</x>
      <y>0</y>
      <width>630</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -2080,7 +2080,7 @@ border-radius: 3px;
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

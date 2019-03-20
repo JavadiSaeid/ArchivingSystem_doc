@@ -43,6 +43,7 @@ class Baygan():
         self.ui.checkBox_advanceSearch.stateChanged.connect(self.advance)
         self.ui.checkBox_allDontReturn.stateChanged.connect(self.allDontReturn)
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
+        self.ui.pushButton_bazgashBygani.clicked.connect(self.btn_return)
         self.MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
 
         MainWindowGetSize = self.MainWindow.frameGeometry()
@@ -181,7 +182,7 @@ class Baygan():
                 SNBH = SN
             insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt,sn_bh) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
                 .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT, SNBH)
-            instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn_bh, ss) VALUES ('{}', 'Exit')".format(SNBH)
+            instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn_bh, ss) VALUES ('{}', 'Exit')".format(SNBH,SNBH)
             database.execute(insert)
             database.execute(instatus)
             database.commit()
@@ -253,16 +254,23 @@ class Baygan():
         self.rowCount = projectModel.rowCount()
         db.close()
 
-    def showResultSearch(self,model):
-        self.ui.tableView_result.setModel(model)
-    def getResultCount(self,count):
-        self.rowCount = count
-        print(self.rowCount)
+    def getStatus(self,SNBH):
+        with sqlite3.connect(self.dbPath) as database:
+            getStatus = "SELECT ss FROM STATUS_BAYGAN WHERE sn_bh = '{}'".format(SNBH)
+            GetSTATUS = database.execute(getStatus)
+            for row in GetSTATUS:
+                Status = row[0]
+                break
+        return Status
 
     def btn_search(self):
         self.searcherVariable()
+        if self.ui.checkBox_daftar_2.isChecked():
+            SNBH = self.sangAsli_2
+        else:
+            SNBH = self.sangAsli_2 + "/" + self.sangFari_2+ "-" + self.bakhsh_2
         if self.ui.checkBox_allDontReturn.isChecked():
-            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN")
+            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit'")
         else:
             if self.ui.checkBox_daftar_2.isChecked():
                 if self.sangAsli_2 != '':
@@ -270,6 +278,11 @@ class Baygan():
                         self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where tr='دفتر' ")
                     else:
                         self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where sn='{}' ".format(self.sangAsli_2))
+                        if self.rowCount > 0:
+                            if self.getStatus(SNBH) == 'Exit':
+                                self.ARBTN()
+                        else:
+                            self.ui.statusbar.showMessage("برای دفتر {} سابقه ای موجود نیست".format(self.sangAsli_2))
                 else:
                     self.errorM('شماره سنگ اصلی باید وارد شود')
             else:
@@ -278,20 +291,39 @@ class Baygan():
                         if self.sangAsli_2 == '*' and self.sangFari_2 == '*':
                             self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN")
                         else:
-                            SNBH = self.sangAsli_2+"/"+self.sangFari_2+"-"+self.bakhsh_2
                             self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where sn_bh='{}'".format(SNBH))
+                            if self.rowCount > 0:
+                                if self.getStatus(SNBH) == 'Exit':
+                                    self.ARBTN()
+                            else:
+                                self.ui.statusbar.showMessage("برای پلاک {} بخش {} سابقه ای موجود نیست".format(self.sangAsli_2+"/"+self.sangFari_2,self.bakhsh_2))
                     else:
                         self.errorM('شماره سنگ فرعی باید وارد شود')
                 else:
                     self.errorM('شماره سنگ اصلی باید وارد شود')
 
+    def btn_return(self):
+        if self.ui.checkBox_daftar_2.isChecked():
+            SNBH = self.sangAsli_2
+        else:
+            SNBH = self.sangAsli_2 + "/" + self.sangFari_2+ "-" + self.bakhsh_2
+        with sqlite3.connect(self.dbPath) as database:
+            update_status = "UPDATE STATUS_BAYGAN SET ss='Returned' WHERE sn_bh = '{}'".format( SNBH)
+            self.dateTime()
+            SR = self.TimeSabt.strftime("%Y/%m/%d-%H:%M")
+            update_Baygan = "UPDATE IT_BAYGAN SET bt='{}' WHERE sn_bh = '{}' AND id = (SELECT MAX(id) FROM IT_BAYGAN WHERE sn_bh = '{}')".format(SR,SNBH,SNBH)
+            database.execute(update_status)
+            database.execute(update_Baygan)
+            database.commit()
+            self.btn_search()
+            self.ui.pushButton_bazgashBygani.setEnabled(False)
+            self.ui.statusbar.showMessage('تاریخ بازگشت با موفقیت ثبت شد')
+            # self.ui.lineEdit_sangAsli_2.setText('')
+            # self.ui.lineEdit_sangFari_2.setText('')
 
     def ARBTN(self):
         self.ui.pushButton_bazgashBygani.setEnabled(True)
         self.ui.pushButton_print.setEnabled(True)
-
-        # self.ui.lineEdit_sangAsli_2.setText('')
-        # self.ui.lineEdit_sangFari_2.setText('')
 
     def btn_New(self):
         self.ui.lineEdit_sangFari.setText('')
