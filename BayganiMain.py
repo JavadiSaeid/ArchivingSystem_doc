@@ -1,11 +1,12 @@
 import sys ,dpi ,sqlite3
+from time import sleep
 
-from PyQt5 import QtCore
-from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
+from PyQt5.QtCore import QRegExp, Qt, QThread, pyqtSignal
+from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel, QSqlTableModel
 from pytz import timezone
 from jdatetime import datetime as dt
-from PyQt5.QtGui import QIntValidator
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PyQt5.QtGui import QIntValidator, QRegExpValidator
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget
 from interface_archive import Ui_MainWindow
 
 class Baygan():
@@ -23,9 +24,14 @@ class Baygan():
         self.ui.lineEdit_dateDay.setText(self.nowDay)
         self.ui.lineEdit_dateDay.setValidator((QIntValidator(1,31)))
         self.ui.lineEdit_sangAsli.setValidator(QIntValidator(1,999))
-        self.ui.lineEdit_sangAsli_2.setValidator(QIntValidator(1,999))
+        # self.ui.lineEdit_sangAsli_2.setValidator(QIntValidator(1,999))
+        self.ui.lineEdit_sangAsli_2.setMaxLength(3)
+        regex=QRegExp("^\*$|[1-9]+")
+        validator = QRegExpValidator(regex)
+        self.ui.lineEdit_sangAsli_2.setValidator(validator)
         self.ui.lineEdit_sangFari.setValidator(self.onlyInt)
-        self.ui.lineEdit_sangFari_2.setValidator(self.onlyInt)
+        self.ui.lineEdit_sangFari_2.setValidator(validator)
+
         self.ui.tab1_inputData.keyPressEvent = self.EnterToTab_1
         self.ui.tab2_SearchData.keyPressEvent = self.EnterToTab_2
         self.ui.pushButton_sabt.clicked.connect(self.btn_sbt)
@@ -35,8 +41,12 @@ class Baygan():
         self.ui.checkBox_advanceSearch.stateChanged.connect(self.advance)
         self.ui.checkBox_allDontReturn.stateChanged.connect(self.allDontReturn)
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
-        self.MainWindow.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self.MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
 
+        MainWindowGetSize = self.MainWindow.frameGeometry()
+        DesktopCenter = QDesktopWidget().availableGeometry().center()
+        MainWindowGetSize.moveCenter(DesktopCenter)
+        self.MainWindow.move(MainWindowGetSize.topLeft())
         self.MainWindow.show()
         sys.exit(app.exec_())
 
@@ -49,31 +59,30 @@ class Baygan():
         self.nowHour = self.TimeSabt.strftime("%H")
         self.nowMinute = self.TimeSabt.strftime("%M")
     def EnterToTab_1(self, e):
-        if e.key() == QtCore.Qt.Key_Return or e.key() == QtCore.Qt.Key_Enter :
+        if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter :
             self.btn_sbt()
     def EnterToTab_2(self,e):
-        if e.key() == QtCore.Qt.Key_Return or e.key() == QtCore.Qt.Key_Enter:
-            print("tab Dovom enter shod")
+        if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter:
             self.btn_search()
 
     def Daftar(self,state):
-        if state == QtCore.Qt.Checked:
+        if state == Qt.Checked:
             self.ui.lineEdit_sangFari.setText('')
             self.ui.lineEdit_sangFari.setEnabled(False)
             self.ui.radioButton_bakhsh25_1.setEnabled(False)
             self.ui.radioButton_bakhsh26_1.setEnabled(False)
-        if state == QtCore.Qt.Unchecked:
+        if state == Qt.Unchecked:
             self.ui.lineEdit_sangFari.setEnabled(True)
             self.ui.radioButton_bakhsh25_1.setEnabled(True)
             self.ui.radioButton_bakhsh26_1.setEnabled(True)
     def Daftar_2(self,state):
-        if state == QtCore.Qt.Checked:
+        if state == Qt.Checked:
             if not self.ui.checkBox_allDontReturn.isChecked():
                 self.ui.lineEdit_sangFari_2.setText('')
                 self.ui.lineEdit_sangFari_2.setEnabled(False)
                 self.ui.radioButton_bakhsh25_2.setEnabled(False)
                 self.ui.radioButton_bakhsh26_2.setEnabled(False)
-        if state == QtCore.Qt.Unchecked:
+        if state == Qt.Unchecked:
             if not self.ui.checkBox_allDontReturn.isChecked():
                 self.ui.lineEdit_sangFari_2.setEnabled(True)
                 self.ui.radioButton_bakhsh25_2.setEnabled(True)
@@ -100,7 +109,9 @@ class Baygan():
             self.ui.lineEdit_sangFari_2.setText('')
             self.ui.radioButton_bakhsh25_2.setEnabled(False)
             self.ui.radioButton_bakhsh26_2.setEnabled(False)
+            self.ui.checkBox_daftar_2.setEnabled(False)
         else:
+            self.ui.checkBox_daftar_2.setEnabled(True)
             self.ui.checkBox_advanceSearch.setEnabled(True)
             self.ui.lineEdit_sangAsli_2.setEnabled(True)
             if not self.ui.checkBox_daftar_2.isChecked():
@@ -148,8 +159,7 @@ class Baygan():
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()
 
     def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT=''):
-        # with sqlite3.connect(r'Backup\ArchivesData.db') as database:
-        with sqlite3.connect(r'\\10.120.112.70\baygan-data\ArchivesData.db') as database:
+        with sqlite3.connect(self.dbPath) as database:
             IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
                     "sn VARCHAR(60),bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (50),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
             STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn_bh VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY, ss VARCHAR(60))"
@@ -215,34 +225,94 @@ class Baygan():
             self.daftarState_2 = True
         else:
             self.daftarState_2 = False
+
+    # def dbToTableView(self,commandSQL):
+    #     QApplication.processEvents()
+    #     if QSqlDatabase.contains("qt_sql_default_connection"):
+    #         db = QSqlDatabase.database("qt_sql_default_connection")
+    #     else:
+    #         db = QSqlDatabase.addDatabase("QSQLITE")
+    #         db.setDatabaseName(self.dbPath)
+    #         db.open()
+    #     projectModel = QSqlQueryModel()
+    #     projectModel.setQuery(commandSQL, db)
+    #     projectModel.setHeaderData(0, Qt.Horizontal, 'پلاک')
+    #     projectModel.setHeaderData(1, Qt.Horizontal, 'بخش')
+    #     projectModel.setHeaderData(2, Qt.Horizontal, 'نوع')
+    #     projectModel.setHeaderData(3, Qt.Horizontal, 'همکار تقاضا کننده')
+    #     projectModel.setHeaderData(4, Qt.Horizontal, 'تحویل گیرنده')
+    #     projectModel.setHeaderData(5, Qt.Horizontal, 'علت درخواست')
+    #     projectModel.setHeaderData(6, Qt.Horizontal, 'توضیحات')
+    #     projectModel.setHeaderData(7, Qt.Horizontal, 'تاریخ تحویل')
+    #     projectModel.setHeaderData(8, Qt.Horizontal, 'ساعت تحویل')
+    #     projectModel.setHeaderData(9, Qt.Horizontal, 'تاریخ بازگشت')
+    #     self.ui.tableView_result.setModel(projectModel)
+    #     # self.ui.tableView_result.show()
+    #     self.rowCount = projectModel.rowCount()
+    #     db.close()
+
+    def showResultSearch(self,model):
+        self.ui.tableView_result.setModel(model)
+    def getResultCount(self,count):
+        self.rowCount = count
+        print(self.rowCount)
+
     def btn_search(self):
         self.searcherVariable()
         if self.ui.checkBox_allDontReturn.isChecked():
-            db = QSqlDatabase.addDatabase("QSQLITE")
-            db.setDatabaseName(r'\\10.120.112.70\baygan-data\ArchivesData.db')
-            db.open()
-            projectModel = QSqlQueryModel()
-            projectModel.setQuery("SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN", db)
-            projectModel.setHeaderData(0, QtCore.Qt.Horizontal, 'پلاک')
-            projectModel.setHeaderData(1, QtCore.Qt.Horizontal, 'بخش')
-            projectModel.setHeaderData(2, QtCore.Qt.Horizontal, 'نوع')
-            projectModel.setHeaderData(3, QtCore.Qt.Horizontal, 'همکار تقاضا کننده')
-            projectModel.setHeaderData(4, QtCore.Qt.Horizontal, 'تحویل گیرنده')
-            projectModel.setHeaderData(5, QtCore.Qt.Horizontal, 'علت درخواست')
-            projectModel.setHeaderData(6, QtCore.Qt.Horizontal, 'توضیحات')
-            projectModel.setHeaderData(7, QtCore.Qt.Horizontal, 'تاریخ تحویل')
-            projectModel.setHeaderData(8, QtCore.Qt.Horizontal, 'ساعت تحویل')
-            projectModel.setHeaderData(9, QtCore.Qt.Horizontal, 'تاریخ بازگشت')
-
-            self.ui.tableView_result.setModel(projectModel)
-            self.ui.tableView_result.show()
-            db.close()
+            # self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN")
+            self.sqlthread = RunThread(parent=None,commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN")
+            self.sqlthread.start()
+            self.sqlthread.query_Result.connect(self.showResultSearch)
+            self.sqlthread.query_Result_count.connect(self.getResultCount)
         else:
-            pass
-        self.ui.pushButton_bazgashBygani.setEnabled(True)
-        self.ui.pushButton_print.setEnabled(True)
+            if self.ui.checkBox_daftar_2.isChecked():
+                if self.sangAsli_2 != '':
+                    if self.sangAsli_2 == '*':
+                        # self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where tr='دفتر' ")
+                        self.sqlthread = RunThread(parent=None,
+                                                   commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where tr='دفتر' ")
+                        self.sqlthread.start()
+                        self.sqlthread.query_Result.connect(self.showResultSearch)
+                        self.sqlthread.query_Result_count.connect(self.getResultCount)
+                    else:
+                        # self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where sn='{}' ".format(self.sangAsli_2))
+                        self.sqlthread1 = RunThread(parent=None,
+                                                   commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where sn='{}' ".format(self.sangAsli_2))
+                        self.sqlthread1.start()
+                        self.sqlthread1.query_Result.connect(self.showResultSearch)
+                        self.sqlthread1.query_Result_count.connect(self.getResultCount)
+                else:
+                    self.errorM('شماره سنگ اصلی باید وارد شود')
+            else:
+                if self.sangAsli_2 != '':
+                    if self.sangFari_2 != '':
+                        if self.sangAsli_2 == '*' and self.sangFari_2 == '*':
+                            # self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN")
+                            self.sqlthread2 = RunThread(parent=None,
+                                                       commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN")
+                            self.sqlthread2.start()
+                            self.sqlthread2.query_Result.connect(self.showResultSearch)
+                            self.sqlthread2.query_Result_count.connect(self.getResultCount)
+                        else:
+                            SNBH = self.sangAsli_2+"/"+self.sangFari_2+"-"+self.bakhsh_2
+                            # self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where sn_bh='{}'".format(SNBH))
+                            self.sqlthread3 = RunThread(parent=None,
+                                                       commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where sn_bh='{}'".format(SNBH))
+                            self.sqlthread3.start()
+                            self.sqlthread3.query_Result.connect(self.showResultSearch)
+                            self.sqlthread3.query_Result_count.connect(self.getResultCount)
+                    else:
+                        self.errorM('شماره سنگ فرعی باید وارد شود')
+                else:
+                    self.errorM('شماره سنگ اصلی باید وارد شود')
+
+
         # self.ui.lineEdit_sangAsli_2.setText('')
         # self.ui.lineEdit_sangFari_2.setText('')
+    def ARBTN(self):
+        self.ui.pushButton_bazgashBygani.setEnabled(True)
+        self.ui.pushButton_print.setEnabled(True)
 
     def btn_New(self):
         self.ui.lineEdit_sangFari.setText('')
@@ -285,10 +355,47 @@ class Baygan():
                           "border: 2px solid  #8b00ff ;\n"
                           "border-radius: 8px;\n"
                           "}")
-        box.setWindowFlags(box.windowFlags() | QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
+        box.setWindowFlags(box.windowFlags() | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         box.exec_()
 
 
+class RunThread(QThread):
+    query_Result = pyqtSignal(object)
+    query_Result_count = pyqtSignal(int)
+    def __init__(self, parent=None, commandSQL=''):
+        super(RunThread, self).__init__(parent)
+        self.commandSQL = commandSQL
+    def run(self):
+        # self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
+        self.dbPath = r'Backup\ArchivesData.db'
+        # if QSqlDatabase.contains("qt_sql_default_connection"):
+        #     db = QSqlDatabase.database("qt_sql_default_connection")
+        # else:
+        db = QSqlDatabase.addDatabase("QSQLITE")
+        db.setDatabaseName(self.dbPath)
+        db.open()
+        self.projectModel = QSqlQueryModel()
+        self.projectModel.setQuery(self.commandSQL, db)
+        self.projectModel.setHeaderData(0, Qt.Horizontal, 'پلاک')
+        self.projectModel.setHeaderData(1, Qt.Horizontal, 'بخش')
+        self.projectModel.setHeaderData(2, Qt.Horizontal, 'نوع')
+        self.projectModel.setHeaderData(3, Qt.Horizontal, 'همکار تقاضا کننده')
+        self.projectModel.setHeaderData(4, Qt.Horizontal, 'تحویل گیرنده')
+        self.projectModel.setHeaderData(5, Qt.Horizontal, 'علت درخواست')
+        self.projectModel.setHeaderData(6, Qt.Horizontal, 'توضیحات')
+        self.projectModel.setHeaderData(7, Qt.Horizontal, 'تاریخ تحویل')
+        self.projectModel.setHeaderData(8, Qt.Horizontal, 'ساعت تحویل')
+        self.projectModel.setHeaderData(9, Qt.Horizontal, 'تاریخ بازگشت')
+        # self.ui.tableView_result.setModel(projectModel)
+        # self.ui.tableView_result.show()
+        self.rowCount = self.projectModel.rowCount()
+        # db.close()
+        self.query_Result.emit(self.projectModel)
+        self.query_Result_count.emit(self.rowCount)
+    # def stop(self):
+    #     self.isRunning = False
+    #     print('stopping thread...')
+    #     self.terminate()  ## ba in dastor thread nabod ya tamom mishe
 
 
 
