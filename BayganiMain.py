@@ -28,7 +28,7 @@ class Baygan():
         self.ui.lineEdit_sangAsli.setValidator(QIntValidator(1,999))
         # self.ui.lineEdit_sangAsli_2.setValidator(QIntValidator(1,999))
         self.ui.lineEdit_sangAsli_2.setMaxLength(3)
-        regex=QRegExp("^\*$|[1-9]+")
+        regex=QRegExp("^\*$|[0-9]+")
         validator = QRegExpValidator(regex)
         self.ui.lineEdit_sangAsli_2.setValidator(validator)
         self.ui.lineEdit_sangFari.setValidator(self.onlyInt)
@@ -161,10 +161,10 @@ class Baygan():
             self.elatDarkhast = 'سایر'
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()
 
-    def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT=''):
+    def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT='',BS = ''):
         with sqlite3.connect(self.dbPath) as database:
             IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
-                    "sn VARCHAR(60),bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (50),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
+                    "sn VARCHAR(60),bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (30),bs varchar (30),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
             STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn_bh VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY, ss VARCHAR(60))"
             USERS_BAYGAN = "CREATE TABLE IF NOT EXISTS USERS_BAYGAN(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,us varchar (60) NOT NULL UNIQUE, pw VARCHAR(60) NOT NULL)"
 
@@ -180,8 +180,8 @@ class Baygan():
                 BH = ''
                 SN = SA
                 SNBH = SN
-            insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt,sn_bh) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
-                .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT, SNBH)
+            insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt,bs,sn_bh) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
+                .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT,BS, SNBH)
             instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn_bh, ss) VALUES ('{}', 'Exit')".format(SNBH,SNBH)
             database.execute(insert)
             database.execute(instatus)
@@ -249,6 +249,7 @@ class Baygan():
         projectModel.setHeaderData(7, Qt.Horizontal, 'تاریخ تحویل')
         projectModel.setHeaderData(8, Qt.Horizontal, 'ساعت تحویل')
         projectModel.setHeaderData(9, Qt.Horizontal, 'تاریخ بازگشت')
+        projectModel.setHeaderData(10, Qt.Horizontal, 'ساعت بازگشت')
         self.ui.tableView_result.setModel(projectModel)
         # self.ui.tableView_result.show()
         self.rowCount = projectModel.rowCount()
@@ -270,7 +271,7 @@ class Baygan():
         else:
             SNBH = self.sangAsli_2 + "/" + self.sangFari_2+ "-" + self.bakhsh_2
         if self.ui.checkBox_allDontReturn.isChecked():
-            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit'")
+            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit'")
         elif self.ui.checkBox_viaDate.isChecked():
             day = self.ui.lineEdit_dateDay.text()
             month = self.ui.lineEdit_dateMonth.text()
@@ -279,38 +280,55 @@ class Baygan():
             searchType = self.ui.comboBox_searchType.currentText()
             if self.ui.checkBox_daftar_2.isChecked():
                 if self.sangAsli_2 != '':
-                    if self.sangAsli_2 == '*':
+                    if self.sangAsli_2 == '*':  ## namayesh tamaie savabeq mojod dafater dar tarikh khas
                         if searchType == 'تمام سوابق موجود':
                             self.dbToTableView(
-                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE tr = 'دفتر' AND th='{}'".format(searchDate))
+                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr = 'دفتر' AND (th='{}' OR bt = '{}')".format(searchDate,searchDate))
+                            if self.rowCount <= 0:
+                                self.ui.statusbar.showMessage(
+                                    "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
                         elif searchType == 'بازگشت داده نشده':
                             self.dbToTableView(
-                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE tr = 'دفتر' AND th='{}' AND bt = ''".format(searchDate))
+                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit' AND tr = 'دفتر' AND th='{}' AND bt = ''".format(searchDate))
+                            if self.rowCount <= 0:
+                                self.ui.statusbar.showMessage(
+                                    "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
                         elif searchType == 'بازگشت داده شده':
                             self.dbToTableView(
-                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE tr = 'دفتر' AND th='{}' AND bt != ''".format(searchDate))
-                        else:
-                            self.ui.statusbar.showMessage("برای دفتر {} سابقه ای موجود نیست".format(self.sangAsli_2))
+                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr = 'دفتر'  AND  bt = '{}' ".format(searchDate))
+                            if self.rowCount <= 0:
+                                self.ui.statusbar.showMessage("در تاریخ {} سابقه ای موجود نیست".format(searchDate))
+                    else:   ## jostojo Baray Ye Daftar
+                        if searchType == 'تمام سوابق موجود':
+                            self.dbToTableView(
+                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn_bh ='{}' AND (th='{}' OR bt = '{}')".format(SNBH,searchDate,searchDate))
+                            if self.rowCount <= 0:
+                                self.ui.statusbar.showMessage(
+                                    "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
+                        elif searchType == 'بازگشت داده نشده':
+                            self.dbToTableView(
+                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON '{}'= '{}' WHERE ss='Exit' AND th='{}' AND bt = ''".format(SNBH,SNBH,searchDate))
+                            if self.rowCount <= 0:
+                                self.ui.statusbar.showMessage(
+                                    "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
+                            else:
+                                self.ARBTN()
+                        elif searchType == 'بازگشت داده شده':
+                            self.dbToTableView(
+                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn_bh ='{}' AND  bt = '{}' ".format(SNBH,searchDate))
+                            if self.rowCount <= 0:
+                                self.ui.statusbar.showMessage( "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate,SNBH))
                 else:
                     self.errorM('شماره سنگ اصلی باید وارد شود')
 
 
-            # if searchType =='تمام سوابق موجود':
-            #     print("تمام سوابق موجود")
-            #     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE th='{}'".format(searchDate))
-            # elif searchType == 'بازگشت داده نشده':
-            #     print("بازگشت داده نشده")
-            #     pass
-            # elif searchType == 'بازگشت داده شده':
-            #     print("بازگشت داده شده")
-            #     pass
         else:
             if self.ui.checkBox_daftar_2.isChecked():
                 if self.sangAsli_2 != '':
                     if self.sangAsli_2 == '*':
-                        self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE tr='دفتر' ")
+                        self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr='دفتر' ")
                     else:
-                        self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN WHERE sn='{}' ".format(self.sangAsli_2))
+                        self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn='{}' ".format(self.sangAsli_2))
                         if self.rowCount > 0:
                             if self.getStatus(SNBH) == 'Exit':
                                 self.ARBTN()
@@ -322,9 +340,9 @@ class Baygan():
                 if self.sangAsli_2 != '':
                     if self.sangFari_2 != '':
                         if self.sangAsli_2 == '*' and self.sangFari_2 == '*':
-                            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN")
+                            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN")
                         else:
-                            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt FROM IT_BAYGAN where sn_bh='{}'".format(SNBH))
+                            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN where sn_bh='{}'".format(SNBH))
                             if self.rowCount > 0:
                                 if self.getStatus(SNBH) == 'Exit':
                                     self.ARBTN()
@@ -343,8 +361,9 @@ class Baygan():
         with sqlite3.connect(self.dbPath) as database:
             update_status = "UPDATE STATUS_BAYGAN SET ss='Returned' WHERE sn_bh = '{}'".format( SNBH)
             self.dateTime()
-            SR = self.TimeSabt.strftime("%Y/%m/%d-%H:%M")
-            update_Baygan = "UPDATE IT_BAYGAN SET bt='{}' WHERE sn_bh = '{}' AND id = (SELECT MAX(id) FROM IT_BAYGAN WHERE sn_bh = '{}')".format(SR,SNBH,SNBH)
+            TR = self.TimeSabt.strftime("%Y/%m/%d")
+            SR = self.TimeSabt.strftime("%H:%M")
+            update_Baygan = "UPDATE IT_BAYGAN SET bt='{}' , bs ='{}' WHERE sn_bh = '{}' AND id = (SELECT MAX(id) FROM IT_BAYGAN WHERE sn_bh = '{}')".format(TR,SR,SNBH,SNBH)
             database.execute(update_status)
             database.execute(update_Baygan)
             database.commit()
