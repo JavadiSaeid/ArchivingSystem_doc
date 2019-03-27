@@ -1985,7 +1985,7 @@ border-radius: 3px;
      <x>0</x>
      <y>0</y>
      <width>630</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -2050,6 +2050,7 @@ border-radius: 3px;
   <tabstop>checkBox_daftar_2</tabstop>
   <tabstop>radioButton_bakhsh26_2</tabstop>
   <tabstop>radioButton_bakhsh25_2</tabstop>
+  <tabstop>checkBox_allDontReturn</tabstop>
   <tabstop>checkBox_viaDate</tabstop>
   <tabstop>lineEdit_dateDay</tabstop>
   <tabstop>lineEdit_dateMonth</tabstop>

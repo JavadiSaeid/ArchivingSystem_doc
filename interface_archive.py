@@ -2,11 +2,12 @@
 
 # Form implementation generated from reading ui file 'Baygani.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.12
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -751,7 +752,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.tabWidget, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 630, 20))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 630, 21))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
@@ -804,7 +805,8 @@ class Ui_MainWindow(object):
         MainWindow.setTabOrder(self.lineEdit_sangFari_2, self.checkBox_daftar_2)
         MainWindow.setTabOrder(self.checkBox_daftar_2, self.radioButton_bakhsh26_2)
         MainWindow.setTabOrder(self.radioButton_bakhsh26_2, self.radioButton_bakhsh25_2)
-        MainWindow.setTabOrder(self.radioButton_bakhsh25_2, self.checkBox_viaDate)
+        MainWindow.setTabOrder(self.radioButton_bakhsh25_2, self.checkBox_allDontReturn)
+        MainWindow.setTabOrder(self.checkBox_allDontReturn, self.checkBox_viaDate)
         MainWindow.setTabOrder(self.checkBox_viaDate, self.lineEdit_dateDay)
         MainWindow.setTabOrder(self.lineEdit_dateDay, self.lineEdit_dateMonth)
         MainWindow.setTabOrder(self.lineEdit_dateMonth, self.lineEdit_dateYear)
@@ -929,4 +931,5 @@ class Ui_MainWindow(object):
         self.action_about.setText(_translate("MainWindow", "درباره"))
         self.action_close.setText(_translate("MainWindow", "بستن"))
         self.action.setText(_translate("MainWindow", "تغییر رمز ورود"))
+
 
