@@ -16,8 +16,8 @@ class Baygan():
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
         self.dateTime()
-        # self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
-        self.dbPath = r'Backup\ArchivesData.db'
+        self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
+        # self.dbPath = r'Backup\ArchivesData.db'
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
         self.ui.lineEdit_dateYear.setValidator((QIntValidator(1,9999)))
@@ -270,6 +270,8 @@ class Baygan():
             SNBH = self.sangAsli_2
         else:
             SNBH = self.sangAsli_2 + "/" + self.sangFari_2+ "-" + self.bakhsh_2
+            SN2  = self.sangAsli_2 + "/" + self.sangFari_2
+            BH2  = self.bakhsh_2
         if self.ui.checkBox_allDontReturn.isChecked():
             self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit'")
         elif self.ui.checkBox_viaDate.isChecked():
@@ -307,7 +309,7 @@ class Baygan():
                                     "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
                         elif searchType == 'بازگشت داده نشده':
                             self.dbToTableView(
-                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON '{}'= '{}' WHERE ss='Exit' AND th='{}' AND bt = ''".format(SNBH,SNBH,searchDate))
+                                commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh  WHERE ss='Exit' AND th='{}' AND sn='{}' AND bt = ''".format(searchDate,SNBH))
                             if self.rowCount <= 0:
                                 self.ui.statusbar.showMessage(
                                     "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
@@ -320,6 +322,66 @@ class Baygan():
                                 self.ui.statusbar.showMessage( "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate,SNBH))
                 else:
                     self.errorM('شماره سنگ اصلی باید وارد شود')
+            else:
+                if self.sangAsli_2 != '':
+                    if self.sangAsli_2 == '*':
+                        if self.sangFari_2 != '':
+                            if self.sangFari_2 == '*': ## search ba * va koli
+                                if searchType == 'تمام سوابق موجود':
+                                    self.dbToTableView(
+                                        commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr = 'پرونده' AND (th='{}' OR bt = '{}')".format(
+                                            searchDate, searchDate))
+                                    if self.rowCount <= 0:
+                                        self.ui.statusbar.showMessage(
+                                            "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
+                                elif searchType == 'بازگشت داده نشده':
+                                    self.dbToTableView(
+                                        commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit' AND tr = 'پرونده' AND th='{}' AND bt = ''".format(
+                                            searchDate))
+                                    if self.rowCount <= 0:
+                                        self.ui.statusbar.showMessage(
+                                            "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
+                                elif searchType == 'بازگشت داده شده':
+                                    self.dbToTableView(
+                                        commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr = 'پرونده'  AND  bt = '{}' ".format(
+                                            searchDate))
+                                    if self.rowCount <= 0:
+                                        self.ui.statusbar.showMessage(
+                                            "در تاریخ {} سابقه ای موجود نیست".format(searchDate))
+                            else:
+                                self.errorM('شماره سنگ فرعی هم باید مانند سنگ اصلی * وارد شود')
+                        else:
+                            self.errorM('شماره سنگ فرعی باید وارد شود')
+                    else:
+                        if self.sangFari_2 != '' and self.sangFari_2 != '*': ## search pelak ba sang asli va farii
+                            if searchType == 'تمام سوابق موجود':
+                                self.dbToTableView(
+                                    commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn_bh ='{}' AND (th='{}' OR bt = '{}')".format(
+                                        SNBH, searchDate, searchDate))
+                                if self.rowCount <= 0:
+                                    self.ui.statusbar.showMessage(
+                                        "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
+                            elif searchType == 'بازگشت داده نشده':
+                                self.dbToTableView(
+                                    commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh  WHERE ss='Exit' AND th='{}' AND sn='{}' AND bh='{}' AND bt = ''".format(
+                                        searchDate,SN2,BH2))
+                                if self.rowCount <= 0:
+                                    self.ui.statusbar.showMessage(
+                                        "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
+                                else:
+                                    self.ARBTN()
+                            elif searchType == 'بازگشت داده شده':
+                                self.dbToTableView(
+                                    commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn_bh ='{}' AND  bt = '{}' ".format(
+                                        SNBH, searchDate))
+                                if self.rowCount <= 0:
+                                    self.ui.statusbar.showMessage(
+                                        "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
+                        else:
+                            self.errorM('شماره سنگ فرعی باید وارد شود')
+                else:
+                    self.errorM('شماره سنگ اصلی باید وارد شود')
+
 
 
         else:
@@ -339,8 +401,11 @@ class Baygan():
             else:
                 if self.sangAsli_2 != '':
                     if self.sangFari_2 != '':
-                        if self.sangAsli_2 == '*' and self.sangFari_2 == '*':
-                            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN")
+                        if self.sangAsli_2 == '*':
+                            if self.sangFari_2 == '*':
+                                self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN")
+                            else:
+                                self.errorM('شماره سنگ فرعی هم باید مانند سنگ اصلی * وارد شود')
                         else:
                             self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN where sn_bh='{}'".format(SNBH))
                             if self.rowCount > 0:
@@ -348,6 +413,7 @@ class Baygan():
                                     self.ARBTN()
                             else:
                                 self.ui.statusbar.showMessage("برای پلاک {} بخش {} سابقه ای موجود نیست".format(self.sangAsli_2+"/"+self.sangFari_2,self.bakhsh_2))
+
                     else:
                         self.errorM('شماره سنگ فرعی باید وارد شود')
                 else:
