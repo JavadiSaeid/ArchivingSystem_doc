@@ -71,8 +71,9 @@ background-color: rgba(0, 0, 0, 0);
 }
 QLineEdit{
 background-color: rgba(0, 0, 0, 0);
-font: 75 14pt &quot;A Arghavan&quot;;
+font: 75 14pt &quot;B Nazanin&quot;;
 border-style: dashed;
+font-weight: bold;
 border-bottom-width: 2px;
 }
 QRadioButton{
@@ -305,11 +306,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
                </property>
                <property name="font">
                 <font>
-                 <family>A Arghavan</family>
+                 <family>B Nazanin</family>
                  <pointsize>14</pointsize>
-                 <weight>9</weight>
+                 <weight>75</weight>
                  <italic>false</italic>
-                 <bold>false</bold>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="toolTip">
@@ -361,11 +362,11 @@ font: 75 11pt &quot;A Arsoo&quot;;
               <widget class="QLineEdit" name="lineEdit_sangAsli">
                <property name="font">
                 <font>
-                 <family>A Arghavan</family>
+                 <family>B Nazanin</family>
                  <pointsize>14</pointsize>
-                 <weight>9</weight>
+                 <weight>75</weight>
                  <italic>false</italic>
-                 <bold>false</bold>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="toolTip">
@@ -987,8 +988,9 @@ background-color: rgba(0, 0, 0, 0);
 }
 QLineEdit{
 background-color: rgba(0, 0, 0, 0);
-font: 75 14pt &quot;A Arghavan&quot;;
+font: 75 14pt &quot;B Nazanin&quot;;
 border-style: dashed;
+font-weight: bold;
 border-bottom-width: 2px;
 }
 QRadioButton{
@@ -1284,11 +1286,11 @@ border-radius: 10px;
                </property>
                <property name="font">
                 <font>
-                 <family>A Arghavan</family>
+                 <family>B Nazanin</family>
                  <pointsize>14</pointsize>
-                 <weight>9</weight>
+                 <weight>75</weight>
                  <italic>false</italic>
-                 <bold>false</bold>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="toolTip">
@@ -1346,11 +1348,11 @@ border-radius: 10px;
                </property>
                <property name="font">
                 <font>
-                 <family>A Arghavan</family>
+                 <family>B Nazanin</family>
                  <pointsize>14</pointsize>
-                 <weight>9</weight>
+                 <weight>75</weight>
                  <italic>false</italic>
-                 <bold>false</bold>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="toolTip">

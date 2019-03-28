@@ -52,8 +52,9 @@ class Ui_MainWindow(object):
 "}\n"
 "QLineEdit{\n"
 "background-color: rgba(0, 0, 0, 0);\n"
-"font: 75 14pt \"A Arghavan\";\n"
+"font: 75 14pt \"B Nazanin\";\n"
 "border-style: dashed;\n"
+"font-weight: bold;\n"
 "border-bottom-width: 2px;\n"
 "}\n"
 "QRadioButton{\n"
@@ -156,11 +157,11 @@ class Ui_MainWindow(object):
         self.lineEdit_sangFari = QtWidgets.QLineEdit(self.groupBox_inputData)
         self.lineEdit_sangFari.setEnabled(True)
         font = QtGui.QFont()
-        font.setFamily("A Arghavan")
+        font.setFamily("B Nazanin")
         font.setPointSize(14)
-        font.setBold(False)
+        font.setBold(True)
         font.setItalic(False)
-        font.setWeight(9)
+        font.setWeight(75)
         self.lineEdit_sangFari.setFont(font)
         self.lineEdit_sangFari.setStatusTip("")
         self.lineEdit_sangFari.setStyleSheet("")
@@ -185,11 +186,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_Sang.addWidget(self.label)
         self.lineEdit_sangAsli = QtWidgets.QLineEdit(self.groupBox_inputData)
         font = QtGui.QFont()
-        font.setFamily("A Arghavan")
+        font.setFamily("B Nazanin")
         font.setPointSize(14)
-        font.setBold(False)
+        font.setBold(True)
         font.setItalic(False)
-        font.setWeight(9)
+        font.setWeight(75)
         self.lineEdit_sangAsli.setFont(font)
         self.lineEdit_sangAsli.setStatusTip("")
         self.lineEdit_sangAsli.setStyleSheet("")
@@ -379,8 +380,9 @@ class Ui_MainWindow(object):
 "}\n"
 "QLineEdit{\n"
 "background-color: rgba(0, 0, 0, 0);\n"
-"font: 75 14pt \"A Arghavan\";\n"
+"font: 75 14pt \"B Nazanin\";\n"
 "border-style: dashed;\n"
+"font-weight: bold;\n"
 "border-bottom-width: 2px;\n"
 "}\n"
 "QRadioButton{\n"
@@ -487,11 +489,11 @@ class Ui_MainWindow(object):
         self.lineEdit_sangFari_2 = QtWidgets.QLineEdit(self.groupBox)
         self.lineEdit_sangFari_2.setEnabled(True)
         font = QtGui.QFont()
-        font.setFamily("A Arghavan")
+        font.setFamily("B Nazanin")
         font.setPointSize(14)
-        font.setBold(False)
+        font.setBold(True)
         font.setItalic(False)
-        font.setWeight(9)
+        font.setWeight(75)
         self.lineEdit_sangFari_2.setFont(font)
         self.lineEdit_sangFari_2.setStatusTip("")
         self.lineEdit_sangFari_2.setStyleSheet("")
@@ -518,11 +520,11 @@ class Ui_MainWindow(object):
         self.lineEdit_sangAsli_2 = QtWidgets.QLineEdit(self.groupBox)
         self.lineEdit_sangAsli_2.setEnabled(True)
         font = QtGui.QFont()
-        font.setFamily("A Arghavan")
+        font.setFamily("B Nazanin")
         font.setPointSize(14)
-        font.setBold(False)
+        font.setBold(True)
         font.setItalic(False)
-        font.setWeight(9)
+        font.setWeight(75)
         self.lineEdit_sangAsli_2.setFont(font)
         self.lineEdit_sangAsli_2.setStatusTip("")
         self.lineEdit_sangAsli_2.setStyleSheet("")

@@ -1,4 +1,4 @@
-import sys ,dpi ,sqlite3
+import sys ,dpi ,sqlite3,getpass
 from time import sleep
 
 from PyQt5.QtCore import QRegExp, Qt, QThread, pyqtSignal
@@ -8,6 +8,8 @@ from jdatetime import datetime as dt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget
 from interface_archive import Ui_MainWindow
+from PyQt5 import QtWidgets
+from about import Ui_Form
 
 class Baygan():
     def __init__(self):
@@ -44,6 +46,7 @@ class Baygan():
         self.ui.checkBox_allDontReturn.stateChanged.connect(self.allDontReturn)
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
         self.ui.pushButton_bazgashBygani.clicked.connect(self.btn_return)
+        self.ui.action_about.triggered.connect(self.RunAbout)
         self.MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
 
         MainWindowGetSize = self.MainWindow.frameGeometry()
@@ -52,6 +55,24 @@ class Baygan():
         self.MainWindow.move(MainWindowGetSize.topLeft())
         self.MainWindow.show()
         sys.exit(app.exec_())
+
+    def RunAbout(self):
+        self.Form = QtWidgets.QWidget()
+        self.uiForm = Ui_Form()
+        self.uiForm.setupUi(self.Form)
+        self.Form.setWindowFlags(Qt.WindowStaysOnTopHint)
+        self.Form.setWindowFlags(self.Form.windowFlags() | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+        MainWindowGetSize = self.Form.frameGeometry()
+        DesktopCenter = QDesktopWidget().availableGeometry().center()
+        MainWindowGetSize.moveCenter(DesktopCenter)
+        self.Form.move(MainWindowGetSize.topLeft())
+        self.Form.keyPressEvent      = self.CustomClose
+
+        self.Form.show()
+    def CustomClose(self,e):
+        if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter:
+            self.Form.close()
+
 
     def dateTime(self):
         self.tz = timezone('Asia/Tehran')
@@ -164,7 +185,7 @@ class Baygan():
     def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT='',BS = ''):
         with sqlite3.connect(self.dbPath) as database:
             IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
-                    "sn VARCHAR(60),bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (30),bs varchar (30),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
+                    "sn VARCHAR(60),bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (30),bs varchar (30),us VARCHAR (72),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
             STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn_bh VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY, ss VARCHAR(60))"
             USERS_BAYGAN = "CREATE TABLE IF NOT EXISTS USERS_BAYGAN(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,us varchar (60) NOT NULL UNIQUE, pw VARCHAR(60) NOT NULL)"
 
@@ -180,8 +201,8 @@ class Baygan():
                 BH = ''
                 SN = SA
                 SNBH = SN
-            insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt,bs,sn_bh) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
-                .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT,BS, SNBH)
+            insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt,bs,sn_bh,us) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
+                .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT,BS, SNBH,getpass.getuser())
             instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn_bh, ss) VALUES ('{}', 'Exit')".format(SNBH,SNBH)
             database.execute(insert)
             database.execute(instatus)
