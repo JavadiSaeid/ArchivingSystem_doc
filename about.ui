@@ -20,7 +20,7 @@
    <string>درباره </string>
   </property>
   <property name="toolTip">
-   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;برای بستن این پنجره بر روی کیبورد کلید Enter را بفشارید.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir='rtl'&gt;برای بستن این پنجره بر روی کیبورد کلید Enter را بفشارید.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>
