@@ -18,8 +18,8 @@ class Baygan():
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
         self.dateTime()
-        self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
-        # self.dbPath = r'Backup\ArchivesData.db'
+        # self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
+        self.dbPath = r'Backup\ArchivesData.db'
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
         self.ui.lineEdit_dateYear.setValidator((QIntValidator(1,9999)))
@@ -342,7 +342,7 @@ class Baygan():
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage( "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate,SNBH))
             else:
-                if self.sangAsli_2 == '' and self.sangFari_2 == '': ## search ba * va koli
+                if self.sangAsli_2 == '' and self.sangFari_2 == '': ## search ba '' va koli
                     if searchType == 'تمام سوابق موجود':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr = 'پرونده' AND (th='{}' OR bt = '{}')".format(
@@ -405,7 +405,7 @@ class Baygan():
                         self.ui.statusbar.showMessage("برای دفتر {} سابقه ای موجود نیست".format(self.sangAsli_2))
             else:
                 if self.sangAsli_2 == '' and self.sangFari_2 == '':
-                    self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN")
+                    self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr='پرونده'")
                 elif self.sangAsli_2 != '' and self.sangFari_2 != '' :
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN where sn_bh='{}'".format(SNBH))
                     if self.rowCount > 0:
