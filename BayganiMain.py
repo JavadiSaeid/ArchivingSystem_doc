@@ -2,11 +2,12 @@ import sys ,dpi ,sqlite3,getpass
 from time import sleep
 
 from PyQt5.QtCore import QRegExp, Qt, QThread, pyqtSignal
+from PyQt5.QtPrintSupport import QPrinter
 from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel, QSqlTableModel
 from pytz import timezone
 from jdatetime import datetime as dt
-from PyQt5.QtGui import QIntValidator, QRegExpValidator
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget
+from PyQt5.QtGui import QIntValidator, QRegExpValidator, QPixmap, QPainter
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget, QFileDialog
 from interface_archive import Ui_MainWindow
 from PyQt5 import QtWidgets
 from about import Ui_Form
@@ -48,6 +49,7 @@ class Baygan():
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
         self.ui.pushButton_bazgashBygani.clicked.connect(self.btn_return)
         self.ui.action_about.triggered.connect(self.RunAbout)
+        self.ui.pushButton_print.clicked.connect(self.printss)
         self.MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
 
         MainWindowGetSize = self.MainWindow.frameGeometry()
@@ -296,6 +298,7 @@ class Baygan():
             BH2  = self.bakhsh_2
         if self.ui.checkBox_allDontReturn.isChecked():
             self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit'")
+            self.enPrint()
         elif self.ui.checkBox_viaDate.isChecked():
             day = self.ui.lineEdit_dateDay.text()
             month = self.ui.lineEdit_dateMonth.text()
@@ -438,7 +441,38 @@ class Baygan():
 
     def ARBTN(self):
         self.ui.pushButton_bazgashBygani.setEnabled(True)
+    def enPrint(self):
         self.ui.pushButton_print.setEnabled(True)
+
+    def printss(self):
+        fileName = QFileDialog.getSaveFileName(self, 'Save File', '', 'PDF Files (*.pdf)')
+        if fileName == '': return
+        # set up the QPrinter
+        p = QPrinter(QPrinter.HighResolution)
+        p.setPaperSize(QPrinter.A4)
+        p.setOutputFormat(QPrinter.PdfFormat)
+        p.setOrientation(QPrinter.Landscape)
+        p.setOutputFileName(fileName)
+        # set up the painter
+        painter = QPainter()
+        # Activate the painter to paint on p then give visual conformation that it worked or not.
+        # If didn't work return out of method.
+        if painter.begin(p) == False:
+            msgBox = QMessageBox()
+            msgBox.setText('An Error occoured while creating PDF')
+            msgBox.setInformativeText('Could not save PDF')
+            msgBox.setIcon(QMessageBox.Critical)
+            msgBox.exec_()
+            return
+        # self.ShotTableView.scale(200, 200);
+        # painter.begin(printer)
+        print (self.ShotTableView.width())
+        xscale = (self.ShotTableView.width() / 50);
+        yscale = (self.ShotTableView.height() / 50);
+        # scale = qMin(xscale, yscale);
+        painter.scale(xscale, yscale);
+        self.ShotTableView.render(painter)
+        painter.end
 
     def btn_New(self):
         self.ui.lineEdit_sangFari.setText('')
