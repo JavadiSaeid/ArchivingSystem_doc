@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Baygani.ui'
 #
-# Created by: PyQt5 UI code generator 5.12
+# Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -754,7 +754,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.tabWidget, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 630, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 630, 20))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
@@ -768,10 +768,10 @@ class Ui_MainWindow(object):
         self.action_about.setObjectName("action_about")
         self.action_close = QtWidgets.QAction(MainWindow)
         self.action_close.setObjectName("action_close")
-        self.action = QtWidgets.QAction(MainWindow)
-        self.action.setObjectName("action")
+        self.action_ChangPassword = QtWidgets.QAction(MainWindow)
+        self.action_ChangPassword.setObjectName("action_ChangPassword")
         self.menu.addAction(self.action_help)
-        self.menu.addAction(self.action)
+        self.menu.addAction(self.action_ChangPassword)
         self.menu.addSeparator()
         self.menu.addAction(self.action_about)
         self.menu.addSeparator()
@@ -932,6 +932,6 @@ class Ui_MainWindow(object):
         self.action_help.setText(_translate("MainWindow", "راهنما"))
         self.action_about.setText(_translate("MainWindow", "درباره"))
         self.action_close.setText(_translate("MainWindow", "بستن"))
-        self.action.setText(_translate("MainWindow", "تغییر رمز ورود"))
+        self.action_ChangPassword.setText(_translate("MainWindow", "تغییر رمز ورود"))
 
 

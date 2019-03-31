@@ -1,12 +1,10 @@
 import sys ,dpi ,sqlite3,getpass
-from time import sleep
-
-from PyQt5.QtCore import QRegExp, Qt, QThread, pyqtSignal
-from PyQt5.QtPrintSupport import QPrinter
-from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel, QSqlTableModel
+from PyQt5.QtCore import QRegExp, Qt, QFileInfo
+from PyQt5.QtPrintSupport import QPrinter, QPrintPreviewDialog
+from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
 from pytz import timezone
 from jdatetime import datetime as dt
-from PyQt5.QtGui import QIntValidator, QRegExpValidator, QPixmap, QPainter
+from PyQt5.QtGui import QIntValidator, QRegExpValidator, QTextCursor, QTextDocument
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget, QFileDialog
 from interface_archive import Ui_MainWindow
 from PyQt5 import QtWidgets
@@ -49,8 +47,10 @@ class Baygan():
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
         self.ui.pushButton_bazgashBygani.clicked.connect(self.btn_return)
         self.ui.action_about.triggered.connect(self.RunAbout)
-        self.ui.pushButton_print.clicked.connect(self.printss)
+        self.ui.pushButton_print.clicked.connect(self.printpreviewDialog)
         self.MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
+        self.ui.action_help.setEnabled(False)
+        self.ui.action_ChangPassword.setEnabled(False)
 
         MainWindowGetSize = self.MainWindow.frameGeometry()
         DesktopCenter = QDesktopWidget().availableGeometry().center()
@@ -75,7 +75,6 @@ class Baygan():
     def CustomClose(self,e):
         if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter:
             self.Form.close()
-
 
     def dateTime(self):
         self.tz = timezone('Asia/Tehran')
@@ -277,6 +276,7 @@ class Baygan():
         self.ui.tableView_result.setModel(projectModel)
         # self.ui.tableView_result.show()
         self.rowCount = projectModel.rowCount()
+        self.tableResult = projectModel
         db.close()
 
     def getStatus(self,SNBH):
@@ -444,35 +444,29 @@ class Baygan():
     def enPrint(self):
         self.ui.pushButton_print.setEnabled(True)
 
-    def printss(self):
-        fileName = QFileDialog.getSaveFileName(self, 'Save File', '', 'PDF Files (*.pdf)')
-        if fileName == '': return
-        # set up the QPrinter
-        p = QPrinter(QPrinter.HighResolution)
-        p.setPaperSize(QPrinter.A4)
-        p.setOutputFormat(QPrinter.PdfFormat)
-        p.setOrientation(QPrinter.Landscape)
-        p.setOutputFileName(fileName)
-        # set up the painter
-        painter = QPainter()
-        # Activate the painter to paint on p then give visual conformation that it worked or not.
-        # If didn't work return out of method.
-        if painter.begin(p) == False:
-            msgBox = QMessageBox()
-            msgBox.setText('An Error occoured while creating PDF')
-            msgBox.setInformativeText('Could not save PDF')
-            msgBox.setIcon(QMessageBox.Critical)
-            msgBox.exec_()
-            return
-        # self.ShotTableView.scale(200, 200);
-        # painter.begin(printer)
-        print (self.ShotTableView.width())
-        xscale = (self.ShotTableView.width() / 50);
-        yscale = (self.ShotTableView.height() / 50);
-        # scale = qMin(xscale, yscale);
-        painter.scale(xscale, yscale);
-        self.ShotTableView.render(painter)
-        painter.end
+    def bbbbbbb(self, printer):
+        document = QTextDocument()
+        cursor = QTextCursor(document)
+        table = cursor.insertTable(self.tableResult.rowCount(), self.tableResult.columnCount())
+
+        for row in range(table.rows()):
+            for col in range(table.columns()):
+                it = self.ui.tableView_result.item(row, col)
+                if it is not None:
+                    cursor.insertText(it.text())
+                cursor.movePosition(QTextCursor.NextCell)
+        document.print_(printer)
+
+    def printpreviewDialog(self):
+        fn, _ = QFileDialog.getSaveFileName(self.MainWindow, 'Export PDF', None, 'PDF files (.pdf);;All Files()')
+
+        if fn != '':
+            if QFileInfo(fn).suffix() == "" : fn += '.pdf'
+
+            printer = QPrinter(QPrinter.HighResolution)
+            printer.setOutputFormat(QPrinter.PdfFormat)
+            printer.setOutputFileName(fn)
+            self.ui.tableView_result.document().print_(printer)
 
     def btn_New(self):
         self.ui.lineEdit_sangFari.setText('')

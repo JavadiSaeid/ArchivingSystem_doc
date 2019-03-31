@@ -1987,7 +1987,7 @@ border-radius: 3px;
      <x>0</x>
      <y>0</y>
      <width>630</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -1995,7 +1995,7 @@ border-radius: 3px;
      <string>فایل</string>
     </property>
     <addaction name="action_help"/>
-    <addaction name="action"/>
+    <addaction name="action_ChangPassword"/>
     <addaction name="separator"/>
     <addaction name="action_about"/>
     <addaction name="separator"/>
@@ -2019,7 +2019,7 @@ border-radius: 3px;
     <string>بستن</string>
    </property>
   </action>
-  <action name="action">
+  <action name="action_ChangPassword">
    <property name="text">
     <string>تغییر رمز ورود</string>
    </property>
