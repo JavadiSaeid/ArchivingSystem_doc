@@ -17,8 +17,8 @@ class Baygan():
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
         self.dateTime()
-        # self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
-        self.dbPath = r'Backup\ArchivesData.db'
+        self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
+        # self.dbPath = r'Backup\ArchivesData.db'
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
         self.ui.lineEdit_dateYear.setValidator((QIntValidator(1,9999)))
@@ -47,7 +47,7 @@ class Baygan():
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
         self.ui.pushButton_bazgashBygani.clicked.connect(self.btn_return)
         self.ui.action_about.triggered.connect(self.RunAbout)
-        self.ui.pushButton_print.clicked.connect(self.printpreviewDialog)
+        # self.ui.pushButton_print.clicked.connect(self.printpreviewDialog)
         self.MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.ui.action_help.setEnabled(False)
         self.ui.action_ChangPassword.setEnabled(False)
@@ -442,31 +442,22 @@ class Baygan():
     def ARBTN(self):
         self.ui.pushButton_bazgashBygani.setEnabled(True)
     def enPrint(self):
-        self.ui.pushButton_print.setEnabled(True)
+        # self.ui.pushButton_print.setEnabled(True)
+        pass
 
-    def bbbbbbb(self, printer):
-        document = QTextDocument()
-        cursor = QTextCursor(document)
-        table = cursor.insertTable(self.tableResult.rowCount(), self.tableResult.columnCount())
 
-        for row in range(table.rows()):
-            for col in range(table.columns()):
-                it = self.ui.tableView_result.item(row, col)
-                if it is not None:
-                    cursor.insertText(it.text())
-                cursor.movePosition(QTextCursor.NextCell)
-        document.print_(printer)
 
-    def printpreviewDialog(self):
-        fn, _ = QFileDialog.getSaveFileName(self.MainWindow, 'Export PDF', None, 'PDF files (.pdf);;All Files()')
-
-        if fn != '':
-            if QFileInfo(fn).suffix() == "" : fn += '.pdf'
-
-            printer = QPrinter(QPrinter.HighResolution)
-            printer.setOutputFormat(QPrinter.PdfFormat)
-            printer.setOutputFileName(fn)
-            self.ui.tableView_result.document().print_(printer)
+    # def printpreviewDialog(self):
+    #     print(self.ui.tableView_result.item(2, 3).text())
+    #     # fn, _ = QFileDialog.getSaveFileName(self.MainWindow, 'Export PDF', None, 'PDF files (.pdf);;All Files()')
+    #     #
+    #     # if fn != '':
+    #     #     if QFileInfo(fn).suffix() == "" : fn += '.pdf'
+    #     #
+    #     #     printer = QPrinter(QPrinter.HighResolution)
+    #     #     printer.setOutputFormat(QPrinter.PdfFormat)
+    #     #     printer.setOutputFileName(fn)
+    #     #     self.ui.tableView_result.document().print_(printer)
 
     def btn_New(self):
         self.ui.lineEdit_sangFari.setText('')

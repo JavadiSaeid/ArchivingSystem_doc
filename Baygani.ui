@@ -158,22 +158,6 @@ font: 75 11pt &quot;A Arsoo&quot;;
                 </property>
                </widget>
               </item>
-              <item row="1" column="2">
-               <widget class="QRadioButton" name="radioButton_sayer">
-                <property name="toolTip">
-                 <string>  علت درخواست سایر</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>سایر</string>
-                </property>
-                <property name="checked">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="1">
                <widget class="QRadioButton" name="radioButton_estelam">
                 <property name="toolTip">
@@ -269,6 +253,29 @@ font: 75 11pt &quot;A Arsoo&quot;;
                </widget>
               </item>
               <item row="1" column="1">
+               <widget class="QRadioButton" name="radioButton_bazdid">
+                <property name="text">
+                 <string>بازدید</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QRadioButton" name="radioButton_sayer">
+                <property name="toolTip">
+                 <string>  علت درخواست سایر</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>سایر</string>
+                </property>
+                <property name="checked">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
                <widget class="QRadioButton" name="radioButton_Jari">
                 <property name="toolTip">
                  <string>  علت درخواست جاری</string>
@@ -1987,7 +1994,7 @@ border-radius: 3px;
      <x>0</x>
      <y>0</y>
      <width>630</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -2042,8 +2049,6 @@ border-radius: 3px;
   <tabstop>radioButton_nameEdarat</tabstop>
   <tabstop>radioButton_darKhastSanad</tabstop>
   <tabstop>radioButton_Baresi</tabstop>
-  <tabstop>radioButton_Jari</tabstop>
-  <tabstop>radioButton_sayer</tabstop>
   <tabstop>textEdit_Tozihat</tabstop>
   <tabstop>pushButton_sabt</tabstop>
   <tabstop>pushButton_new</tabstop>
