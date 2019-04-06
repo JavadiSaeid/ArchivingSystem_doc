@@ -2,11 +2,12 @@
 
 # Form implementation generated from reading ui file 'about.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.12
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -68,5 +69,6 @@ class Ui_Form(object):
         Form.setToolTip(_translate("Form", "<html><head/><body><p dir=\'rtl\'>برای بستن این پنجره بر روی کیبورد کلید Enter را بفشارید.</p></body></html>"))
         self.label_creator.setText(_translate("Form", "توسعه داده شده توسط : "))
         self.label_sarbaz.setText(_translate("Form", "سرباز"))
-        self.label_email.setText(_translate("Form", "©  1398 - s.a.e.i.d@live.com"))
+        self.label_email.setText(_translate("Form", "©  sjp-1398 | s.a.e.i.d@live.com"))
+
 
