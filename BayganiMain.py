@@ -180,6 +180,8 @@ class Baygan():
             self.elatDarkhast = 'جاری'
         elif self.ui.radioButton_Baresi.isChecked():
             self.elatDarkhast = 'بررسی'
+        elif self.ui.radioButton_bazdid.isChecked():
+            self.elatDarkhast = 'بازدید'
         elif self.ui.radioButton_sayer.isChecked():
             self.elatDarkhast = 'سایر'
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()
