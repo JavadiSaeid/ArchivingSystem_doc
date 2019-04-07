@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>سامانه بایگانی ثبت ماسال</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="icon.qrc">
+    <normaloff>:/QIcon/Backup/icons/Archiver.png</normaloff>:/QIcon/Backup/icons/Archiver.png</iconset>
+  </property>
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>
   </property>
@@ -2068,7 +2072,9 @@ border-radius: 3px;
   <tabstop>pushButton_print</tabstop>
   <tabstop>tableView_result</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="icon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>action_close</sender>

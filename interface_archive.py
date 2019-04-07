@@ -13,6 +13,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(630, 640)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/QIcon/Backup/icons/Archiver.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setLayoutDirection(QtCore.Qt.RightToLeft)
         MainWindow.setStyleSheet("QMainWindow{\n"
 "background-color: #5D5136;\n"
@@ -937,3 +940,4 @@ class Ui_MainWindow(object):
         self.action_ChangPassword.setText(_translate("MainWindow", "تغییر رمز ورود"))
 
 
+import icon_rc
