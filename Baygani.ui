@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>640</height>
+    <height>644</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -949,20 +949,7 @@ font: 75 11pt &quot;A Arsoo&quot;;
                 </property>
                </widget>
               </item>
-              <item row="1" column="3">
-               <widget class="QRadioButton" name="radioButton_nameEdarat">
-                <property name="toolTip">
-                 <string>  علت درخواست نامه ادارات</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>نامه ادارات</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4">
+              <item row="0" column="5">
                <widget class="QRadioButton" name="radioButton_darKhastSanad">
                 <property name="toolTip">
                  <string>  علت درخواست درخواست سند</string>
@@ -975,7 +962,20 @@ font: 75 11pt &quot;A Arsoo&quot;;
                 </property>
                </widget>
               </item>
-              <item row="0" column="5">
+              <item row="0" column="4">
+               <widget class="QRadioButton" name="radioButton_nameEdarat">
+                <property name="toolTip">
+                 <string>  علت درخواست نامه ادارات</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>نامه ادارات</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
                <widget class="QRadioButton" name="radioButton_roneveshNaqshe">
                 <property name="minimumSize">
                  <size>
@@ -990,14 +990,10 @@ font: 75 11pt &quot;A Arsoo&quot;;
                  </size>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">QRadioButton{
-background-color: rgba(0, 0, 0, 0);
-font: 80 11pt &quot;A Arghavan&quot;;
-}</string>
+                 <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>رونوشت نقشه/
- صورتمجلس تفکیکی </string>
+                 <string>رونوشت</string>
                 </property>
                </widget>
               </item>
@@ -2076,12 +2072,12 @@ border-radius: 3px;
   <tabstop>radioButton_estelam</tabstop>
   <tabstop>radioButton_tajmii</tabstop>
   <tabstop>radioButton_tafkik</tabstop>
+  <tabstop>radioButton_nameEdarat</tabstop>
   <tabstop>radioButton_darKhastSanad</tabstop>
-  <tabstop>radioButton_roneveshNaqshe</tabstop>
   <tabstop>radioButton_Baresi</tabstop>
   <tabstop>radioButton_bazdid</tabstop>
   <tabstop>radioButton_Jari</tabstop>
-  <tabstop>radioButton_nameEdarat</tabstop>
+  <tabstop>radioButton_roneveshNaqshe</tabstop>
   <tabstop>radioButton_sayer</tabstop>
   <tabstop>textEdit_Tozihat</tabstop>
   <tabstop>pushButton_sabt</tabstop>
@@ -2124,7 +2120,7 @@ border-radius: 3px;
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>
