@@ -182,6 +182,8 @@ class Baygan():
             self.elatDarkhast = 'بررسی'
         elif self.ui.radioButton_bazdid.isChecked():
             self.elatDarkhast = 'بازدید'
+        elif self.ui.radioButton_roneveshNaqshe.isChecked():
+            self.elatDarkhast = 'رونوشت نقشه/صورتمجلس تفکیکی'
         elif self.ui.radioButton_sayer.isChecked():
             self.elatDarkhast = 'سایر'
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()

@@ -123,178 +123,6 @@ border-radius:2px;
            <string>فرم ثبت خروج پرونده از بایگانی</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="6" column="0">
-            <widget class="QGroupBox" name="groupBox_Tozihat">
-             <property name="toolTip">
-              <string>  علت درخواست</string>
-             </property>
-             <property name="statusTip">
-              <string/>
-             </property>
-             <property name="layoutDirection">
-              <enum>Qt::RightToLeft</enum>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QRadioButton{
-font: 75 11pt &quot;A Arsoo&quot;;
-}</string>
-             </property>
-             <property name="title">
-              <string>توضیحات</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_6">
-              <item row="3" column="0" colspan="6">
-               <widget class="QTextEdit" name="textEdit_Tozihat">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="cursor" stdset="0">
-                 <cursorShape>IBeamCursor</cursorShape>
-                </property>
-                <property name="toolTip">
-                 <string>توضیحات خود را در این بخش بنویسید</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="placeholderText">
-                 <string>توضیحات</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QRadioButton" name="radioButton_estelam">
-                <property name="toolTip">
-                 <string>  علت درخواست استعلام</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>استعلام</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QRadioButton" name="radioButton_edary">
-                <property name="toolTip">
-                 <string>  علت درخواست اداری</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>اداری</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="QRadioButton" name="radioButton_tafkik">
-                <property name="toolTip">
-                 <string>  علت درخواست تفکیک</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>تفکیک</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="5">
-               <widget class="QRadioButton" name="radioButton_darKhastSanad">
-                <property name="toolTip">
-                 <string>  علت درخواست درخواست سند</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>درخواست سند</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4">
-               <widget class="QRadioButton" name="radioButton_nameEdarat">
-                <property name="toolTip">
-                 <string>  علت درخواست نامه ادارات</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>نامه ادارات</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QRadioButton" name="radioButton_tajmii">
-                <property name="toolTip">
-                 <string>  علت درخواست تجمیع</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>تجمیع</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QRadioButton" name="radioButton_Baresi">
-                <property name="toolTip">
-                 <string>  علت درخواست بررسی</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>بررسی</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QRadioButton" name="radioButton_bazdid">
-                <property name="text">
-                 <string>بازدید</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="3">
-               <widget class="QRadioButton" name="radioButton_sayer">
-                <property name="toolTip">
-                 <string>  علت درخواست سایر</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>سایر</string>
-                </property>
-                <property name="checked">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QRadioButton" name="radioButton_Jari">
-                <property name="toolTip">
-                 <string>  علت درخواست جاری</string>
-                </property>
-                <property name="statusTip">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>جاری</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
            <item row="0" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_Sang">
              <item>
@@ -977,6 +805,204 @@ border-radius: 10px;
               </spacer>
              </item>
             </layout>
+           </item>
+           <item row="6" column="0">
+            <widget class="QGroupBox" name="groupBox_Tozihat">
+             <property name="toolTip">
+              <string>  علت درخواست</string>
+             </property>
+             <property name="statusTip">
+              <string/>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QRadioButton{
+font: 75 11pt &quot;A Arsoo&quot;;
+}</string>
+             </property>
+             <property name="title">
+              <string>توضیحات</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="3" column="0" colspan="6">
+               <widget class="QTextEdit" name="textEdit_Tozihat">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="cursor" stdset="0">
+                 <cursorShape>IBeamCursor</cursorShape>
+                </property>
+                <property name="toolTip">
+                 <string>توضیحات خود را در این بخش بنویسید</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="placeholderText">
+                 <string>توضیحات</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QRadioButton" name="radioButton_estelam">
+                <property name="toolTip">
+                 <string>  علت درخواست استعلام</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>استعلام</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QRadioButton" name="radioButton_edary">
+                <property name="toolTip">
+                 <string>  علت درخواست اداری</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>اداری</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QRadioButton" name="radioButton_tafkik">
+                <property name="toolTip">
+                 <string>  علت درخواست تفکیک</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>تفکیک</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QRadioButton" name="radioButton_tajmii">
+                <property name="toolTip">
+                 <string>  علت درخواست تجمیع</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>تجمیع</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QRadioButton" name="radioButton_Baresi">
+                <property name="toolTip">
+                 <string>  علت درخواست بررسی</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>بررسی</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QRadioButton" name="radioButton_bazdid">
+                <property name="text">
+                 <string>بازدید</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="4">
+               <widget class="QRadioButton" name="radioButton_sayer">
+                <property name="toolTip">
+                 <string>  علت درخواست سایر</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>سایر</string>
+                </property>
+                <property name="checked">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QRadioButton" name="radioButton_Jari">
+                <property name="toolTip">
+                 <string>  علت درخواست جاری</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>جاری</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QRadioButton" name="radioButton_nameEdarat">
+                <property name="toolTip">
+                 <string>  علت درخواست نامه ادارات</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>نامه ادارات</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="QRadioButton" name="radioButton_darKhastSanad">
+                <property name="toolTip">
+                 <string>  علت درخواست درخواست سند</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>درخواست سند</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QRadioButton" name="radioButton_roneveshNaqshe">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>45</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QRadioButton{
+background-color: rgba(0, 0, 0, 0);
+font: 80 11pt &quot;A Arghavan&quot;;
+}</string>
+                </property>
+                <property name="text">
+                 <string>رونوشت نقشه/
+ صورتمجلس تفکیکی </string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -2050,9 +2076,13 @@ border-radius: 3px;
   <tabstop>radioButton_estelam</tabstop>
   <tabstop>radioButton_tajmii</tabstop>
   <tabstop>radioButton_tafkik</tabstop>
-  <tabstop>radioButton_nameEdarat</tabstop>
   <tabstop>radioButton_darKhastSanad</tabstop>
+  <tabstop>radioButton_roneveshNaqshe</tabstop>
   <tabstop>radioButton_Baresi</tabstop>
+  <tabstop>radioButton_bazdid</tabstop>
+  <tabstop>radioButton_Jari</tabstop>
+  <tabstop>radioButton_nameEdarat</tabstop>
+  <tabstop>radioButton_sayer</tabstop>
   <tabstop>textEdit_Tozihat</tabstop>
   <tabstop>pushButton_sabt</tabstop>
   <tabstop>pushButton_new</tabstop>
