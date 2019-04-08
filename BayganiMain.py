@@ -1,15 +1,17 @@
 import sys ,dpi ,sqlite3,getpass
 from PyQt5.QtCore import QRegExp, Qt
-from PyQt5.QtPrintSupport import QPrintDialog
+from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
 from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
 from pytz import timezone
 from jdatetime import datetime as dt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator, QTextDocument, QTextCursor, \
-    QTextTableFormat, QColor
+    QTextTableFormat, QColor, QIcon, QPixmap, QTextCharFormat
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget, QDialog
 from interface_archive import Ui_MainWindow
 from PyQt5 import QtWidgets
 from about import Ui_Form
+import icon_rc
+
 
 class Baygan():
     def __init__(self):
@@ -251,7 +253,6 @@ class Baygan():
             self.errorM(' خطایی در ثبت اطلاعات بوجود امده است \n این خطا را به مدیر سیستم اطلاع دهید')
             pass
 
-
     def searcherVariable(self):
         self.sangAsli_2 = self.ui.lineEdit_sangAsli_2.text()
         self.sangFari_2 = self.ui.lineEdit_sangFari_2.text()
@@ -285,7 +286,7 @@ class Baygan():
             projectModel.setHeaderData(7, Qt.Horizontal, 'تاریخ تحویل')
             projectModel.setHeaderData(8, Qt.Horizontal, 'ساعت تحویل')
             projectModel.setHeaderData(9, Qt.Horizontal, 'تاریخ بازگشت')
-            projectModel.setHeaderData(10, Qt.Horizontal, 'ساعت بازگشت')
+            projectModel.setHeaderData(10, Qt.Horizontal,'ساعت بازگشت')
             self.ui.tableView_result.setModel(projectModel)
             # self.ui.tableView_result.show()
             self.rowCount = projectModel.rowCount()
@@ -309,6 +310,7 @@ class Baygan():
         return Status
 
     def btn_search(self):
+        self.ui.pushButton_print.setEnabled(False)
         self.searcherVariable()
         if self.ui.checkBox_daftar_2.isChecked():
             SNBH = self.sangAsli_2
@@ -333,17 +335,23 @@ class Baygan():
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage(
                                 "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
+                        else:
+                            self.enPrint()
                     elif searchType == 'بازگشت داده نشده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit' AND tr = 'دفتر' AND th='{}' AND bt = ''".format(searchDate))
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage(
                                 "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
+                        else:
+                            self.enPrint()
                     elif searchType == 'بازگشت داده شده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr = 'دفتر'  AND  bt = '{}' ".format(searchDate))
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage("در تاریخ {} سابقه ای موجود نیست".format(searchDate))
+                        else:
+                            self.enPrint()
                 else:   ## jostojo Baray Ye Daftar
                     if searchType == 'تمام سوابق موجود':
                         self.dbToTableView(
@@ -351,6 +359,8 @@ class Baygan():
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage(
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
+                        else:
+                            self.enPrint()
                     elif searchType == 'بازگشت داده نشده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh  WHERE ss='Exit' AND th='{}' AND sn='{}' AND bt = ''".format(searchDate,SNBH))
@@ -359,11 +369,14 @@ class Baygan():
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
                         else:
                             self.ARBTN()
+                            self.enPrint()
                     elif searchType == 'بازگشت داده شده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn_bh ='{}' AND  bt = '{}' ".format(SNBH,searchDate))
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage( "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate,SNBH))
+                        else:
+                            self.enPrint()
             else:
                 if self.sangAsli_2 == '' and self.sangFari_2 == '': ## search ba '' va koli
                     if searchType == 'تمام سوابق موجود':
@@ -373,6 +386,8 @@ class Baygan():
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage(
                                 "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
+                        else:
+                            self.enPrint()
                     elif searchType == 'بازگشت داده نشده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit' AND tr = 'پرونده' AND th='{}' AND bt = ''".format(
@@ -380,6 +395,8 @@ class Baygan():
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage(
                                 "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
+                        else:
+                            self.enPrint()
                     elif searchType == 'بازگشت داده شده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr = 'پرونده'  AND  bt = '{}' ".format(
@@ -387,6 +404,8 @@ class Baygan():
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage(
                                 "در تاریخ {} سابقه ای موجود نیست".format(searchDate))
+                        else:
+                            self.enPrint()
 
                 elif self.sangAsli_2 != '' and self.sangFari_2 != '':
                     if searchType == 'تمام سوابق موجود':
@@ -396,6 +415,8 @@ class Baygan():
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage(
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
+                        else:
+                            self.enPrint()
                     elif searchType == 'بازگشت داده نشده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh  WHERE ss='Exit' AND th='{}' AND sn='{}' AND bh='{}' AND bt = ''".format(
@@ -405,6 +426,7 @@ class Baygan():
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
                         else:
                             self.ARBTN()
+                            self.enPrint()
                     elif searchType == 'بازگشت داده شده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn_bh ='{}' AND  bt = '{}' ".format(
@@ -412,6 +434,8 @@ class Baygan():
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage(
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
+                        else:
+                            self.enPrint()
                 else:
                     self.errorM('شماره پلاک به درستی وارد نشده است\n برای بازیابی کلیه پلاک ها باید هردو فیلد سنگ اصلی و فرعی خالی باشند و یا پلاک را بطور کامل وارد کنید.')
 
@@ -419,23 +443,30 @@ class Baygan():
             if self.ui.checkBox_daftar_2.isChecked():
                 if self.sangAsli_2 == '':
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr='دفتر' ")
+                    if self.rowCount > 0:
+                        self.enPrint()
                 else:
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn='{}' ".format(self.sangAsli_2))
                     if self.rowCount > 0:
                         if self.getStatus(SNBH) == 'Exit':
                             self.ARBTN()
+                            self.enPrint()
                     else:
                         self.ui.statusbar.showMessage("برای دفتر {} سابقه ای موجود نیست".format(self.sangAsli_2))
             else:
                 if self.sangAsli_2 == '' and self.sangFari_2 == '':
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr='پرونده'")
+                    if self.rowCount > 0:
+                        self.enPrint()
                 elif self.sangAsli_2 != '' and self.sangFari_2 != '' :
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN where sn_bh='{}'".format(SNBH))
                     if self.rowCount > 0:
                         if self.getStatus(SNBH) == 'Exit':
                             self.ARBTN()
+                            self.enPrint()
                     else:
                         self.ui.statusbar.showMessage("برای پلاک {} بخش {} سابقه ای موجود نیست".format(self.sangAsli_2+"/"+self.sangFari_2,self.bakhsh_2))
+
                 else:
                     self.errorM('شماره پلاک به درستی وارد نشده است\n برای بازیابی کلیه پلاک ها باید هردو فیلد سنگ اصلی و فرعی خالی باشند و یا پلاک را بطور کامل وارد کنید.')
 
@@ -463,41 +494,52 @@ class Baygan():
         self.ui.pushButton_bazgashBygani.setEnabled(True)
     def enPrint(self):
         self.ui.pushButton_print.setEnabled(True)
-        # pass
 
-    def handlePreview(self):
+## QtableView table Sql print to printer
+    def handlePrint(self):
         dialog = QPrintDialog()
+        dialog.setWindowFlags(Qt.WindowStaysOnTopHint)
         if dialog.exec_() == QDialog.Accepted:
             self.handlePaintRequest(dialog.printer())
     def handlePreview(self):
-        dialog = QtGui.QPrintPreviewDialog()
+        dialog = QPrintPreviewDialog()
+        icon = QIcon()
+        icon.addPixmap(QPixmap(":/QIcon/Backup/icons/Archiver.png"), QIcon.Normal, QIcon.Off)
+        dialog.setWindowIcon(icon)
+        dialog.setWindowTitle("پیش نمایش چاپ")
         dialog.paintRequested.connect(self.handlePaintRequest)
+        dialog.setWindowFlags(Qt.WindowStaysOnTopHint)
         dialog.exec_()
-
     def handlePaintRequest(self, printer):
         document = QTextDocument()
         cursor = QTextCursor(document)
         tableFormat = QTextTableFormat()
+        TableText = QTextCharFormat()
+        TableText.setLayoutDirection(Qt.RightToLeft)
         tableFormat.setAlignment(Qt.AlignCenter)
-        tableFormat.setBackground(QColor('#e0e0e0'))
-        tableFormat.setCellPadding(4)
-        tableFormat.setCellSpacing(6)
-        # tableFormat.setLayoutDirection(Qt.RightToLeft)
+        tableFormat.setBackground(QColor('#d3fbf5'))
+        tableFormat.setCellPadding(3)
+        tableFormat.setCellSpacing(4)
+        tableFormat.setLayoutDirection(Qt.RightToLeft)
+        tableFormat.setBorderStyle(QTextTableFormat.BorderStyle_Double)
 
         model = self.ui.tableView_result.model()
-        table = cursor.insertTable(model.rowCount(), model.columnCount(), tableFormat)
+        table = cursor.insertTable(model.rowCount()+1, model.columnCount(), tableFormat)
+        headers = ['پلاک','بخش','نوع','همکار تقاضا کننده','تحویل گیرنده','علت درخواست','توضیحات','تاریخ تحویل','ساعت تحویل','تاریخ بازگشت', 'ساعت بازگشت']
+        self.tableResult.insertRows(10,10)
+        for header in headers:
+            cursor.insertText(header)
+            cursor.movePosition(QTextCursor.NextCell)
         for row in range(table.rows()):
             for column in range(table.columns()):
-                cursor.insertText(self.tableResult.data(self.tableResult.index(row,column)))
+                cursor.insertText(self.tableResult.data(self.tableResult.index(row,column)),TableText)
                 cursor.movePosition(QTextCursor.NextCell)
         document.print_(printer)
-
 
     def btn_New(self):
         self.ui.lineEdit_sangFari.setText('')
         self.ui.lineEdit_sangAsli.setText('')
         self.ui.textEdit_Tozihat.setText('')
-
 
     def errorM(self,errorText='مشکلی پیش آمده است !!!'):
         box = QMessageBox()
