@@ -1,11 +1,12 @@
 import sys ,dpi ,sqlite3,getpass
-from PyQt5.QtCore import QRegExp, Qt, QFileInfo
-from PyQt5.QtPrintSupport import QPrinter, QPrintPreviewDialog
+from PyQt5.QtCore import QRegExp, Qt
+from PyQt5.QtPrintSupport import QPrintDialog
 from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
 from pytz import timezone
 from jdatetime import datetime as dt
-from PyQt5.QtGui import QIntValidator, QRegExpValidator, QTextCursor, QTextDocument
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget, QFileDialog
+from PyQt5.QtGui import QIntValidator, QRegExpValidator, QTextDocument, QTextCursor, \
+    QTextTableFormat, QColor
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget, QDialog
 from interface_archive import Ui_MainWindow
 from PyQt5 import QtWidgets
 from about import Ui_Form
@@ -17,8 +18,8 @@ class Baygan():
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
         self.dateTime()
-        self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
-        # self.dbPath = r'Backup\ArchivesData.db'
+        # self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
+        self.dbPath = r'Backup\ArchivesData.db'
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
         self.ui.lineEdit_dateYear.setValidator((QIntValidator(1,9999)))
@@ -47,7 +48,7 @@ class Baygan():
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
         self.ui.pushButton_bazgashBygani.clicked.connect(self.btn_return)
         self.ui.action_about.triggered.connect(self.RunAbout)
-        # self.ui.pushButton_print.clicked.connect(self.printpreviewDialog)
+        self.ui.pushButton_print.clicked.connect(self.handlePreview)
         self.MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.ui.action_help.setEnabled(False)
         self.ui.action_ChangPassword.setEnabled(False)
@@ -189,30 +190,37 @@ class Baygan():
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()
 
     def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT='',BS = ''):
-        with sqlite3.connect(self.dbPath) as database:
-            IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
-                    "sn VARCHAR(60),bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (30),bs varchar (30),us VARCHAR (72),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
-            STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn_bh VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY, ss VARCHAR(60))"
-            USERS_BAYGAN = "CREATE TABLE IF NOT EXISTS USERS_BAYGAN(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,us varchar (60) NOT NULL UNIQUE, pw VARCHAR(60) NOT NULL)"
+        try:
+            with sqlite3.connect(self.dbPath) as database:
+                IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
+                        "sn VARCHAR(60),bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (30),bs varchar (30),us VARCHAR (72),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
+                STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn_bh VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY, ss VARCHAR(60))"
+                USERS_BAYGAN = "CREATE TABLE IF NOT EXISTS USERS_BAYGAN(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,us varchar (60) NOT NULL UNIQUE, pw VARCHAR(60) NOT NULL)"
 
-            database.execute(STATUS_BAYGAN)
-            database.execute(IT_BAYGAN)
-            database.execute(USERS_BAYGAN)
-            TH = self.TimeSabt.strftime("%Y/%m/%d")
-            ST = self.TimeSabt.strftime("%H:%M")
-            if TR == 'پرونده':
-                SN = SA+"/"+SF
-                SNBH = SA+"/"+SF+"-"+BH
+                database.execute(STATUS_BAYGAN)
+                database.execute(IT_BAYGAN)
+                database.execute(USERS_BAYGAN)
+                TH = self.TimeSabt.strftime("%Y/%m/%d")
+                ST = self.TimeSabt.strftime("%H:%M")
+                if TR == 'پرونده':
+                    SN = SA+"/"+SF
+                    SNBH = SA+"/"+SF+"-"+BH
+                else:
+                    BH = ''
+                    SN = SA
+                    SNBH = SN
+                insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt,bs,sn_bh,us) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
+                    .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT,BS, SNBH,getpass.getuser())
+                instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn_bh, ss) VALUES ('{}', 'Exit')".format(SNBH,SNBH)
+                database.execute(insert)
+                database.execute(instatus)
+                database.commit()
+        except Exception as e:
+            if e.message != '':
+                errormsg = e.message
             else:
-                BH = ''
-                SN = SA
-                SNBH = SN
-            insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt,bs,sn_bh,us) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
-                .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT,BS, SNBH,getpass.getuser())
-            instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn_bh, ss) VALUES ('{}', 'Exit')".format(SNBH,SNBH)
-            database.execute(insert)
-            database.execute(instatus)
-            database.commit()
+                errormsg = " "
+            self.errorM('مشکل در ارتباط با دیتابیس\n {}'.format(errormsg))
 
     def btn_sbt(self):
         self.getUpdateVriable()
@@ -257,31 +265,39 @@ class Baygan():
             self.daftarState_2 = False
 
     def dbToTableView(self,commandSQL):
-        QApplication.processEvents()
-        if QSqlDatabase.contains("qt_sql_default_connection"):
-            db = QSqlDatabase.database("qt_sql_default_connection")
-        else:
-            db = QSqlDatabase.addDatabase("QSQLITE")
-            db.setDatabaseName(self.dbPath)
-            db.open()
-        projectModel = QSqlQueryModel()
-        projectModel.setQuery(commandSQL, db)
-        projectModel.setHeaderData(0, Qt.Horizontal, 'پلاک')
-        projectModel.setHeaderData(1, Qt.Horizontal, 'بخش')
-        projectModel.setHeaderData(2, Qt.Horizontal, 'نوع')
-        projectModel.setHeaderData(3, Qt.Horizontal, 'همکار تقاضا کننده')
-        projectModel.setHeaderData(4, Qt.Horizontal, 'تحویل گیرنده')
-        projectModel.setHeaderData(5, Qt.Horizontal, 'علت درخواست')
-        projectModel.setHeaderData(6, Qt.Horizontal, 'توضیحات')
-        projectModel.setHeaderData(7, Qt.Horizontal, 'تاریخ تحویل')
-        projectModel.setHeaderData(8, Qt.Horizontal, 'ساعت تحویل')
-        projectModel.setHeaderData(9, Qt.Horizontal, 'تاریخ بازگشت')
-        projectModel.setHeaderData(10, Qt.Horizontal, 'ساعت بازگشت')
-        self.ui.tableView_result.setModel(projectModel)
-        # self.ui.tableView_result.show()
-        self.rowCount = projectModel.rowCount()
-        self.tableResult = projectModel
-        db.close()
+        try:
+            QApplication.processEvents()
+            if QSqlDatabase.contains("qt_sql_default_connection"):
+                db = QSqlDatabase.database("qt_sql_default_connection")
+            else:
+                db = QSqlDatabase.addDatabase("QSQLITE")
+                db.setDatabaseName(self.dbPath)
+                db.open()
+            projectModel = QSqlQueryModel()
+            projectModel.setQuery(commandSQL, db)
+            projectModel.setHeaderData(0, Qt.Horizontal, 'پلاک')
+            projectModel.setHeaderData(1, Qt.Horizontal, 'بخش')
+            projectModel.setHeaderData(2, Qt.Horizontal, 'نوع')
+            projectModel.setHeaderData(3, Qt.Horizontal, 'همکار تقاضا کننده')
+            projectModel.setHeaderData(4, Qt.Horizontal, 'تحویل گیرنده')
+            projectModel.setHeaderData(5, Qt.Horizontal, 'علت درخواست')
+            projectModel.setHeaderData(6, Qt.Horizontal, 'توضیحات')
+            projectModel.setHeaderData(7, Qt.Horizontal, 'تاریخ تحویل')
+            projectModel.setHeaderData(8, Qt.Horizontal, 'ساعت تحویل')
+            projectModel.setHeaderData(9, Qt.Horizontal, 'تاریخ بازگشت')
+            projectModel.setHeaderData(10, Qt.Horizontal, 'ساعت بازگشت')
+            self.ui.tableView_result.setModel(projectModel)
+            # self.ui.tableView_result.show()
+            self.rowCount = projectModel.rowCount()
+            self.tableResult = projectModel
+            db.close()
+
+        except Exception as e:
+            if e.message != '':
+                errormsg = e.message
+            else:
+                errormsg = " "
+            self.errorM('مشکل در ارتباط با دیتابیس\n {}'.format(errormsg))
 
     def getStatus(self,SNBH):
         with sqlite3.connect(self.dbPath) as database:
@@ -446,22 +462,36 @@ class Baygan():
     def ARBTN(self):
         self.ui.pushButton_bazgashBygani.setEnabled(True)
     def enPrint(self):
-        # self.ui.pushButton_print.setEnabled(True)
-        pass
+        self.ui.pushButton_print.setEnabled(True)
+        # pass
 
+    def handlePreview(self):
+        dialog = QPrintDialog()
+        if dialog.exec_() == QDialog.Accepted:
+            self.handlePaintRequest(dialog.printer())
+    def handlePreview(self):
+        dialog = QtGui.QPrintPreviewDialog()
+        dialog.paintRequested.connect(self.handlePaintRequest)
+        dialog.exec_()
 
+    def handlePaintRequest(self, printer):
+        document = QTextDocument()
+        cursor = QTextCursor(document)
+        tableFormat = QTextTableFormat()
+        tableFormat.setAlignment(Qt.AlignCenter)
+        tableFormat.setBackground(QColor('#e0e0e0'))
+        tableFormat.setCellPadding(4)
+        tableFormat.setCellSpacing(6)
+        # tableFormat.setLayoutDirection(Qt.RightToLeft)
 
-    # def printpreviewDialog(self):
-    #     print(self.ui.tableView_result.item(2, 3).text())
-    #     # fn, _ = QFileDialog.getSaveFileName(self.MainWindow, 'Export PDF', None, 'PDF files (.pdf);;All Files()')
-    #     #
-    #     # if fn != '':
-    #     #     if QFileInfo(fn).suffix() == "" : fn += '.pdf'
-    #     #
-    #     #     printer = QPrinter(QPrinter.HighResolution)
-    #     #     printer.setOutputFormat(QPrinter.PdfFormat)
-    #     #     printer.setOutputFileName(fn)
-    #     #     self.ui.tableView_result.document().print_(printer)
+        model = self.ui.tableView_result.model()
+        table = cursor.insertTable(model.rowCount(), model.columnCount(), tableFormat)
+        for row in range(table.rows()):
+            for column in range(table.columns()):
+                cursor.insertText(self.tableResult.data(self.tableResult.index(row,column)))
+                cursor.movePosition(QTextCursor.NextCell)
+        document.print_(printer)
+
 
     def btn_New(self):
         self.ui.lineEdit_sangFari.setText('')
