@@ -517,7 +517,7 @@ class Baygan():
         tableFormat = QTextTableFormat()
         TableText = QTextCharFormat()
         TableText.setLayoutDirection(Qt.RightToLeft)
-        tableFormat.setAlignment(Qt.AlignCenter)
+        # tableFormat.setAlignment(Qt.AlignCenter)
         tableFormat.setBackground(QColor('#d3fbf5'))
         tableFormat.setCellPadding(3)
         tableFormat.setCellSpacing(4)
@@ -528,11 +528,11 @@ class Baygan():
         table = cursor.insertTable(model.rowCount()+1, model.columnCount(), tableFormat)
         headers = ['پلاک','بخش','نوع','همکار تقاضا کننده','تحویل گیرنده','علت درخواست','توضیحات','تاریخ تحویل','ساعت تحویل','تاریخ بازگشت', 'ساعت بازگشت']
         self.tableResult.insertRows(10,10)
-        for header in headers:
+        for header in reversed(headers):
             cursor.insertText(header)
             cursor.movePosition(QTextCursor.NextCell)
         for row in range(table.rows()):
-            for column in range(table.columns()):
+            for column in reversed(range(table.columns())):
                 cursor.insertText(self.tableResult.data(self.tableResult.index(row,column)),TableText)
                 cursor.movePosition(QTextCursor.NextCell)
         document.print_(printer)
