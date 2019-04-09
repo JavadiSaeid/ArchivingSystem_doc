@@ -310,6 +310,9 @@ class Baygan():
         return Status
 
     def btn_search(self):
+        self.TableTitr = ""
+        Tr = self.TimeSabt.strftime("%Y/%m/%d")
+        Ts = self.TimeSabt.strftime("%H:%M")
         self.ui.pushButton_print.setEnabled(False)
         self.searcherVariable()
         if self.ui.checkBox_daftar_2.isChecked():
@@ -320,6 +323,7 @@ class Baygan():
             BH2  = self.bakhsh_2
         if self.ui.checkBox_allDontReturn.isChecked():
             self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit'")
+            self.TableTitr =f" لیست سوابق ثبت شده موجود تمام پرونده های بازگشت داده نشده به بایگانی تا تاریخ {Ts} - {Tr} "
             self.enPrint()
         elif self.ui.checkBox_viaDate.isChecked():
             day = self.ui.lineEdit_dateDay.text()
@@ -336,6 +340,7 @@ class Baygan():
                             self.ui.statusbar.showMessage(
                                 "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
                         else:
+                            self.TableTitr = f" تمام سوابق ثبت شده موجود دفترها برای تاریخ  {searchDate} "
                             self.enPrint()
                     elif searchType == 'بازگشت داده نشده':
                         self.dbToTableView(
@@ -344,6 +349,7 @@ class Baygan():
                             self.ui.statusbar.showMessage(
                                 "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
                         else:
+                            self.TableTitr = f"  سوابق ثبت شده موجود دفترهای بازگشت داده نشده برای تاریخ  {searchDate} "
                             self.enPrint()
                     elif searchType == 'بازگشت داده شده':
                         self.dbToTableView(
@@ -351,6 +357,7 @@ class Baygan():
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage("در تاریخ {} سابقه ای موجود نیست".format(searchDate))
                         else:
+                            self.TableTitr = f"  سوابق ثبت شده موجود دفترهای بازگشت داده شده برای تاریخ  {searchDate} "
                             self.enPrint()
                 else:   ## jostojo Baray Ye Daftar
                     if searchType == 'تمام سوابق موجود':
@@ -360,6 +367,7 @@ class Baygan():
                             self.ui.statusbar.showMessage(
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
                         else:
+                            self.TableTitr = f" تمام سوابق ثبت شده موجود دفتر برای تاریخ  {searchDate} "
                             self.enPrint()
                     elif searchType == 'بازگشت داده نشده':
                         self.dbToTableView(
@@ -369,6 +377,7 @@ class Baygan():
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
                         else:
                             self.ARBTN()
+                            self.TableTitr = f"  سوابق ثبت شده موجود دفتر بازگشت داده نشده برای تاریخ  {searchDate} "
                             self.enPrint()
                     elif searchType == 'بازگشت داده شده':
                         self.dbToTableView(
@@ -376,6 +385,7 @@ class Baygan():
                         if self.rowCount <= 0:
                             self.ui.statusbar.showMessage( "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate,SNBH))
                         else:
+                            self.TableTitr = f"  سوابق ثبت شده موجود دفتر بازگشت داده شده برای تاریخ  {searchDate} "
                             self.enPrint()
             else:
                 if self.sangAsli_2 == '' and self.sangFari_2 == '': ## search ba '' va koli
@@ -387,6 +397,7 @@ class Baygan():
                             self.ui.statusbar.showMessage(
                                 "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
                         else:
+                            self.TableTitr = f" تمام سوابق ثبت شده موجود پروندها برای تاریخ  {searchDate} "
                             self.enPrint()
                     elif searchType == 'بازگشت داده نشده':
                         self.dbToTableView(
@@ -396,6 +407,7 @@ class Baygan():
                             self.ui.statusbar.showMessage(
                                 "برای تاریخ {} سابقه ای موجود نیست".format(searchDate))
                         else:
+                            self.TableTitr = f"  سوابق ثبت شده موجود پرونده های بازگشت داده نشده برای تاریخ  {searchDate} "
                             self.enPrint()
                     elif searchType == 'بازگشت داده شده':
                         self.dbToTableView(
@@ -405,6 +417,7 @@ class Baygan():
                             self.ui.statusbar.showMessage(
                                 "در تاریخ {} سابقه ای موجود نیست".format(searchDate))
                         else:
+                            self.TableTitr = f"  سوابق ثبت شده موجود پرونده های بازگشت داده شده برای تاریخ  {searchDate} "
                             self.enPrint()
 
                 elif self.sangAsli_2 != '' and self.sangFari_2 != '':
@@ -416,6 +429,7 @@ class Baygan():
                             self.ui.statusbar.showMessage(
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
                         else:
+                            self.TableTitr = f" تمام سوابق ثبت شده موجود پرونده برای تاریخ  {searchDate} "
                             self.enPrint()
                     elif searchType == 'بازگشت داده نشده':
                         self.dbToTableView(
@@ -425,6 +439,7 @@ class Baygan():
                             self.ui.statusbar.showMessage(
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
                         else:
+                            self.TableTitr = f"  سوابق ثبت شده موجود پرونده بازگشت داده نشده برای تاریخ  {searchDate} "
                             self.ARBTN()
                             self.enPrint()
                     elif searchType == 'بازگشت داده شده':
@@ -435,6 +450,7 @@ class Baygan():
                             self.ui.statusbar.showMessage(
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
                         else:
+                            self.TableTitr = f"  سوابق ثبت شده موجود پرونده بازگشت داده شده برای تاریخ  {searchDate} "
                             self.enPrint()
                 else:
                     self.errorM('شماره پلاک به درستی وارد نشده است\n برای بازیابی کلیه پلاک ها باید هردو فیلد سنگ اصلی و فرعی خالی باشند و یا پلاک را بطور کامل وارد کنید.')
@@ -444,12 +460,14 @@ class Baygan():
                 if self.sangAsli_2 == '':
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr='دفتر' ")
                     if self.rowCount > 0:
+                        self.TableTitr =f" لیست تاریخچه سوابق ثبت شده موجود تمام دفتر ها تا تاریخ {Ts} - {Tr} "
                         self.enPrint()
                 else:
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn='{}' ".format(self.sangAsli_2))
                     if self.rowCount > 0:
                         if self.getStatus(SNBH) == 'Exit':
                             self.ARBTN()
+                            self.TableTitr = f" لیست تاریخچه سوابق ثبت شده موجود دفتر تا تاریخ {Ts} - {Tr} "
                             self.enPrint()
                     else:
                         self.ui.statusbar.showMessage("برای دفتر {} سابقه ای موجود نیست".format(self.sangAsli_2))
@@ -457,10 +475,12 @@ class Baygan():
                 if self.sangAsli_2 == '' and self.sangFari_2 == '':
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr='پرونده'")
                     if self.rowCount > 0:
+                        self.TableTitr = f" لیست تاریخچه سوابق ثبت شده موجود تمام پرونده ها ها تا تاریخ {Ts} - {Tr} "
                         self.enPrint()
                 elif self.sangAsli_2 != '' and self.sangFari_2 != '' :
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN where sn_bh='{}'".format(SNBH))
                     if self.rowCount > 0:
+                        self.TableTitr = f" لیست تاریخچه سوابق ثبت شده موجود موجود پرونده تا تاریخ {Ts} - {Tr} "
                         self.enPrint()
                         if self.getStatus(SNBH) == 'Exit':
                             self.ARBTN()
@@ -523,6 +543,10 @@ class Baygan():
         tableFormat.setCellSpacing(4)
         tableFormat.setLayoutDirection(Qt.RightToLeft)
         tableFormat.setBorderStyle(QTextTableFormat.BorderStyle_Double)
+
+        TitrFormat = QTextCharFormat()
+        TitrFormat.setLayoutDirection(Qt.RightToLeft)
+        cursor.insertText(self.TableTitr+"\n")
 
         model = self.ui.tableView_result.model()
         table = cursor.insertTable(model.rowCount()+1, model.columnCount(), tableFormat)
