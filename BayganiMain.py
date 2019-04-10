@@ -66,6 +66,7 @@ class Baygan():
         self.Form = QtWidgets.QWidget()
         self.uiForm = Ui_Form()
         self.uiForm.setupUi(self.Form)
+        self.uiForm.label_email.setOpenExternalLinks(True)
         self.Form.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.Form.setWindowFlags(self.Form.windowFlags() | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         MainWindowGetSize = self.Form.frameGeometry()
