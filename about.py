@@ -70,6 +70,6 @@ class Ui_Form(object):
         self.label_creator.setText(_translate("Form", "توسعه داده شده توسط : "))
         self.label_sarbaz.setText(_translate("Form", "سرباز"))
         self.label_email.setToolTip(_translate("Form", "<html><head/><body><p dir=\'rtl\'><span style=\" color:#55007f;\">برای ارتباط با سازنده کلیک کنید.</span></p></body></html>"))
-        self.label_email.setText(_translate("Form", "<html><head/><body><p><a href=\"mailto:s.a.e.i.d@live.com\"><span style=\" text-decoration: none; color:#00ffff;\">© sjp-1398 | s.a.e.i.d@live.com</span></a></p></body></html>"))
+        self.label_email.setText(_translate("Form", "<html><head/><body><p><a href=\"mailto:s.a.e.i.d@live.com?subject=ارتباط%20با%20سازنده%20سامانه%20بایگانی%20ثبت%20ماسال\"><span style=\" text-decoration: none; color:#00ffff;\">© sjp-1398 | s.a.e.i.d@live.com</span></a></p></body></html>"))
 
 

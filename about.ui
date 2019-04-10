@@ -94,7 +94,7 @@ background-color:#396BFE;
       <string notr="true">color:#E6F014 ;</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;mailto:s.a.e.i.d@live.com&quot;&gt;&lt;span style=&quot; text-decoration: none; color:#00ffff;&quot;&gt;© sjp-1398 | s.a.e.i.d@live.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;mailto:s.a.e.i.d@live.com?subject=ارتباط%20با%20سازنده%20سامانه%20بایگانی%20ثبت%20ماسال&quot;&gt;&lt;span style=&quot; text-decoration: none; color:#00ffff;&quot;&gt;© sjp-1398 | s.a.e.i.d@live.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
