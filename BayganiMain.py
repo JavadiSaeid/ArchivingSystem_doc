@@ -5,7 +5,7 @@ from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
 from pytz import timezone
 from jdatetime import datetime as dt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator, QTextDocument, QTextCursor, \
-    QTextTableFormat, QColor, QIcon, QPixmap, QTextCharFormat
+    QTextTableFormat, QColor, QIcon, QPixmap, QTextCharFormat, QFont
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget, QDialog
 from interface_archive import Ui_MainWindow
 from PyQt5 import QtWidgets
@@ -186,7 +186,7 @@ class Baygan():
         elif self.ui.radioButton_bazdid.isChecked():
             self.elatDarkhast = 'بازدید'
         elif self.ui.radioButton_roneveshNaqshe.isChecked():
-            self.elatDarkhast = 'رونوشت نقشه/صورتمجلس تفکیکی'
+            self.elatDarkhast = 'رونوشت نقشه/ صورتمجلس تفکیکی'
         elif self.ui.radioButton_sayer.isChecked():
             self.elatDarkhast = 'سایر'
         self.tozihat = self.ui.textEdit_Tozihat.toPlainText()
@@ -475,16 +475,15 @@ class Baygan():
                 if self.sangAsli_2 == '' and self.sangFari_2 == '':
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE tr='پرونده'")
                     if self.rowCount > 0:
-                        self.TableTitr = f" لیست تاریخچه سوابق ثبت شده موجود تمام پرونده ها ها تا تاریخ {Ts} - {Tr} "
+                        self.TableTitr = f" لیست تاریخچه سوابق ثبت شده موجود تمام پرونده ها تا تاریخ {Ts} - {Tr} "
                         self.enPrint()
                 elif self.sangAsli_2 != '' and self.sangFari_2 != '' :
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN where sn_bh='{}'".format(SNBH))
                     if self.rowCount > 0:
-                        self.TableTitr = f" لیست تاریخچه سوابق ثبت شده موجود موجود پرونده تا تاریخ {Ts} - {Tr} "
+                        self.TableTitr = f" لیست تاریخچه سوابق ثبت شده موجود پرونده تا تاریخ {Ts} - {Tr} "
                         self.enPrint()
                         if self.getStatus(SNBH) == 'Exit':
                             self.ARBTN()
-
                     else:
                         self.ui.statusbar.showMessage("برای پلاک {} بخش {} سابقه ای موجود نیست".format(self.sangAsli_2+"/"+self.sangFari_2,self.bakhsh_2))
 
@@ -545,15 +544,21 @@ class Baygan():
         tableFormat.setBorderStyle(QTextTableFormat.BorderStyle_Double)
 
         TitrFormat = QTextCharFormat()
+        fontTitr = QFont()
+        fontTitr.setBold(True)
+        TitrFormat.setFont(fontTitr)
+        SotonFormat = QTextCharFormat()
         TitrFormat.setLayoutDirection(Qt.RightToLeft)
-        cursor.insertText(self.TableTitr+"\n")
+        # SotonFormat.setBackground(QColor('#EEF9C9'))
+        SotonFormat.setFont(fontTitr)
 
+        cursor.insertText(self.TableTitr+"\n",TitrFormat)
         model = self.ui.tableView_result.model()
         table = cursor.insertTable(model.rowCount()+1, model.columnCount(), tableFormat)
-        headers = ['پلاک','بخش','نوع','همکار تقاضا کننده','تحویل گیرنده','علت درخواست','توضیحات','تاریخ تحویل','ساعت تحویل','تاریخ بازگشت', 'ساعت بازگشت']
+        headers = ['پلاک','بخش','نوع','همکار تقاضاکننده','تحویل گیرنده','علت درخواست','توضیحات','تاریخ تحویل','ساعت تحویل','تاریخ بازگشت', 'ساعت بازگشت']
         self.tableResult.insertRows(10,10)
         for header in reversed(headers):
-            cursor.insertText(header)
+            cursor.insertText(header,SotonFormat)
             cursor.movePosition(QTextCursor.NextCell)
         for row in range(table.rows()):
             for column in reversed(range(table.columns())):
