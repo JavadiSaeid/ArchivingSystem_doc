@@ -87,6 +87,9 @@ background-color:#396BFE;
        <bold>true</bold>
       </font>
      </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir='rtl'&gt;&lt;span style=&quot; color:#55007f;&quot;&gt;برای ارتباط با سازنده کلیک کنید.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
      <property name="styleSheet">
       <string notr="true">color:#E6F014 ;</string>
      </property>
