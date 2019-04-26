@@ -1,4 +1,4 @@
-import sys ,dpi ,sqlite3,getpass
+import dpi, sys, sqlite3, getpass
 from PyQt5.QtCore import QRegExp, Qt
 from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
 from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
@@ -20,8 +20,8 @@ class Baygan():
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
         self.dateTime()
-        self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
-        # self.dbPath = r'Backup\ArchivesData.db'
+        # self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
+        self.dbPath = r'Backup\ArchivesData.db'
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
         self.ui.lineEdit_dateYear.setValidator((QIntValidator(1,9999)))
@@ -29,16 +29,16 @@ class Baygan():
         self.ui.lineEdit_dateMonth.setValidator((QIntValidator(1,12)))
         self.ui.lineEdit_dateDay.setText(self.nowDay)
         self.ui.lineEdit_dateDay.setValidator((QIntValidator(1,31)))
-        self.ui.lineEdit_sangAsli.setValidator(QIntValidator(1,999))
-        # self.ui.lineEdit_sangAsli_2.setValidator(QIntValidator(1,999))
-        self.ui.lineEdit_sangAsli_2.setMaxLength(3)
         # regex=QRegExp("^\*$|[0-9]+")
         regex=QRegExp("[0-9]+")
         validator = QRegExpValidator(regex)
+        # self.ui.lineEdit_sangAsli_2.setValidator(QIntValidator(1,999))
+        self.ui.lineEdit_sangAsli.setValidator(validator)
+        self.ui.lineEdit_sangFari.setValidator(validator)
         self.ui.lineEdit_sangAsli_2.setValidator(validator)
-        self.ui.lineEdit_sangFari.setValidator(self.onlyInt)
         self.ui.lineEdit_sangFari_2.setValidator(validator)
-
+        self.ui.lineEdit_sangAsli_2.setMaxLength(3)
+        self.ui.lineEdit_sangAsli.setMaxLength(3)
         self.ui.tab1_inputData.keyPressEvent = self.EnterToTab_1
         self.ui.tab2_SearchData.keyPressEvent = self.EnterToTab_2
         self.ui.pushButton_sabt.clicked.connect(self.btn_sbt)
@@ -89,11 +89,13 @@ class Baygan():
         self.nowHour = self.TimeSabt.strftime("%H")
         self.nowMinute = self.TimeSabt.strftime("%M")
     def EnterToTab_1(self, e):
-        if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter :
+        if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter:
             self.btn_sbt()
+
     def EnterToTab_2(self,e):
         if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter:
             self.btn_search()
+
 
     def Daftar(self,state):
         if state == Qt.Checked:
@@ -323,7 +325,7 @@ class Baygan():
             SN2  = self.sangAsli_2 + "/" + self.sangFari_2
             BH2  = self.bakhsh_2
         if self.ui.checkBox_allDontReturn.isChecked():
-            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE ss='Exit'")
+            self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh WHERE (ss='Exit' AND bt='')")
             self.TableTitr =f" لیست سوابق ثبت شده موجود تمام پرونده های بازگشت داده نشده به بایگانی تا تاریخ {Ts} - {Tr} "
             self.enPrint()
         elif self.ui.checkBox_viaDate.isChecked():
@@ -466,10 +468,11 @@ class Baygan():
                 else:
                     self.dbToTableView(commandSQL="SELECT sn,bh,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn='{}' ".format(self.sangAsli_2))
                     if self.rowCount > 0:
+                        self.enPrint()
                         if self.getStatus(SNBH) == 'Exit':
                             self.ARBTN()
                             self.TableTitr = f" لیست تاریخچه سوابق ثبت شده موجود دفتر تا تاریخ {Ts} - {Tr} "
-                            self.enPrint()
+
                     else:
                         self.ui.statusbar.showMessage("برای دفتر {} سابقه ای موجود نیست".format(self.sangAsli_2))
             else:
@@ -497,13 +500,15 @@ class Baygan():
         else:
             SNBH = self.sangAsli_2 + "/" + self.sangFari_2+ "-" + self.bakhsh_2
         with sqlite3.connect(self.dbPath) as database:
-            update_status = "UPDATE STATUS_BAYGAN SET ss='Returned' WHERE sn_bh = '{}'".format( SNBH)
+            update_status = "UPDATE STATUS_BAYGAN SET ss='Returned' WHERE sn_bh = '{}'".format(SNBH)
             self.dateTime()
             TR = self.TimeSabt.strftime("%Y/%m/%d")
             SR = self.TimeSabt.strftime("%H:%M")
             update_Baygan = "UPDATE IT_BAYGAN SET bt='{}' , bs ='{}' WHERE sn_bh = '{}' AND id = (SELECT MAX(id) FROM IT_BAYGAN WHERE sn_bh = '{}')".format(TR,SR,SNBH,SNBH)
+            update_oldRecord = "UPDATE IT_BAYGAN SET bt='-' , bs ='-'  WHERE ((SELECT ss FROM STATUS_BAYGAN WHERE sn_bh='{}')= 'Returned') AND (bt = '' AND sn_bh='{}') ".format(SNBH, SNBH)
             database.execute(update_status)
             database.execute(update_Baygan)
+            database.execute(update_oldRecord)
             database.commit()
             self.btn_search()
             self.ui.pushButton_bazgashBygani.setEnabled(False)
@@ -553,7 +558,7 @@ class Baygan():
         # SotonFormat.setBackground(QColor('#EEF9C9'))
         SotonFormat.setFont(fontTitr)
 
-        cursor.insertText(self.TableTitr+"\n",TitrFormat)
+        cursor.insertText(self.TableTitr+"\n", TitrFormat)
         model = self.ui.tableView_result.model()
         table = cursor.insertTable(model.rowCount()+1, model.columnCount(), tableFormat)
         headers = ['پلاک','بخش','نوع','همکار تقاضاکننده','تحویل گیرنده','علت درخواست','توضیحات','تاریخ تحویل','ساعت تحویل','تاریخ بازگشت', 'ساعت بازگشت']
@@ -565,6 +570,8 @@ class Baygan():
             for column in reversed(range(table.columns())):
                 cursor.insertText(self.tableResult.data(self.tableResult.index(row,column)),TableText)
                 cursor.movePosition(QTextCursor.NextCell)
+        cursor.movePosition(QTextCursor.NextBlock)
+        cursor.insertText('- سامانه بایگانی ثبت ماسال -', TitrFormat)
         document.print_(printer)
 
     def btn_New(self):
