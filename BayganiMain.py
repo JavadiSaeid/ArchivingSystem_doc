@@ -20,8 +20,8 @@ class Baygan():
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
         self.dateTime()
-        # self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
-        self.dbPath = r'Backup\ArchivesData.db'
+        self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
+        # self.dbPath = r'Backup\ArchivesData.db'
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
         self.ui.lineEdit_dateYear.setValidator((QIntValidator(1,9999)))
