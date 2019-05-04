@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>644</height>
+    <height>639</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -117,12 +117,185 @@ border-radius:2px;
         <string>ورود اطلاعات</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="1">
+        <item row="0" column="0">
          <widget class="QGroupBox" name="groupBox_inputData">
           <property name="title">
            <string>فرم ثبت خروج پرونده از بایگانی</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
+           <item row="6" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_btnNew">
+             <property name="leftMargin">
+              <number>10</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>10</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <spacer name="horizontalSpacer_10">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_new">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir=&quot;rtl&quot;&gt;پاکسازی فرم برای ثبت اطلاعات جدید&lt;/p&gt;&lt;p dir=&quot;rtl&quot;&gt;کلید میانبر CTRL+N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="statusTip">
+                <string/>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton:hover:!pressed
+{
+  border: 2px dashed   #039cff  ;
+	background-color:  #cddbab  ;
+	color:   #d101ff  ;
+}
+QPushButton{
+background-color:   #0087f1    ;
+font: 14pt &quot;A Arsoo&quot;;
+color: rgb(255, 255, 127);
+border: 1px solid   #2bff01 ;;
+border-radius: 10px;
+}</string>
+               </property>
+               <property name="text">
+                <string>   جدید   </string>
+               </property>
+               <property name="shortcut">
+                <string>Ctrl+N</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item row="5" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_sabtBtn">
+             <property name="leftMargin">
+              <number>20</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>20</number>
+             </property>
+             <property name="bottomMargin">
+              <number>5</number>
+             </property>
+             <item>
+              <spacer name="horizontalSpacer_12">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_sabt">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir=&quot;rtl&quot;&gt;برای ثبت کلیک کنید&lt;/p&gt;&lt;p dir=&quot;rtl&quot;&gt;یا دکمه Enter را از کیبورد انتخاب کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="statusTip">
+                <string/>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton:hover:!pressed
+{
+  border: 2px dashed rgb(255, 85, 0);
+	background-color: rgb(129, 125, 255);
+	color: #FF0000;
+}
+QPushButton{
+background-color: #24470d  ;
+font: 14pt &quot;A Arsoo&quot;;
+color: rgb(255, 255, 127);
+border: 1px solid   #b2ff00  ;
+border-radius: 10px;
+}</string>
+               </property>
+               <property name="text">
+                <string>ثبت</string>
+               </property>
+               <property name="autoDefault">
+                <bool>false</bool>
+               </property>
+               <property name="default">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_11">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
            <item row="0" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_Sang">
              <item>
@@ -268,27 +441,30 @@ border-radius:2px;
              </item>
             </layout>
            </item>
-           <item row="2" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_QRadio">
+           <item row="3" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_TahvilGirande">
              <property name="spacing">
-              <number>30</number>
+              <number>20</number>
              </property>
              <property name="leftMargin">
               <number>10</number>
              </property>
              <property name="topMargin">
-              <number>7</number>
+              <number>5</number>
              </property>
              <property name="rightMargin">
               <number>10</number>
              </property>
              <property name="bottomMargin">
-              <number>7</number>
+              <number>0</number>
              </property>
              <item>
-              <spacer name="horizontalSpacer_3">
+              <spacer name="horizontalSpacer_8">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -299,75 +475,66 @@ border-radius:2px;
               </spacer>
              </item>
              <item>
-              <widget class="QLabel" name="label_2">
-               <property name="font">
-                <font>
-                 <family>A Arsoo</family>
-                 <pointsize>17</pointsize>
-                 <weight>9</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
+              <widget class="QLabel" name="label_4">
                <property name="toolTip">
-                <string>بخش را انتخاب کنید</string>
+                <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
                </property>
                <property name="statusTip">
                 <string/>
                </property>
                <property name="text">
-                <string>بخش:</string>
+                <string>تحویل گیرنده:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_bakhsh26_1">
+              <widget class="QRadioButton" name="radioButton_arbabRojo">
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="toolTip">
-                <string>بخش 26 گیلان</string>
+                <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
                </property>
                <property name="statusTip">
                 <string/>
                </property>
                <property name="text">
-                <string>26</string>
+                <string>ارباب رجوع</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_2</string>
+                <string notr="true">buttonGroup_3</string>
                </attribute>
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_bakhsh25_1">
+              <widget class="QRadioButton" name="radioButton_hamkar">
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="toolTip">
-                <string>بخش 25 گیلان</string>
+                <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
                </property>
                <property name="statusTip">
                 <string/>
                </property>
                <property name="text">
-                <string>25</string>
-               </property>
-               <property name="checked">
-                <bool>false</bool>
+                <string>همکار</string>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_2</string>
+                <string notr="true">buttonGroup_3</string>
                </attribute>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_4">
+              <spacer name="horizontalSpacer_7">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -379,7 +546,7 @@ border-radius:2px;
              </item>
             </layout>
            </item>
-           <item row="4" column="0">
+           <item row="2" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_DarkhastKonande">
              <property name="spacing">
               <number>10</number>
@@ -528,30 +695,62 @@ border-radius:2px;
              </item>
             </layout>
            </item>
-           <item row="5" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_TahvilGirande">
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_QRadio">
              <property name="spacing">
-              <number>20</number>
+              <number>30</number>
              </property>
              <property name="leftMargin">
               <number>10</number>
              </property>
              <property name="topMargin">
-              <number>5</number>
+              <number>7</number>
              </property>
              <property name="rightMargin">
               <number>10</number>
              </property>
              <property name="bottomMargin">
-              <number>0</number>
+              <number>7</number>
              </property>
              <item>
-              <spacer name="horizontalSpacer_8">
+              <spacer name="horizontalSpacer_26">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>65</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_jeld">
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="placeholderText">
+                <string>تعداد جلد</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_25">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Preferred</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -562,70 +761,114 @@ border-radius:2px;
               </spacer>
              </item>
              <item>
-              <widget class="QLabel" name="label_4">
-               <property name="toolTip">
-                <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
+              <widget class="QLineEdit" name="lineEdit_safahat">
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
                </property>
-               <property name="statusTip">
-                <string/>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
-               <property name="text">
-                <string>تحویل گیرنده:</string>
+               <property name="placeholderText">
+                <string>تعداد صفحات</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_arbabRojo">
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Preferred</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="font">
+                <font>
+                 <family>A Arsoo</family>
+                 <pointsize>17</pointsize>
+                 <weight>9</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
                </property>
                <property name="toolTip">
-                <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
+                <string>بخش را انتخاب کنید</string>
                </property>
                <property name="statusTip">
                 <string/>
                </property>
                <property name="text">
-                <string>ارباب رجوع</string>
+                <string>بخش:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButton_bakhsh26_1">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="toolTip">
+                <string>بخش 26 گیلان</string>
+               </property>
+               <property name="statusTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string>26</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_3</string>
+                <string notr="true">buttonGroup_2</string>
                </attribute>
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_hamkar">
+              <widget class="QRadioButton" name="radioButton_bakhsh25_1">
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="toolTip">
-                <string>تحویل گیرنده پرونده از بایگانی را انتخاب کنید</string>
+                <string>بخش 25 گیلان</string>
                </property>
                <property name="statusTip">
                 <string/>
                </property>
                <property name="text">
-                <string>همکار</string>
+                <string>25</string>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroup_3</string>
+                <string notr="true">buttonGroup_2</string>
                </attribute>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_7">
+              <spacer name="horizontalSpacer_4">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
+                <enum>QSizePolicy::Expanding</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>40</width>
+                 <width>60</width>
                  <height>20</height>
                 </size>
                </property>
@@ -633,180 +876,7 @@ border-radius:2px;
              </item>
             </layout>
            </item>
-           <item row="7" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_sabtBtn">
-             <property name="leftMargin">
-              <number>20</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>20</number>
-             </property>
-             <property name="bottomMargin">
-              <number>5</number>
-             </property>
-             <item>
-              <spacer name="horizontalSpacer_12">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_sabt">
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir=&quot;rtl&quot;&gt;برای ثبت کلیک کنید&lt;/p&gt;&lt;p dir=&quot;rtl&quot;&gt;یا دکمه Enter را از کیبورد انتخاب کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string/>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton:hover:!pressed
-{
-  border: 2px dashed rgb(255, 85, 0);
-	background-color: rgb(129, 125, 255);
-	color: #FF0000;
-}
-QPushButton{
-background-color: #24470d  ;
-font: 14pt &quot;A Arsoo&quot;;
-color: rgb(255, 255, 127);
-border: 1px solid   #b2ff00  ;
-border-radius: 10px;
-}</string>
-               </property>
-               <property name="text">
-                <string>ثبت</string>
-               </property>
-               <property name="autoDefault">
-                <bool>false</bool>
-               </property>
-               <property name="default">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_11">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item row="8" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_btnNew">
-             <property name="leftMargin">
-              <number>10</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>10</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <spacer name="horizontalSpacer_10">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_new">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir=&quot;rtl&quot;&gt;پاکسازی فرم برای ثبت اطلاعات جدید&lt;/p&gt;&lt;p dir=&quot;rtl&quot;&gt;کلید میانبر CTRL+N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string/>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton:hover:!pressed
-{
-  border: 2px dashed   #039cff  ;
-	background-color:  #cddbab  ;
-	color:   #d101ff  ;
-}
-QPushButton{
-background-color:   #0087f1    ;
-font: 14pt &quot;A Arsoo&quot;;
-color: rgb(255, 255, 127);
-border: 1px solid   #2bff01 ;;
-border-radius: 10px;
-}</string>
-               </property>
-               <property name="text">
-                <string>   جدید   </string>
-               </property>
-               <property name="shortcut">
-                <string>Ctrl+N</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_9">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item row="6" column="0">
+           <item row="4" column="0">
             <widget class="QGroupBox" name="groupBox_Tozihat">
              <property name="toolTip">
               <string>  علت درخواست</string>
@@ -2063,6 +2133,8 @@ border-radius: 3px;
   <tabstop>lineEdit_sangAsli</tabstop>
   <tabstop>lineEdit_sangFari</tabstop>
   <tabstop>checkBox_daftar</tabstop>
+  <tabstop>lineEdit_jeld</tabstop>
+  <tabstop>lineEdit_safahat</tabstop>
   <tabstop>radioButton_bakhsh26_1</tabstop>
   <tabstop>radioButton_bakhsh25_1</tabstop>
   <tabstop>comboBox_Hamkaran</tabstop>
@@ -2120,7 +2192,7 @@ border-radius: 3px;
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>
