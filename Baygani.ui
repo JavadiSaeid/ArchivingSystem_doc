@@ -736,6 +736,9 @@ border-radius: 10px;
                  <height>16777215</height>
                 </size>
                </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir='rtl'&gt;تعداد &lt;span style=&quot; font-weight:600; color:#724c00;&quot;&gt;جلد&lt;/span&gt; درخواست شده را وارد کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
                </property>
@@ -767,6 +770,9 @@ border-radius: 10px;
                  <width>120</width>
                  <height>16777215</height>
                 </size>
+               </property>
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir='rtl'&gt;تعداد &lt;span style=&quot; font-weight:600; color:#724c00;&quot;&gt;صفحات&lt;/span&gt;  پرونده را وارد کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>

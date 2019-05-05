@@ -1,6 +1,6 @@
 import dpi, sys, sqlite3, getpass
 from PyQt5.QtCore import QRegExp, Qt, QSizeF
-from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog, QPrinter
+from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
 from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
 from pytz import timezone
 from jdatetime import datetime as dt
