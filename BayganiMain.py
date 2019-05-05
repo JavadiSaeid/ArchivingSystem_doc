@@ -12,6 +12,7 @@ from PyQt5 import QtWidgets
 from about import Ui_Form
 import icon_rc
 
+
 class Baygan():
     def __init__(self):
         app = QApplication(sys.argv)
@@ -19,17 +20,17 @@ class Baygan():
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
         self.dateTime()
-        self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
-        # self.dbPath = r'Data\ArchivesData.db'
+        # self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
+        self.dbPath = r'Data\ArchivesData.db'
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
-        self.ui.lineEdit_dateYear.setValidator((QIntValidator(1,9999)))
+        self.ui.lineEdit_dateYear.setValidator((QIntValidator(1, 9999)))
         self.ui.lineEdit_dateMonth.setText(self.nowMonth)
-        self.ui.lineEdit_dateMonth.setValidator((QIntValidator(1,12)))
+        self.ui.lineEdit_dateMonth.setValidator((QIntValidator(1, 12)))
         self.ui.lineEdit_dateDay.setText(self.nowDay)
-        self.ui.lineEdit_dateDay.setValidator((QIntValidator(1,31)))
+        self.ui.lineEdit_dateDay.setValidator((QIntValidator(1, 31)))
         # regex=QRegExp("^\*$|[0-9]+")
-        regex=QRegExp("[0-9]+")
+        regex = QRegExp("[0-9]+")
         validator = QRegExpValidator(regex)
         # self.ui.lineEdit_sangAsli_2.setValidator(QIntValidator(1,999))
         self.ui.lineEdit_sangAsli.setValidator(validator)
@@ -74,10 +75,10 @@ class Baygan():
         DesktopCenter = QDesktopWidget().availableGeometry().center()
         MainWindowGetSize.moveCenter(DesktopCenter)
         self.Form.move(MainWindowGetSize.topLeft())
-        self.Form.keyPressEvent      = self.CustomClose
-
+        self.Form.keyPressEvent = self.CustomClose
         self.Form.show()
-    def CustomClose(self,e):
+
+    def CustomClose(self, e):
         if e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter:
             self.Form.close()
 
@@ -319,6 +320,7 @@ class Baygan():
 
     def btn_search(self):
         self.TableTitr = ""
+        self.ui.pushButton_bazgashBygani.setEnabled(False)
         Tr = self.TimeSabt.strftime("%Y/%m/%d")
         Ts = self.TimeSabt.strftime("%H:%M")
         self.ui.pushButton_print.setEnabled(False)
@@ -377,6 +379,8 @@ class Baygan():
                         else:
                             self.TableTitr = f" تمام سوابق ثبت شده موجود دفتر برای تاریخ  {searchDate} "
                             self.enPrint()
+                            if self.getStatus(SNBH) == 'Exit':
+                                self.ARBTN()
                     elif searchType == 'بازگشت داده نشده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,jd,pg,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh  WHERE ss='Exit' AND th='{}' AND sn='{}' AND bt = ''".format(searchDate,SNBH))
@@ -384,9 +388,10 @@ class Baygan():
                             self.ui.statusbar.showMessage(
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
                         else:
-                            self.ARBTN()
                             self.TableTitr = f"  سوابق ثبت شده موجود دفتر بازگشت داده نشده برای تاریخ  {searchDate} "
                             self.enPrint()
+                            if self.getStatus(SNBH) == 'Exit':
+                                self.ARBTN()
                     elif searchType == 'بازگشت داده شده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,jd,pg,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn_bh ='{}' AND  bt = '{}' ".format(SNBH,searchDate))
@@ -439,6 +444,8 @@ class Baygan():
                         else:
                             self.TableTitr = f" تمام سوابق ثبت شده موجود پرونده برای تاریخ  {searchDate} "
                             self.enPrint()
+                            if self.getStatus(SNBH) == 'Exit':
+                                self.ARBTN()
                     elif searchType == 'بازگشت داده نشده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,jd,pg,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN INNER JOIN STATUS_BAYGAN ON IT_BAYGAN.sn_bh = STATUS_BAYGAN.sn_bh  WHERE ss='Exit' AND th='{}' AND sn='{}' AND bh='{}' AND bt = ''".format(
@@ -448,8 +455,9 @@ class Baygan():
                                 "در تاریخ {} برای دفتر {} سابقه ای موجود نیست".format(searchDate, SNBH))
                         else:
                             self.TableTitr = f"  سوابق ثبت شده موجود پرونده بازگشت داده نشده برای تاریخ  {searchDate} "
-                            self.ARBTN()
                             self.enPrint()
+                            if self.getStatus(SNBH) == 'Exit':
+                                self.ARBTN()
                     elif searchType == 'بازگشت داده شده':
                         self.dbToTableView(
                             commandSQL="SELECT sn,bh,jd,pg,tr,hr,tg,er,tt,th,st,bt,bs FROM IT_BAYGAN WHERE sn_bh ='{}' AND  bt = '{}' ".format(
