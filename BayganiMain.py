@@ -1,6 +1,6 @@
 import dpi, sys, sqlite3, getpass
-from PyQt5.QtCore import QRegExp, Qt
-from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
+from PyQt5.QtCore import QRegExp, Qt, QSizeF
+from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog, QPrinter
 from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
 from pytz import timezone
 from jdatetime import datetime as dt
@@ -543,7 +543,7 @@ class Baygan():
         dialog.exec_()
     def handlePaintRequest(self, printer):
         document = QTextDocument()
-        document.setDocumentMargin(0.1)
+        document.setPageSize(QSizeF(printer.pageRect().size()))
         cursor = QTextCursor(document)
         tableFormat = QTextTableFormat()
         TableText = QTextCharFormat()
@@ -567,7 +567,7 @@ class Baygan():
         cursor.insertText(self.TableTitr+"\n", TitrFormat)
         model = self.ui.tableView_result.model()
         table = cursor.insertTable(model.rowCount()+1, model.columnCount(), tableFormat)
-        headers = ['پلاک','بخش','تعداد جلد','صفحات','نوع','همکار تقاضاکننده','تحویل گیرنده','علت درخواست','توضیحات','تاریخ تحویل','ساعت تحویل','تاریخ بازگشت','ساعت بازگشت']
+        headers = ['پلاک','بخش','تعداد جلد','تعداد صفحات','نوع','همکار تقاضاکننده','تحویل گیرنده','علت درخواست','توضیحات','تاریخ تحویل','ساعت تحویل','تاریخ بازگشت','ساعت بازگشت']
         self.tableResult.insertRows(10,10)
         for header in reversed(headers):
             cursor.insertText(header,SotonFormat)
@@ -578,6 +578,7 @@ class Baygan():
                 cursor.movePosition(QTextCursor.NextCell)
         cursor.movePosition(QTextCursor.NextBlock)
         cursor.insertText('- سامانه بایگانی ثبت ماسال -', TitrFormat)
+        # printer.setFullPage(True)
         document.print_(printer)
 
     def btn_New(self):
@@ -624,7 +625,6 @@ class Baygan():
                           "}")
         box.setWindowFlags(box.windowFlags() | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         box.exec_()
-
 
 
 
