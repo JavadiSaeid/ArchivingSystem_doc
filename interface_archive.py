@@ -796,8 +796,11 @@ class Ui_MainWindow(object):
         self.action_close.setObjectName("action_close")
         self.action_ChangPassword = QtWidgets.QAction(MainWindow)
         self.action_ChangPassword.setObjectName("action_ChangPassword")
+        self.action_backup = QtWidgets.QAction(MainWindow)
+        self.action_backup.setObjectName("action_backup")
         self.menu.addAction(self.action_help)
         self.menu.addAction(self.action_ChangPassword)
+        self.menu.addAction(self.action_backup)
         self.menu.addSeparator()
         self.menu.addAction(self.action_about)
         self.menu.addSeparator()
@@ -969,6 +972,7 @@ class Ui_MainWindow(object):
         self.action_about.setText(_translate("MainWindow", "درباره"))
         self.action_close.setText(_translate("MainWindow", "بستن"))
         self.action_ChangPassword.setText(_translate("MainWindow", "تغییر رمز ورود"))
+        self.action_backup.setText(_translate("MainWindow", "پشتیبان گیری"))
 
 
 import icon_rc

@@ -2105,6 +2105,7 @@ border-radius: 3px;
     </property>
     <addaction name="action_help"/>
     <addaction name="action_ChangPassword"/>
+    <addaction name="action_backup"/>
     <addaction name="separator"/>
     <addaction name="action_about"/>
     <addaction name="separator"/>
@@ -2131,6 +2132,11 @@ border-radius: 3px;
   <action name="action_ChangPassword">
    <property name="text">
     <string>تغییر رمز ورود</string>
+   </property>
+  </action>
+  <action name="action_backup">
+   <property name="text">
+    <string>پشتیبان گیری</string>
    </property>
   </action>
  </widget>

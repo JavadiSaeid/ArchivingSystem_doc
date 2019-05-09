@@ -1,3 +1,5 @@
+import os
+
 import dpi, sys, sqlite3, getpass
 from PyQt5.QtCore import QRegExp, Qt, QSizeF
 from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
@@ -10,6 +12,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidg
 from interface_archive import Ui_MainWindow
 from about import Ui_Form
 import icon_rc
+from xlsxwriter import Workbook
 
 
 class Baygan():
@@ -51,6 +54,7 @@ class Baygan():
         self.ui.checkBox_daftar_2.stateChanged.connect(self.Daftar_2)
         self.ui.pushButton_bazgashBygani.clicked.connect(self.btn_return)
         self.ui.action_about.triggered.connect(self.RunAbout)
+        self.ui.action_backup.triggered.connect(self.dbTOxlsx)
         self.ui.pushButton_print.clicked.connect(self.handlePreview)
         self.MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.ui.action_help.setEnabled(False)
@@ -533,6 +537,28 @@ class Baygan():
     def enPrint(self):
         self.ui.pushButton_print.setEnabled(True)
 
+    def dbTOxlsx(self):
+        try:
+            if not os.path.isdir('./Backup'):
+                os.mkdir('Backup')
+            Tr = self.TimeSabt.strftime("%Y%m%d%H%M")
+            workbook = Workbook('Backup/BackupBaygani_{}.xlsx'.format(Tr))
+            worksheet = workbook.add_worksheet()
+            with sqlite3.connect(self.dbPath) as conn:
+                c = conn.cursor()
+                c.execute("select id,sn,bh,jd,pg,tr,hr,tg,er,tt,th,st,bt,bs from IT_BAYGAN")
+                mysel = c.execute("select id,sn,bh,jd,pg,tr,hr,tg,er,tt,th,st,bt,bs from IT_BAYGAN")
+                headers = ['ردیف','پلاک','بخش','تعداد جلد','تعداد صفحات','نوع','همکار تقاضاکننده','تحویل گیرنده','علت درخواست','توضیحات','تاریخ تحویل','ساعت تحویل','تاریخ بازگشت','ساعت بازگشت']
+                for i, title in enumerate(headers):
+                    worksheet.write(0, i, title)
+                for i, row in enumerate(mysel):
+                    for j, value in enumerate(row):
+                        worksheet.write(i + 1, j, value)
+                workbook.close()
+                self.errorM(errorText="پشتیبان گیری از دیتابیس با موفقیت انجام شد.", icon='Information')
+        except:
+            self.errorM("خطا در تهیه پشتیبان از دیتابیس برنامه!")
+
 ## QtableView table Sql print to printer
     def handlePrint(self):
         dialog = QPrintDialog()
@@ -595,9 +621,12 @@ class Baygan():
         self.ui.lineEdit_jeld.setText('')
         self.ui.lineEdit_safahat.setText('')
 
-    def errorM(self,errorText='مشکلی پیش آمده است !!!'):
+    def errorM(self,errorText='مشکلی پیش آمده است !!!', icon=''):
         box = QMessageBox()
-        box.setIcon(QMessageBox.Warning)
+        if icon == '':
+            box.setIcon(QMessageBox.Warning)
+        else:
+            box.setIcon(QMessageBox.Information)
         box.setWindowTitle('ارور')
         box.setText(errorText)
         box.setStandardButtons(QMessageBox.Yes)
