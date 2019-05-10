@@ -1,5 +1,4 @@
 import os
-
 import dpi, sys, sqlite3, getpass
 from PyQt5.QtCore import QRegExp, Qt, QSizeF
 from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
@@ -24,6 +23,7 @@ class Baygan():
         self.dateTime()
         self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
         # self.dbPath = r'Data\ArchivesData.db'
+        self.checkConect(self.dbPath)
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
         self.ui.lineEdit_dateYear.setValidator((QIntValidator(1, 9999)))
@@ -59,13 +59,19 @@ class Baygan():
         self.MainWindow.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.ui.action_help.setEnabled(False)
         self.ui.action_ChangPassword.setEnabled(False)
-
         MainWindowGetSize = self.MainWindow.frameGeometry()
         DesktopCenter = QDesktopWidget().availableGeometry().center()
         MainWindowGetSize.moveCenter(DesktopCenter)
         self.MainWindow.move(MainWindowGetSize.topLeft())
         self.MainWindow.show()
         sys.exit(app.exec_())
+
+    def checkConect(self, path):
+        try:
+            with sqlite3.connect(path) as db:
+                pass
+        except:
+            self.errorM("خطا در اتصال به دیتابیس !\nلطفا مسیر دیتابیس در سرور را چک کنید.")
 
     def RunAbout(self):
         self.Form = QWidget()
@@ -227,6 +233,7 @@ class Baygan():
                 database.execute(insert)
                 database.execute(instatus)
                 database.commit()
+                QApplication.processEvents()
         except Exception as e:
             if e.message != '':
                 errormsg = e.message
@@ -298,13 +305,13 @@ class Baygan():
             projectModel.setHeaderData(9, Qt.Horizontal, 'تاریخ تحویل')
             projectModel.setHeaderData(10, Qt.Horizontal, 'ساعت تحویل')
             projectModel.setHeaderData(11, Qt.Horizontal, 'تاریخ بازگشت')
-            projectModel.setHeaderData(12, Qt.Horizontal,'ساعت بازگشت')
+            projectModel.setHeaderData(12, Qt.Horizontal, 'ساعت بازگشت')
             self.ui.tableView_result.setModel(projectModel)
             # self.ui.tableView_result.show()
             self.rowCount = projectModel.rowCount()
             self.tableResult = projectModel
             db.close()
-
+            QApplication.processEvents()
         except Exception as e:
             if e.message != '':
                 errormsg = e.message
