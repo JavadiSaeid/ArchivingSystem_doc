@@ -924,7 +924,7 @@ class Ui_MainWindow(object):
         self.radioButton_nameEdarat.setToolTip(_translate("MainWindow", "  علت درخواست نامه ادارات"))
         self.radioButton_nameEdarat.setText(_translate("MainWindow", "نامه ادارات"))
         self.radioButton_roneveshNaqshe.setText(_translate("MainWindow", "رونوشت"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1_inputData), _translate("MainWindow", "ورود اطلاعات"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1_inputData), _translate("MainWindow", "ثبت اطلاعات"))
         self.tab2_SearchData.setStatusTip(_translate("MainWindow", " بازیابی پرونده خارج شده از بایگانی"))
         self.groupBox.setTitle(_translate("MainWindow", "فرم بازیابی اطلاعات ثبت شده"))
         self.pushButton_search.setToolTip(_translate("MainWindow", "برای بازیابی اطلاعات ذخیره شده کلیک کنید"))
