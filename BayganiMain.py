@@ -21,8 +21,8 @@ class Baygan():
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
         self.dateTime()
-        self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
-        # self.dbPath = r'Data\ArchivesData.db'
+        # self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
+        self.dbPath = r'Data\ArchivesData.db'
         self.checkConect(self.dbPath)
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
@@ -63,8 +63,16 @@ class Baygan():
         DesktopCenter = QDesktopWidget().availableGeometry().center()
         MainWindowGetSize.moveCenter(DesktopCenter)
         self.MainWindow.move(MainWindowGetSize.topLeft())
+        self.hamkaran_list()
         self.MainWindow.show()
         sys.exit(app.exec_())
+
+    def hamkaran_list(self):
+        with sqlite3.connect(self.dbPath) as database:
+            e = "SELECT * FROM HAMKARAN)"
+            curser = database.execute(e)
+            for i in curser:
+                self.ui.comboBox_Hamkaran.setItemText(i[0], i[1])
 
     def checkConect(self, path):
         try:
@@ -214,10 +222,11 @@ class Baygan():
                         "sn VARCHAR(60),jd VARCHAR(10),pg VARCHAR(15), bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (30),bs varchar (30),us VARCHAR (72),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
                 STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn_bh VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY, ss VARCHAR(60))"
                 USERS_BAYGAN = "CREATE TABLE IF NOT EXISTS USERS_BAYGAN(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,us varchar (60) NOT NULL UNIQUE, pw VARCHAR(60) NOT NULL)"
-
+                HAMKARAN_LIST = "CREATE TABLE IF NOT EXISTS HAMKARAN (id INTEGER PRIMARY KEY AUTOINCREMENT, hamkar VARCHAR(72) UNIQUE)"
                 database.execute(STATUS_BAYGAN)
                 database.execute(IT_BAYGAN)
                 database.execute(USERS_BAYGAN)
+                database.execute(HAMKARAN_LIST)
                 TH = self.TimeSabt.strftime("%Y/%m/%d")
                 ST = self.TimeSabt.strftime("%H:%M")
                 if TR == 'پرونده':
@@ -230,6 +239,13 @@ class Baygan():
                 insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt,bs,sn_bh,us,jd,pg) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
                     .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT,BS, SNBH,getpass.getuser(),JD,PG)
                 instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn_bh, ss) VALUES ('{}', 'Exit')".format(SNBH,SNBH)
+                e = "SELECT * FROM HAMKARAN)"
+                curser = database.execute(e)
+                if curser != None:
+                    hamkaran = ["کیوان حسنجانی", "اسماعیل دولتی", "کیوان حسنجانی", "صائمه امجدی", "سیدمحمد آتشی", "علی رحمانی", "آرمان کاظمی", "یداله شهبازی", "سیدرشید کاظمی", "سیدمحمد موسوی", "صدیقه روشن", "محسن مهرافشان", "علیرضا آزادی", "سایر"]
+                    for h in hamkaran:
+                        hamkar = "INSERT INTO HAMKARAN (hamkar) values ('{}')".format(h)
+                        database.execute(hamkar)
                 database.execute(insert)
                 database.execute(instatus)
                 database.commit()
