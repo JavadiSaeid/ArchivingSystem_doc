@@ -622,6 +622,11 @@ border-radius: 10px;
                </item>
                <item>
                 <property name="text">
+                 <string>اسماعیل دولتی</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
                  <string>صائمه امجدی</string>
                 </property>
                </item>
