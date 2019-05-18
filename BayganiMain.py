@@ -68,11 +68,29 @@ class Baygan():
         sys.exit(app.exec_())
 
     def hamkaran_list(self):
-        with sqlite3.connect(self.dbPath) as database:
-            e = "SELECT * FROM HAMKARAN)"
-            curser = database.execute(e)
-            for i in curser:
-                self.ui.comboBox_Hamkaran.setItemText(i[0], i[1])
+        try:
+            with sqlite3.connect(self.dbPath) as database:
+                HAMKARAN_LIST = "CREATE TABLE IF NOT EXISTS HAMKARAN (hamkar VARCHAR(72)  UNIQUE)"
+                database.execute(HAMKARAN_LIST)
+
+                if 1:
+                    print("h")
+                    hamkaran = ["کیوان حسنجانی", "اسماعیل دولتی", "صائمه امجدی", "سیدمحمد آتشی", "علی رحمانی", "آرمان کاظمی", "یداله شهبازی", "سیدرشید کاظمی", "سیدمحمد موسوی", "صدیقه روشن", "محسن مهرافشان", "علیرضا آزادی", "سایر"]
+                    for h in hamkaran:
+                        hamkar = "INSERT INTO HAMKARAN(hamkar) values ('{}')".format(h)
+                        database.execute(hamkar)
+                        database.commit()
+                print("not none")
+                e = "SELECT hamkar FROM HAMKARAN"
+                curser = database.execute(e)
+                r = 0
+                for i in curser:
+                    print("oo")
+                    self.ui.comboBox_Hamkaran.setItemText(r, i[0])
+                    r += 1
+
+        except:
+            self.errorM("خطا در خواندن اطلاعات از دیتابیس!")
 
     def checkConect(self, path):
         try:
@@ -222,11 +240,9 @@ class Baygan():
                         "sn VARCHAR(60),jd VARCHAR(10),pg VARCHAR(15), bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (30),bs varchar (30),us VARCHAR (72),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
                 STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn_bh VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY, ss VARCHAR(60))"
                 USERS_BAYGAN = "CREATE TABLE IF NOT EXISTS USERS_BAYGAN(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,us varchar (60) NOT NULL UNIQUE, pw VARCHAR(60) NOT NULL)"
-                HAMKARAN_LIST = "CREATE TABLE IF NOT EXISTS HAMKARAN (id INTEGER PRIMARY KEY AUTOINCREMENT, hamkar VARCHAR(72) UNIQUE)"
                 database.execute(STATUS_BAYGAN)
                 database.execute(IT_BAYGAN)
                 database.execute(USERS_BAYGAN)
-                database.execute(HAMKARAN_LIST)
                 TH = self.TimeSabt.strftime("%Y/%m/%d")
                 ST = self.TimeSabt.strftime("%H:%M")
                 if TR == 'پرونده':
@@ -239,13 +255,6 @@ class Baygan():
                 insert = "INSERT INTO IT_BAYGAN(th,st,tr,sn,bh,hr,tg,er,tt,bt,bs,sn_bh,us,jd,pg) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
                     .format(TH, ST, TR, SN, BH, HR, TG, ER, TT, BT,BS, SNBH,getpass.getuser(),JD,PG)
                 instatus = "INSERT OR REPLACE INTO STATUS_BAYGAN(sn_bh, ss) VALUES ('{}', 'Exit')".format(SNBH,SNBH)
-                e = "SELECT * FROM HAMKARAN)"
-                curser = database.execute(e)
-                if curser != None:
-                    hamkaran = ["کیوان حسنجانی", "اسماعیل دولتی", "کیوان حسنجانی", "صائمه امجدی", "سیدمحمد آتشی", "علی رحمانی", "آرمان کاظمی", "یداله شهبازی", "سیدرشید کاظمی", "سیدمحمد موسوی", "صدیقه روشن", "محسن مهرافشان", "علیرضا آزادی", "سایر"]
-                    for h in hamkaran:
-                        hamkar = "INSERT INTO HAMKARAN (hamkar) values ('{}')".format(h)
-                        database.execute(hamkar)
                 database.execute(insert)
                 database.execute(instatus)
                 database.commit()

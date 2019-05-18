@@ -613,68 +613,8 @@ border-radius: 10px;
                 <bool>false</bool>
                </property>
                <property name="currentText">
-                <string>کیوان حسنجانی</string>
+                <string/>
                </property>
-               <item>
-                <property name="text">
-                 <string>کیوان حسنجانی</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>صائمه امجدی</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>سیدمحمد آتشی</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>علی رحمانی</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>آرمان کاظمی</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>یداله شهبازی</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>سیدرشید کاظمی</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>سیدمحمد موسوی</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>صدیقه روشن</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>محسن مهرافشان</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>علیرضا آزادی</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>سایر</string>
-                </property>
-               </item>
               </widget>
              </item>
              <item>
