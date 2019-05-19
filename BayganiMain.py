@@ -1,6 +1,6 @@
 import os
 import dpi, sys, sqlite3, getpass
-from PyQt5.QtCore import QRegExp, Qt, QSizeF
+from PyQt5.QtCore import QRegExp, Qt, QSizeF, QCoreApplication
 from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
 from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
 from pytz import timezone
@@ -72,25 +72,32 @@ class Baygan():
             with sqlite3.connect(self.dbPath) as database:
                 HAMKARAN_LIST = "CREATE TABLE IF NOT EXISTS HAMKARAN (hamkar VARCHAR(72)  UNIQUE)"
                 database.execute(HAMKARAN_LIST)
-
-                if 1:
-                    print("h")
+                e = "SELECT hamkar FROM HAMKARAN"
+                curser = database.execute(e)
+                if curser.fetchone() is None:
                     hamkaran = ["کیوان حسنجانی", "اسماعیل دولتی", "صائمه امجدی", "سیدمحمد آتشی", "علی رحمانی", "آرمان کاظمی", "یداله شهبازی", "سیدرشید کاظمی", "سیدمحمد موسوی", "صدیقه روشن", "محسن مهرافشان", "علیرضا آزادی", "سایر"]
                     for h in hamkaran:
                         hamkar = "INSERT INTO HAMKARAN(hamkar) values ('{}')".format(h)
                         database.execute(hamkar)
                         database.commit()
-                print("not none")
-                e = "SELECT hamkar FROM HAMKARAN"
-                curser = database.execute(e)
+                e2 = "SELECT hamkar FROM HAMKARAN"
+                curser2 = database.execute(e2)
                 r = 0
-                for i in curser:
-                    print("oo")
+                for i in curser2:
+                    self.ui.comboBox_Hamkaran.addItem("")
                     self.ui.comboBox_Hamkaran.setItemText(r, i[0])
                     r += 1
-
         except:
-            self.errorM("خطا در خواندن اطلاعات از دیتابیس!")
+            try:
+                hamkaran = ["کیوان حسنجانی", "اسماعیل دولتی", "صائمه امجدی", "سیدمحمد آتشی", "علی رحمانی",
+                            "آرمان کاظمی", "یداله شهبازی", "سیدرشید کاظمی", "سیدمحمد موسوی", "صدیقه روشن",
+                            "محسن مهرافشان", "علیرضا آزادی", "سایر"]
+                for hamkar in hamkaran:
+                    self.ui.comboBox_Hamkaran.addItem("")
+                    self.ui.comboBox_Hamkaran.setItemText(hamkaran.index(hamkar), hamkar)
+            except:
+                self.ui.comboBox_Hamkaran.setEditable(True)
+                self.errorM("خطا در خواندن لیست نام همکاران از دیتابیس!")
 
     def checkConect(self, path):
         try:

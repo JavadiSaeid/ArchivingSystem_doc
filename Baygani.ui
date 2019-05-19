@@ -615,6 +615,9 @@ border-radius: 10px;
                <property name="currentText">
                 <string/>
                </property>
+               <property name="maxVisibleItems">
+                <number>10</number>
+               </property>
               </widget>
              </item>
              <item>
@@ -857,7 +860,7 @@ font: 75 11pt &quot;A Arsoo&quot;;
                  <string/>
                 </property>
                 <property name="placeholderText">
-                 <string>توضیحات</string>
+                 <string/>
                 </property>
                </widget>
               </item>
