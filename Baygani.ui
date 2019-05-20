@@ -613,8 +613,12 @@ border-radius: 10px;
                 <bool>false</bool>
                </property>
                <property name="currentText">
-                <string>کیوان حسنجانی</string>
+                <string/>
                </property>
+               <property name="maxVisibleItems">
+                <number>10</number>
+               </property>
+<<<<<<< HEAD
                <item>
                 <property name="text">
                  <string>کیوان حسنجانی</string>
@@ -680,6 +684,8 @@ border-radius: 10px;
                  <string>سایر</string>
                 </property>
                </item>
+=======
+>>>>>>> beta
               </widget>
              </item>
              <item>
@@ -922,7 +928,7 @@ font: 75 11pt &quot;A Arsoo&quot;;
                  <string/>
                 </property>
                 <property name="placeholderText">
-                 <string>توضیحات</string>
+                 <string/>
                 </property>
                </widget>
               </item>

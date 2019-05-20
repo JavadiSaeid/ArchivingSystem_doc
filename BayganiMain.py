@@ -63,8 +63,41 @@ class Baygan():
         DesktopCenter = QDesktopWidget().availableGeometry().center()
         MainWindowGetSize.moveCenter(DesktopCenter)
         self.MainWindow.move(MainWindowGetSize.topLeft())
+        self.hamkaran_list()
         self.MainWindow.show()
         sys.exit(app.exec_())
+
+    def hamkaran_list(self):
+        try:
+            with sqlite3.connect(self.dbPath) as database:
+                HAMKARAN_LIST = "CREATE TABLE IF NOT EXISTS HAMKARAN (hamkar VARCHAR(72)  UNIQUE)"
+                database.execute(HAMKARAN_LIST)
+                e = "SELECT hamkar FROM HAMKARAN"
+                curser = database.execute(e)
+                if curser.fetchone() is None:
+                    hamkaran = ["کیوان حسنجانی", "اسماعیل دولتی", "صائمه امجدی", "سیدمحمد آتشی", "علی رحمانی", "آرمان کاظمی", "یداله شهبازی", "سیدرشید کاظمی", "سیدمحمد موسوی", "صدیقه روشن", "محسن مهرافشان", "علیرضا آزادی", "سایر"]
+                    for h in hamkaran:
+                        hamkar = "INSERT INTO HAMKARAN(hamkar) values ('{}')".format(h)
+                        database.execute(hamkar)
+                        database.commit()
+                e2 = "SELECT hamkar FROM HAMKARAN"
+                curser2 = database.execute(e2)
+                r = 0
+                for i in curser2:
+                    self.ui.comboBox_Hamkaran.addItem("")
+                    self.ui.comboBox_Hamkaran.setItemText(r, i[0])
+                    r += 1
+        except:
+            try:
+                hamkaran = ["کیوان حسنجانی", "اسماعیل دولتی", "صائمه امجدی", "سیدمحمد آتشی", "علی رحمانی",
+                            "آرمان کاظمی", "یداله شهبازی", "سیدرشید کاظمی", "سیدمحمد موسوی", "صدیقه روشن",
+                            "محسن مهرافشان", "علیرضا آزادی", "سایر"]
+                for hamkar in hamkaran:
+                    self.ui.comboBox_Hamkaran.addItem("")
+                    self.ui.comboBox_Hamkaran.setItemText(hamkaran.index(hamkar), hamkar)
+            except:
+                self.ui.comboBox_Hamkaran.setEditable(True)
+                self.errorM("خطا در خواندن لیست نام همکاران از دیتابیس!")
 
     def checkConect(self, path):
         try:
@@ -209,12 +242,12 @@ class Baygan():
 
     def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT='',BS = '',JD='',PG=''):
         try:
+            QApplication.processEvents()
             with sqlite3.connect(self.dbPath) as database:
                 IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
                         "sn VARCHAR(60),jd VARCHAR(10),pg VARCHAR(15), bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (30),bs varchar (30),us VARCHAR (72),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
                 STATUS_BAYGAN = "CREATE TABLE IF NOT EXISTS STATUS_BAYGAN(sn_bh VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY, ss VARCHAR(60))"
                 USERS_BAYGAN = "CREATE TABLE IF NOT EXISTS USERS_BAYGAN(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,us varchar (60) NOT NULL UNIQUE, pw VARCHAR(60) NOT NULL)"
-
                 database.execute(STATUS_BAYGAN)
                 database.execute(IT_BAYGAN)
                 database.execute(USERS_BAYGAN)
