@@ -1,6 +1,6 @@
 import os
 import dpi, sys, sqlite3, getpass
-from PyQt5.QtCore import QRegExp, Qt, QSizeF, QCoreApplication
+from PyQt5.QtCore import QRegExp, Qt, QSizeF
 from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
 from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel
 from pytz import timezone
@@ -21,8 +21,8 @@ class Baygan():
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
         self.dateTime()
-        # self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
-        self.dbPath = r'Data\ArchivesData.db'
+        self.dbPath = r'\\10.120.112.70\baygan-data\ArchivesData.db'
+        # self.dbPath = r'Data\ArchivesData.db'
         self.checkConect(self.dbPath)
         self.onlyInt = QIntValidator()              ## just int get in LineEdir , int Value in QlineEdit
         self.ui.lineEdit_dateYear.setText(self.nowYear)
@@ -242,6 +242,7 @@ class Baygan():
 
     def insertdb(self,TR,SA,HR,TG,ER,SF='',BH='',TT='',BT='',BS = '',JD='',PG=''):
         try:
+            QApplication.processEvents()
             with sqlite3.connect(self.dbPath) as database:
                 IT_BAYGAN = "CREATE TABLE IF NOT EXISTS IT_BAYGAN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,th VARCHAR(50),st VARCHAR(50),tr VARCHAR(50) ," \
                         "sn VARCHAR(60),jd VARCHAR(10),pg VARCHAR(15), bh VARCHAR (10),hr varchar (60),tg VARCHAR (50),er varchar (50),tt TEXT,bt varchar (30),bs varchar (30),us VARCHAR (72),sn_bh VARCHAR(50) REFERENCES STATUS_BAYGAN(sn_bh))"
