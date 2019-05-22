@@ -295,7 +295,7 @@ class Baygan():
                         self.ui.statusbar.showMessage('با موفقیت ثبت شد')
                         self.btn_New()
                     else:
-                        self.errorM('شماره سنگ فرعی باید وارد شود')
+                        self.errorM('شماره پلاک فرعی باید وارد شود')
                 else:
                     self.errorM('شماره سنگ اصلی باید وارد شود')
         except:
