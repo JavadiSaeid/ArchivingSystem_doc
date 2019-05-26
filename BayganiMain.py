@@ -583,7 +583,7 @@ class Baygan():
             if not os.path.isdir(f'{DeskTop}/Backup'):
                 os.mkdir(f'{DeskTop}/Backup')
             Tr = self.TimeSabt.strftime("%Y%m%d%H%M")
-            workbook = Workbook('{}/Backup/BackupBazdid_{}.xlsx'.format(DeskTop, Tr))
+            workbook = Workbook('{}/Backup/BackupBaygan_{}.xlsx'.format(DeskTop, Tr))
             worksheet = workbook.add_worksheet()
             worksheet.right_to_left()
             header_format = workbook.add_format({'bold': True,
@@ -616,7 +616,7 @@ class Baygan():
                 if not os.path.isdir('./Backup'):
                     os.mkdir('Backup')
                 Tr = self.TimeSabt.strftime("%Y%m%d%H%M")
-                workbook = Workbook('Backup/BackupBazdid_{}.xlsx'.format(Tr))
+                workbook = Workbook('Backup/BackupBaygan_{}.xlsx'.format(Tr))
                 worksheet = workbook.add_worksheet()
                 worksheet.right_to_left()
                 header_format = workbook.add_format({'bold': True,
