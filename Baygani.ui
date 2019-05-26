@@ -1408,7 +1408,7 @@ border-radius: 10px;
                 </font>
                </property>
                <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;سنگ &lt;span style=&quot; font-weight:600; color:#875a00;&quot;&gt;اصلی&lt;/span&gt; را وارد کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p  dir='rtl'&gt;سنگ &lt;span style=&quot; font-weight:600; color:#875a00;&quot;&gt;اصلی&lt;/span&gt; را وارد کنید&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="statusTip">
                 <string/>

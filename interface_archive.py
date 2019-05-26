@@ -916,7 +916,7 @@ class Ui_MainWindow(object):
         self.lineEdit_sangFari_2.setToolTip(_translate("MainWindow", "<html><head/><body><p dir=\'rtl\'>پلاک <span style=\" font-weight:600; color:#724c00;\">فرعی</span> را وارد کنید</p></body></html>"))
         self.lineEdit_sangFari_2.setPlaceholderText(_translate("MainWindow", "پلاک فرعی"))
         self.label_6.setText(_translate("MainWindow", "/"))
-        self.lineEdit_sangAsli_2.setToolTip(_translate("MainWindow", "<html><head/><body><p>سنگ <span style=\" font-weight:600; color:#875a00;\">اصلی</span> را وارد کنید</p></body></html>"))
+        self.lineEdit_sangAsli_2.setToolTip(_translate("MainWindow", "<html><head/><body><p  dir=\'rtl\'>سنگ <span style=\" font-weight:600; color:#875a00;\">اصلی</span> را وارد کنید</p></body></html>"))
         self.lineEdit_sangAsli_2.setPlaceholderText(_translate("MainWindow", "سنگ اصلی"))
         self.checkBox_daftar_2.setToolTip(_translate("MainWindow", "<html><head/><body><p>   درخواست دریافت <span style=\" font-weight:600; color:#644200;\">دفتر</span> از بایگانی  </p></body></html>"))
         self.checkBox_daftar_2.setText(_translate("MainWindow", "دفتر"))
