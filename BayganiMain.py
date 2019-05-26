@@ -585,16 +585,30 @@ class Baygan():
             Tr = self.TimeSabt.strftime("%Y%m%d%H%M")
             workbook = Workbook('{}/Backup/BackupBazdid_{}.xlsx'.format(DeskTop, Tr))
             worksheet = workbook.add_worksheet()
+            worksheet.right_to_left()
+            header_format = workbook.add_format({'bold': True,
+                                                 'align': 'center',
+                                                 'size': '12',
+                                                 'valign': 'vcenter',
+                                                 'fg_color': '#D7E4BC',
+                                                 'border': 1})
+            worksheet.set_column('A:N', 12)
+            worksheet.set_zoom(95)
             with sqlite3.connect(self.dbPath) as conn:
                 c = conn.cursor()
                 c.execute("select id,sn,bh,jd,pg,tr,hr,tg,er,tt,th,st,bt,bs from IT_BAYGAN")
                 mysel = c.execute("select id,sn,bh,jd,pg,tr,hr,tg,er,tt,th,st,bt,bs from IT_BAYGAN")
                 headers = ['ردیف','پلاک','بخش','تعداد جلد','تعداد صفحات','نوع','همکار تقاضاکننده','تحویل گیرنده','علت درخواست','توضیحات','تاریخ تحویل','ساعت تحویل','تاریخ بازگشت','ساعت بازگشت']
                 for i, title in enumerate(headers):
-                    worksheet.write(0, i, title)
+                    worksheet.write(0, i, title, header_format)
+                worksheet.freeze_panes(1, 0)
                 for i, row in enumerate(mysel):
                     for j, value in enumerate(row):
-                        worksheet.write(i + 1, j, value)
+                        if i % 2 == 0:
+                            fg_format = workbook.add_format({'fg_color': '#FFFFFF', 'align': 'center'})
+                        else:
+                            fg_format = workbook.add_format({'fg_color': '#C7F2F9', 'align': 'center'})
+                        worksheet.write(i + 1, j, value, fg_format)
                 workbook.close()
                 self.errorM(errorText="پشتیبان گیری از دیتابیس با موفقیت انجام شد.", icon='Information')
         except:
@@ -604,6 +618,15 @@ class Baygan():
                 Tr = self.TimeSabt.strftime("%Y%m%d%H%M")
                 workbook = Workbook('Backup/BackupBazdid_{}.xlsx'.format(Tr))
                 worksheet = workbook.add_worksheet()
+                worksheet.right_to_left()
+                header_format = workbook.add_format({'bold': True,
+                                                     'align': 'center',
+                                                     'size': '12',
+                                                     'valign': 'vcenter',
+                                                     'fg_color': '#D7E4BC',
+                                                     'border': 1})
+                worksheet.set_column('A:N', 12)
+                worksheet.set_zoom(95)
                 with sqlite3.connect(self.dbPath) as conn:
                     c = conn.cursor()
                     c.execute("select id,sn,bh,jd,pg,tr,hr,tg,er,tt,th,st,bt,bs from IT_BAYGAN")
@@ -612,10 +635,15 @@ class Baygan():
                                'تحویل گیرنده', 'علت درخواست', 'توضیحات', 'تاریخ تحویل', 'ساعت تحویل', 'تاریخ بازگشت',
                                'ساعت بازگشت']
                     for i, title in enumerate(headers):
-                        worksheet.write(0, i, title)
+                        worksheet.write(0, i, title, header_format)
+                    worksheet.freeze_panes(1, 0)
                     for i, row in enumerate(mysel):
                         for j, value in enumerate(row):
-                            worksheet.write(i + 1, j, value)
+                            if i % 2 == 0:
+                                fg_format = workbook.add_format({'fg_color': '#FFFFFF', 'align': 'center'})
+                            else:
+                                fg_format = workbook.add_format({'fg_color': '#C7F2F9', 'align': 'center'})
+                            worksheet.write(i + 1, j, value, fg_format)
                     workbook.close()
                     self.errorM(errorText="پشتیبان گیری از دیتابیس با موفقیت انجام شد.", icon='Information')
             except:
