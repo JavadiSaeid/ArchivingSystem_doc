@@ -6,9 +6,8 @@ from pytz import timezone
 from jdatetime import datetime as dt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator, QTextDocument, QTextCursor, \
     QTextTableFormat, QColor, QIcon, QPixmap, QTextCharFormat, QFont
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget, QDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget, QDialog, QWidget
 from interface_archive import Ui_MainWindow
-from PyQt5 import QtWidgets
 from about import Ui_Form
 import icon_rc
 
@@ -65,7 +64,7 @@ class Baygan():
         sys.exit(app.exec_())
 
     def RunAbout(self):
-        self.Form = QtWidgets.QWidget()
+        self.Form = QWidget()
         self.uiForm = Ui_Form()
         self.uiForm.setupUi(self.Form)
         self.uiForm.label_email.setOpenExternalLinks(True)
