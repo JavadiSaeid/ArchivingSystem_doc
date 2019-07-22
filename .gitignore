@@ -2,4 +2,5 @@ __pycache__/*
 venv/*
 Backup/*
 .idea/*
-Design/*
+WS/
+Data/
